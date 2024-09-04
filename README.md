@@ -1,6 +1,6 @@
-# new-tandhur-version
+# nodebase-backend
 
-New Tandhur Version
+Node Base Backend
 
 # Requiments:
 
@@ -11,7 +11,7 @@ New Tandhur Version
 Dev Enviroments:
 
 ```cmd
-$ cd new-tandhur-version
+$ cd nodebase-backend
 $ npm install
 $ npm run dev
 ```
@@ -19,7 +19,7 @@ $ npm run dev
 Production Enviroments:
 
 ```cmd
-$ cd new-tandhur-version
+$ cd nodebase-backend
 $ npm install
 $ npm start
 ```
@@ -60,4 +60,4 @@ localhost:3500
 Coming soon
 ```
 
-# new-tandhur-version
+# nodebase-backend
