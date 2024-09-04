@@ -1,0 +1,12 @@
+node_modules
+dist
+.vscode
+*.pem
+package-lock.json
+src/pptx/*
+.env
+.DS_Store
+#vs code configurations
+.vscode/
+public/photos
+public/proof_payment
