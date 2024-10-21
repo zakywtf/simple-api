@@ -1,0 +1,238 @@
+extends ../layouts/base
+
+block content
+	.container-fluid
+		br
+		//- br
+		.card
+			.card-body
+				h5.card-title.fw-semibold.mb-4 Histori
+				p.mb-0 Berikut riwayat pengecekan anda
+				br
+				.table-responsive
+					table#dataTable.table.table-bordered
+						thead.thead-light
+							tr
+								th Tinggi Badan
+								th Berat Badan
+								th Suhu Badan
+								th Tekanan Darah
+								th Gula Darah
+								th Hemoglobin
+								th Tanggal
+
+						tbody
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+							tr
+								td 173 Cm
+								td 77 Kg
+								td 34 Celcius
+								td 120/80 mmHg
+								td 120 mg/dL
+								td 15 g/dL
+								td Senin, 10 Oktober 2024
+					nav
+						ul#pagination.pagination
+
+	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
+	script.
+		let currentPage = 1;
+		const rowsPerPage = 5;
+
+		function displayTable(page) {
+			const rows = $('#dataTable tbody tr');
+			const totalRows = rows.length;
+			const totalPages = Math.ceil(totalRows / rowsPerPage);
+			const start = (page - 1) * rowsPerPage;
+			const end = start + rowsPerPage;
+
+			rows.hide().slice(start, end).show();
+			updatePagination(totalPages);
+		}
+
+		function updatePagination(totalPages) {
+			const pagination = $('#pagination');
+			pagination.empty();
+
+			const prevButton = $('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
+			if (currentPage === 1) prevButton.addClass('disabled');
+			prevButton.click(function () {
+				if (currentPage > 1) {
+					currentPage--;
+					displayTable(currentPage);
+				}
+			});
+			pagination.append(prevButton);
+
+			for (let i = 1; i <= totalPages; i++) {
+				const pageButton = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
+				if (currentPage === i) pageButton.addClass('active');
+				pageButton.click(function () {
+					currentPage = i;
+					displayTable(currentPage);
+				});
+				pagination.append(pageButton);
+			}
+
+			const nextButton = $('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+			if (currentPage === totalPages) nextButton.addClass('disabled');
+			nextButton.click(function () {
+				if (currentPage < totalPages) {
+					currentPage++;
+					displayTable(currentPage);
+				}
+			});
+			pagination.append(nextButton);
+		}
+
+		function filterTable() {
+			const filter = $('#search').val().toLowerCase();
+			const filteredRows = $('#dataTable tbody tr').filter(function () {
+				return $(this).text().toLowerCase().includes(filter);
+			});
+
+			$('#dataTable tbody').empty().append(filteredRows);
+
+			currentPage = 1; // Reset to first page
+			displayTable(currentPage);
+		}
+
+		$(document).ready(function () {
+			displayTable(currentPage);
+		});

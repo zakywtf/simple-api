@@ -1,0 +1,64 @@
+doctype html
+html(lang="en")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		title Wellness Monitoring
+		link(rel="shortcut icon", type="image/png", href="../assets/images/logos/favicon.png")
+		link(rel="stylesheet", href="../assets/css/styles.min.css")
+	body
+		// Body Wrapper
+		#main-wrapper.page-wrapper(data-layout="vertical", data-navbarbg="skin6", data-sidebartype="full", data-sidebar-position="fixed", data-header-position="fixed")
+			.position-relative.overflow-hidden.radial-gradient.min-vh-100.d-flex.align-items-center.justify-content-center
+				.d-flex.align-items-center.justify-content-center.w-100
+					.row.justify-content-center.w-100
+						.col-md-8.col-lg-6.col-xxl-3
+							.card.mb-0
+								.card-body
+									a.text-nowrap.logo-img.text-center.d-block.py-3.w-100(href="./index.html")
+										// <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+										h2 Logo
+									p.text-center Wellness Monitoring
+									form
+										.mb-3
+											label.form-label(for="exampleInputEmail1") NISN
+											input#exampleInputEmail1.form-control(type="text")
+										.mb-3
+											label.form-label(for="exampleInputEmail1") Nama Lengkap
+											input#exampleInputEmail1.form-control(type="text")
+										.mb-3
+											label.form-label(for="exampleInputEmail1") Jenis Kelamin
+											select.form-control(name="gender", id='', required="required")
+												option(value='') -- Pilih Jenis Kelamin --
+												option(value="male") Laki-laki
+												option(value="female") Perempuan
+										.mb-3
+											label.form-label(for="exampleInputEmail1") Kode Sekolah
+											input#exampleInputEmail1.form-control(type="text")
+										.mb-3
+											label.form-label(for="exampleInputEmail1") Register Sebagai
+											select.form-control(name="role", id='', required="required")
+												option(value='') -- Pilih Role --
+												option(value="teacher") Guru 
+												option(value="student") Murid
+										.mb-3
+											label.form-label(for="exampleInputPassword1") Buat PIN
+											input#exampleInputPassword1.form-control(type="password")
+										//
+											<div class="d-flex align-items-center justify-content-between mb-4">
+											<div class="form-check">
+											<input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
+											<label class="form-check-label text-dark" for="flexCheckChecked">
+											Remeber this Device
+											</label>
+											</div>
+											<a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+											</div>
+										br
+										a.btn.btn-primary.w-100.py-8.fs-4.mb-4.rounded-2(href="/dashboard") Daftar
+										.d-flex.align-items-center.justify-content-center
+											//- p.fs-4.mb-0.fw-bold New to Modernize?
+											| Sudah punya akun?
+											a.text-primary.fw-bold.ms-2(href="/") Masuk
+		script(src="../assets/libs/jquery/dist/jquery.min.js")
+		script(src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js")

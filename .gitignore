@@ -8,5 +8,6 @@ src/pptx/*
 .DS_Store
 #vs code configurations
 .vscode/
+# public
 public/photos
 public/proof_payment

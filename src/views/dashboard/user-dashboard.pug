@@ -1,0 +1,183 @@
+extends ../layouts/base
+
+block content
+	.container-fluid
+		// Row 1
+		br
+		//- br
+		//- h6 Laporan Mingguan 
+		//- br
+		.row 
+			.col-lg-4
+				.card
+					.card-body
+						.row.alig.n-items-start
+							.col-8
+								h5.card-title.mb-9.fw-semibold  Tinggi Badan
+								h3.fw-semibold.mb-3 173 cm
+							.col-4
+								.d-flex.justify-content-end
+									.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+										i.ti.ti-arrow-up.fs-6
+			.col-lg-4
+				.card
+					.card-body
+						.row.alig.n-items-start
+							.col-8
+								h5.card-title.mb-9.fw-semibold  Berat Badan
+								h3.fw-semibold.mb-3 77 Kg
+							.col-4
+								.d-flex.justify-content-end
+									.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+										i.ti.ti-weight.fs-6
+			.col-lg-4
+				.card
+					.card-body
+						.row.alig.n-items-start
+							.col-8
+								h5.card-title.mb-9.fw-semibold  Suhu Badan
+								h3.fw-semibold.mb-3 34 Celcius
+							.col-4
+								.d-flex.justify-content-end
+									.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+										i.ti.ti-temperature.fs-6
+		.row 
+			.col-lg-4
+				.row
+					.col-lg-12
+						// Monthly Earnings
+						.card
+							.card-body
+								.row.alig.n-items-start
+									.col-8
+										h6.card-title.mb-9.fw-semibold  Kondisi BMI 
+										h5.fw-semibold.mb-3.text-warning Kelebihan Berat Badan
+									.col-4
+										.d-flex.justify-content-end
+											.text-white.bg-warning.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+												i.ti.ti-weight.fs-6
+					.col-lg-12
+						// Monthly Earnings
+						.card
+							.card-body
+								.row.alig.n-items-start
+									.col-8
+										h6.card-title.mb-9.fw-semibold  Kolesterol
+										h5.fw-semibold.mb-3 220 mg/dL
+									.col-4
+										.d-flex.justify-content-end
+											.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+												i.ti.ti-square-letter-k.fs-6
+			.col-lg-8.d-flex.align-items-stretch
+				.card.w-100
+					.card-body.p-4
+						h5.card-title.fw-semibold.mb-4 Laporan Mingguan
+						.table-responsive
+							table.table.text-nowrap.mb-0.align-middle
+								thead.text-dark.fs-4
+									tr
+										th.border-bottom-0
+											h6.fw-semibold.mb-0 No
+										th.border-bottom-0
+											h6.fw-semibold.mb-0 Nama
+										th.border-bottom-0
+											h6.fw-semibold.mb-0 Jumlah
+										th.border-bottom-0
+											h6.fw-semibold.mb-0 Status
+										th.border-bottom-0
+											h6.fw-semibold.mb-0 Tanggal
+								tbody
+									tr
+										td.border-bottom-0
+											h6.fw-semibold.mb-0 1
+										td.border-bottom-0
+											h6.fw-semibold.mb-1.fs-4 Tekanan Darah
+										td.border-bottom-0
+											p.mb-0.fw-semibold 120/80 mmHg
+										td.border-bottom-0
+											.d-flex.align-items-center.gap-2
+												span.badge.bg-danger.rounded-3.fw-semibold Tinggi
+										td.border-bottom-0
+											h6.fw-normal.mb-0 Senin, 10 Oktober 2024
+									tr
+										td.border-bottom-0
+											h6.fw-semibold.mb-0 2
+										td.border-bottom-0
+											h6.fw-semibold.mb-1.fs-4 Gula Darah
+										td.border-bottom-0
+											p.mb-0.fw-semibold 120 mg/dL
+										td.border-bottom-0
+											.d-flex.align-items-center.gap-2
+												span.badge.bg-success.rounded-3.fw-semibold Normal
+										td.border-bottom-0
+											h6.fw-normal.mb-0 Senin, 10 Oktober 2024
+									tr
+										td.border-bottom-0
+											h6.fw-semibold.mb-0 3
+										td.border-bottom-0
+											h6.fw-semibold.mb-1.fs-4 Hemoglobin
+										td.border-bottom-0
+											p.mb-0.fw-semibold 15 g/dL
+										td.border-bottom-0
+											.d-flex.align-items-center.gap-2
+												span.badge.bg-danger.rounded-3.fw-semibold Tinggi
+										td.border-bottom-0
+											h6.fw-normal.mb-0 Senin, 10 Oktober 2024
+
+		//- .row
+		//- 	.col-lg-12.d-flex.align-items-strech
+		//- 		.card.w-100
+		//- 			.row 
+		//- 				.col-lg-4 
+		//- 					.card-body
+		//- 						.d-sm-flex.d-block.align-items-center.justify-content-between.mb-9
+		//- 							.mb-3.mb-sm-0
+		//- 								h5.card-title.fw-semibold Laporan Mingguan
+		//- 							//- div
+		//- 							//- 	select.form-select
+		//- 							//- 		option(value="1") March 2023
+		//- 							//- 		option(value="2") April 2023
+		//- 							//- 		option(value="3") May 2023
+		//- 							//- 		option(value="4") June 2023
+		//- 						//- #chart
+		//- 						img.text-center(src="/assets/images/wellness.png", alt="...", width="350", height="300")
+
+		//- 				.col-lg-4
+		//- 					.row
+		//- 						.col-lg-12
+		//- 							// Monthly Earnings
+		//- 							.card
+		//- 								.card-body
+		//- 									.row.alig.n-items-start
+		//- 										.col-8
+		//- 											h5.card-title.mb-9.fw-semibold  Tinggi Badan 
+		//- 											h4.fw-semibold.mb-3 173 cm
+		//- 										.col-4
+		//- 											.d-flex.justify-content-end
+		//- 												.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+		//- 													i.ti.ti-currency-dollar.fs-6
+		//- 						.col-lg-12
+		//- 							// Monthly Earnings
+		//- 							.card
+		//- 								.card-body
+		//- 									.row.alig.n-items-start
+		//- 										.col-8
+		//- 											h5.card-title.mb-9.fw-semibold  Tinggi Badan 
+		//- 											h4.fw-semibold.mb-3 173 cm
+		//- 										.col-4
+		//- 											.d-flex.justify-content-end
+		//- 												.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+		//- 													i.ti.ti-currency-dollar.fs-6
+		//- 						.col-lg-12
+		//- 							// Monthly Earnings
+		//- 							.card
+		//- 								.card-body
+		//- 									.row.alig.n-items-start
+		//- 										.col-8
+		//- 											h5.card-title.mb-9.fw-semibold  Tinggi Badan 
+		//- 											h4.fw-semibold.mb-3 173 cm
+		//- 										.col-4
+		//- 											.d-flex.justify-content-end
+		//- 												.text-white.bg-secondary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+		//- 													i.ti.ti-currency-dollar.fs-6
+		

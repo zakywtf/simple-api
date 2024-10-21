@@ -1,0 +1,24 @@
+aside.left-sidebar
+	// Sidebar scroll
+	div
+		.brand-logo.d-flex.align-items-center.justify-content-between
+			a.text-nowrap.logo-img(href="./index.html")
+				//- img(src="../assets/images/logos/dark-logo.svg", width="180", alt=)
+				h2 Logo
+			#sidebarCollapse.close-btn.d-xl-none.d-block.sidebartoggler.cursor-pointer
+				i.ti.ti-x.fs-8
+		// Sidebar navigation
+		nav.sidebar-nav.scroll-sidebar(data-simplebar="")
+			ul#sidebarnav
+				li.nav-small-cap
+					i.ti.ti-dots.nav-small-cap-icon.fs-4
+					span.hide-menu Menu
+				li.sidebar-item
+					a.sidebar-link(href="/dashboard", aria-expanded="false")
+						span
+							i.ti.ti-layout-dashboard
+						span.hide-menu Dashboard
+
+				//- include ./menubar/user-menu.pug
+				include ./menubar/admin-menu.pug
+				//- include ./menubar/teacher-menu.pug

@@ -1,0 +1,39 @@
+extends ../layouts/base
+
+block content
+	.container-fluid
+		br
+		//- br
+		.card
+			.card-body
+				h5.card-title.fw-semibold.mb-4 Rekomendasi
+				p.mb-0 Berikut rekomendasi olahraga yang cocok untuk anda
+				br
+				//- p#test(myFunction('"+data+"'))
+
+				each data in datas
+					h6 hari : #{data.hari}
+					table.table.table-bordered
+						thead.thead-light
+							tr
+								th Latihan
+								th Set
+								th Repetisi
+								th Keterangan
+
+						tbody
+							each aktivitas in data.aktivitas
+								tr
+									td #{aktivitas.latihan}
+									td #{aktivitas.set}
+									td #{aktivitas.repetisi}
+									td #{aktivitas.keterangan}
+					br
+					br
+	
+	//- script.
+	//- 	myFunction(data) {
+	//- 		console.log({data})
+	//- 		cont x = data.replace(/(?:\r\n|\r|\n)/g, "");
+	//- 		test.innerHTML = x;
+	//- 	}

@@ -1,0 +1,11 @@
+doctype html
+html(lang="en")
+	head
+		include head.pug
+	body 
+		#main-wrapper.page-wrapper(data-layout="vertical", data-navbarbg="skin6", data-sidebartype="full", data-sidebar-position="fixed", data-header-position="fixed")
+			include sidebar.pug
+			.body-wrapper
+				include header.pug
+				block content
+		include js.pug
