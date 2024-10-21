@@ -24,8 +24,6 @@ function controller(model) {
         handleRequest(req, res, async(body)=>{
             // console.log({user: req.user})
             if (req.user) model.setUdata(req.user)
-            if(req.query.commodity_id) body.commodity_id=req.query.commodity_id
-            if(req.query.farmer_land_id) body.farmer_land_id=req.query.farmer_land_id
             return await model.insert(body);
         });
     })

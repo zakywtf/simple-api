@@ -1,11 +1,11 @@
 import Models from "./classModel";
 import { ValidationError, NotFoundError, ServerError, UnauthorizedError } from "./classRespons"
 import sch from "../schemas/users";
+import Schools from "../schemas/schools"
 import { signer } from "../middlewares/authMiddleware";
 import { deserializeUser } from "passport";
 import bcrypt from "bcryptjs";
 import moment from "moment-timezone";
-import { addUserCommodity } from "../helpers/masterFunction"
 
 class authModel extends Models{
     constructor(){
@@ -14,7 +14,9 @@ class authModel extends Models{
 
     async register(body, useragent) {
         const { browser, version, os, platform, source } = useragent
-        
+        const school = await Schools.findOne({ npsn: body.school_npsn })
+        if(!school) throw new NotFoundError('School Not Found')
+
         let pinHash = await bcrypt.hash(body.pin + process.env.SALT, 10);
         
         const ug = {
@@ -25,7 +27,7 @@ class authModel extends Models{
             source : source
         }
 
-        const resp = await this.model.create({...body, pin: pinHash, user_agent: ug})
+        const resp = await this.model.create({ ...body, pin: pinHash, user_agent: ug, school_id: school._id })
         if(!resp) throw new ServerError('Cannot Create Data')
         
         return { msg: 'Register Success.', data: { nisn: resp.nisn, pin: body.pin, name: resp.name }}
