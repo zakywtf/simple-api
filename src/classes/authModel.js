@@ -13,9 +13,14 @@ class authModel extends Models{
     }
 
     async register(body, useragent) {
+        console.log({body, useragent})
         const { browser, version, os, platform, source } = useragent
+
+        const user = await this.model.findOne({ nisn: body.nisn })
+        if(user) throw new NotFoundError('NISN sudah terdaftar!')
+
         const school = await Schools.findOne({ npsn: body.school_npsn })
-        if(!school) throw new NotFoundError('School Not Found')
+        if(!school) throw new NotFoundError('NPSN sekolah tidak ditemukan!')
 
         let pinHash = await bcrypt.hash(body.pin + process.env.SALT, 10);
         
@@ -28,7 +33,7 @@ class authModel extends Models{
         }
 
         const resp = await this.model.create({ ...body, pin: pinHash, user_agent: ug, school_id: school._id })
-        if(!resp) throw new ServerError('Cannot Create Data')
+        if(!resp) throw new ServerError('Gagal register!')
         
         return { msg: 'Register Success.', data: { nisn: resp.nisn, pin: body.pin, name: resp.name }}
     }
@@ -37,8 +42,8 @@ class authModel extends Models{
         // console.log({body})
         let user = await this.model.findOne({nisn: body.nisn})
         console.log({user})
-        if (!user) throw new NotFoundError('NISN Not Found')
-        if (user.status == 'inactive') throw new NotFoundError('Your Account is inactive')
+        if (!user) throw new NotFoundError('NISN tidak ditemukan!')
+        if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
         
         var payload = {
             _id: user._id,
@@ -51,7 +56,7 @@ class authModel extends Models{
         }
         // console.log({payload})
         const isMatch = await bcrypt.compare(body.pin + process.env.SALT, user.pin)
-        if (!isMatch) throw new ValidationError('Incorect Pin!')
+        if (!isMatch) throw new ValidationError('PIN salah!')
 
         const token = await signer(payload)
         console.log({token})
