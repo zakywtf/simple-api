@@ -1,24 +1,23 @@
 
+// let dotenv = require('dotenv')
 
-import bcrypt from "bcryptjs";
-import mongoose from 'mongoose';
-import model from './schemas/users'
+const bcrypt = require("bcryptjs");
+const model = require('./schemas/users')
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-let dotenv = require('dotenv')
-dotenv.config()
-
-mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true });
+const mongoURI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/wellness_monitoring';
+const salt = 'Be5TgHbUSBDiQ04K0dE5vPwrtJKd6ilYnjGEmQ'
+mongoose.connect(mongoURI, { useNewUrlParser: true });
 
 const createAdmin = async () => {
-    let passwordHash = await bcrypt.hash('12345678' + process.env.SALT, 10);
+    let pinHash = await bcrypt.hash('123456' + salt, 10);
 
     let admin = new model({
-        password: passwordHash,
-        email: 'developer@beehivedrones.com',
-        name: 'Developer Beehive',
-        role: 'developer',
-        phone: '08324378979',
-        employee_id: '20200101001'
+        pin: pinHash,
+        name: 'Admin Beehive',
+        nisn: '11223344',
+        role: 'admin'
     });
 
     await admin.save()

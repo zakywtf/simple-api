@@ -2,6 +2,8 @@ import jwt from "jsonwebtoken";
 import apiResponse from "../helpers/apiResponse";
 import Users from "../schemas/users";
 
+require("dotenv").config();
+
 const secret = process.env.JWT_SECRET;
 const jwtData = {
     expiresIn: process.env.JWT_TIMEOUT_DURATION,
@@ -11,8 +13,10 @@ const signerOption = {
 }
 
 const signer = async (payload) => {
-    // console.log({payload})
-    return token = jwt.sign(payload, secret, jwtData);
+    // console.log({payload, secret, jwtData})
+    const token = jwt.sign(payload, secret, jwtData);
+
+    return token
 }
 
 const checkExpired = async (user_id, next) => {

@@ -12,32 +12,47 @@ class authModel extends Models{
         super(sch)
     }
 
+    async register(body, useragent) {
+        const { browser, version, os, platform, source } = useragent
+        
+        let pinHash = await bcrypt.hash(body.pin + process.env.SALT, 10);
+        
+        const ug = {
+            browser : browser,
+            version : version,
+            os : os,
+            platform : platform,
+            source : source
+        }
+
+        const resp = await this.model.create({...body, pin: pinHash, user_agent: ug})
+        if(!resp) throw new ServerError('Cannot Create Data')
+        
+        return { msg: 'Register Success.', data: { nisn: resp.nisn, pin: body.pin, name: resp.name }}
+    }
+
     async login(body) {
         // console.log({body})
-        let user = await this.model.findOne({username: body.username})
+        let user = await this.model.findOne({nisn: body.nisn})
         console.log({user})
-        if (!user) throw new NotFoundError('Username Not Found')
-        // if (user.status == 'unpaid') throw new NotFoundError('User is Unpaid')
-        if (user.status == 'suspend') throw new NotFoundError('Your Account is Unpaid')
-        // if (user.status == 'registered') throw new NotFoundError('Paid to Activated User')
+        if (!user) throw new NotFoundError('NISN Not Found')
+        if (user.status == 'inactive') throw new NotFoundError('Your Account is inactive')
         
         var payload = {
             _id: user._id,
-            username: user.username,
+            nisn: user.nisn,
             name: user.name,
-            email: user.email,
             role: user.role,
             status: user.status,
             last_login: user.last_login,
-            total_login: user.total_login,
-            membership: user.membership,
-            isExpired: user.isExpired
+            total_login: user.total_login
         }
         // console.log({payload})
-        const isMatch = await bcrypt.compare(body.password + process.env.SALT, user.password)
-        if (!isMatch) throw new ValidationError('Incorect Password!')
+        const isMatch = await bcrypt.compare(body.pin + process.env.SALT, user.pin)
+        if (!isMatch) throw new ValidationError('Incorect Pin!')
 
         const token = await signer(payload)
+        console.log({token})
         payload.token = token
 
         user.total_login += 1

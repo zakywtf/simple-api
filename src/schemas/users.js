@@ -3,25 +3,20 @@ const Schema = mongoose.Schema;
 const timestamp = require('./plugins/timestamps');
 
 let sch = new Schema({
-    username: {
+    nisn: {
         type: String,
     },
-    password: {
+    pin: {
         type: String,
     },
     name: {
         type: String,
     },
-    nik: {
-        type: String,
-    },
     email: {
         type: String,
+        default: null
     },
     phone: {
-        type: String
-    },
-    group_name: {
         type: String,
         default: null
     },
@@ -31,69 +26,36 @@ let sch = new Schema({
     },
     role : {
         type:String, 
-        enum:['penyuluh', 'admin'], 
-        default:'penyuluh'
+        enum:['user', 'admin', 'teacher'], 
+        default:'user'
+    },
+    gender : {
+        type:String, 
+        enum:['male', 'female'], 
+        default:'male'
     },
     status:{
         type:String, 
         enum:['registered', 'active', 'inactive', 'unpaid', 'suspend'], 
         default:'active'
     },
-    membership: {
-        type:String, 
-        enum:['trial', 'basic', 'pro', 'premium', 'enterprise'], 
-        default:'basic'
+    school_id : {
+        type: Schema.Types.ObjectId, 
+        autopopulate: { select: 'npsn name address category status latitude longitude'}, 
+        ref:'schools',
+        default: null
     },
     isOnline: {
         type: Boolean,
         default: false
     },
     last_login: {
-        type: Date
+        type: Date,
+        default: null
     },
     total_login: {
         type: Number,
         default: 0
-    },
-    province: {
-        id: {
-            type: String,
-            default: null
-        },
-        name: {
-            type: String,
-            default: null
-        }
-    },
-    regencies: {
-        id: {
-            type: String,
-            default: null
-        },
-        name: {
-            type: String,
-            default: null
-        }
-    },
-    district: {
-        id: {
-            type: String,
-            default: null
-        },
-        name: {
-            type: String,
-            default: null
-        }
-    },
-    village: {
-        id: {
-            type: String,
-            default: null
-        },
-        name: {
-            type: String,
-            default: null
-        }
     },
     user_agent:{
         browser: {
@@ -116,17 +78,6 @@ let sch = new Schema({
             type: String,
             default: null
         }
-    },
-    agree_tnc: {
-        type: Boolean,
-        default: false
-    },
-    expired_membership: {
-        type: Date
-    },
-    referal_code: {
-        type: String,
-        default: null
     },
     isExpired: {
         type: Boolean,
