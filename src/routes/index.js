@@ -5,6 +5,7 @@ import  auth  from "../middlewares/auth";
 
 const router = express.Router();
 
+// Routes Test
 router.get('/ping', IndexController.ping);
 router.get('/planner', IndexController.testPlanner);
 router.get('/gemini', IndexController.testGemini);
@@ -16,7 +17,6 @@ router.get('/email-test', IndexController.testSendEmail);
 
 
 // Routes Prefixes / API
-
 router.use('/api/v1', require('./api/index'));
 
 // Routes Web
@@ -24,10 +24,10 @@ router.use('/api/v1', require('./api/index'));
 router.get('/', IndexController.loginPage);
 router.get('/register', IndexController.registerPage);
 router.get('/dashboard', auth, IndexController.dashboard)
-// router.get('/history', IndexController.history)
-// router.get('/recommendation', IndexController.recommendation)
-// router.get('/users', IndexController.users)
-// router.get('/devices', IndexController.devices)
-// router.get('/schools', IndexController.schools)
+router.get('/history', auth, IndexController.history)
+router.get('/recommendation', auth, IndexController.recommendation)
+router.get('/users', auth, IndexController.users)
+router.get('/schools', auth, IndexController.schools)
+router.get('/devices', auth, IndexController.devices)
 
 module.exports = router;

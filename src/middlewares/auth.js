@@ -4,7 +4,7 @@ const auth = async (req, res, next) => {
         if (req.session.online == true) {
             next();
         }else if(!req.session.online){
-            res.render('notfound')
+            res.render('unauthorization')
             // res.render('notfound')
             // next();
         }
