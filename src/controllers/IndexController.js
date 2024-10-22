@@ -205,7 +205,7 @@ const IndexController = {
     },
 
     dashboard: async (req, res) => {
-        res.render('dashboard/admin-dashboard');
+        res.render('dashboard/index');
     },
 
     history: async (req, res) => {

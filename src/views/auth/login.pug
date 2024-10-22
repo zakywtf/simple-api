@@ -63,7 +63,7 @@ html(lang="en")
 						data: JSON.stringify(obj),
 						success: function(response) {
 							//- console.log({response})
-							if (response.status == 404){
+							if (response.status == 404 || response.status == 400 || response.status == 500){
 								var error = document.getElementById("response-container");
 								error.style.display = "block";
 								$('#response-container').html(response.message)

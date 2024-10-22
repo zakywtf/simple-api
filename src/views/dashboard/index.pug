@@ -1,0 +1,10 @@
+extends ../layouts/base
+
+block content
+	.container-fluid
+		br
+		- var role = session.role
+		case role!==undefined
+			when role == 'user' : include user-dashboard.pug
+			when role == 'admin' : include admin-dashboard.pug
+			when role == 'teacher' : include teacher-dashboard.pug
