@@ -41,7 +41,7 @@ class authModel extends Models{
     async login(body) {
         // console.log({body})
         let user = await this.model.findOne({nisn: body.nisn})
-        console.log({user})
+        // console.log({user})
         if (!user) throw new NotFoundError('NISN tidak ditemukan!')
         if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
         
@@ -59,7 +59,7 @@ class authModel extends Models{
         if (!isMatch) throw new ValidationError('PIN salah!')
 
         const token = await signer(payload)
-        console.log({token})
+        // console.log({token})
         payload.token = token
 
         user.total_login += 1

@@ -19,13 +19,14 @@ html(lang="en")
 										// <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
 										h2 Logo
 									p.text-center Wellness Monitoring
-									form
+									#response-container.alert.alert-danger(role="alert", style="display:none;")
+									form#data-form
 										.mb-3
 											label.form-label(for="exampleInputEmail1") NISN
-											input#exampleInputEmail1.form-control(type="text")
+											input#nisn.form-control(type="text", name='nisn')
 										.mb-4
 											label.form-label(for="exampleInputPassword1") PIN
-											input#exampleInputPassword1.form-control(type="password")
+											input#pin.form-control(type="password", name='pin')
 										//
 											<div class="d-flex align-items-center justify-content-between mb-4">
 											<div class="form-check">
@@ -37,9 +38,46 @@ html(lang="en")
 											<a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
 											</div>
 										br
-										a.btn.btn-primary.w-100.py-8.fs-4.mb-4.rounded-2(href="/dashboard") Masuk
+										button.btn.btn-primary.w-100.py-8.fs-4.mb-4.rounded-2(type="submit") Masuk
 										.d-flex.align-items-center.justify-content-center
 											//- p.fs-4.mb-0.fw-bold New to Modernize?
 											a.text-primary.fw-bold.ms-2(href="/register") Buat Akun Baru
 		script(src="../assets/libs/jquery/dist/jquery.min.js")
 		script(src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js")
+		script.
+			$(document).ready(function() {
+				$('#data-form').submit(function(event) {
+					event.preventDefault(); // Prevent the default form submission
+					var host = window.location.origin;
+
+					const nisn = $('#nisn').val();
+					const pin = $('#pin').val();
+
+					const obj = { nisn: nisn, pin: pin }
+					//- console.log({obj})
+
+					$.ajax({
+						url: host + '/api/v1/auth/login', // Example API
+						method: 'POST',
+						contentType: 'application/json',
+						data: JSON.stringify(obj),
+						success: function(response) {
+							//- console.log({response})
+							if (response.status == 404){
+								var error = document.getElementById("response-container");
+								error.style.display = "block";
+								$('#response-container').html(response.message)
+								$('#data-form')[0].reset();
+							} else if (response.status == 200){
+								localStorage.setItem('token', response.data.token);
+								window.location.href = host+'/dashboard'
+							}
+						},
+						error: function(xhr, status, error) {
+							//- console.log({xhr, status, error})
+							console.error('Error submitting data: ', error);
+							$('#response-container').html('<p>Error submitting data. Please try again later.</p>');
+						}
+					});
+				});
+			});

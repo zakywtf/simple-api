@@ -18,7 +18,8 @@ aside.left-sidebar
 						span
 							i.ti.ti-layout-dashboard
 						span.hide-menu Dashboard
-
-				//- include ./menubar/user-menu.pug
-				include ./menubar/admin-menu.pug
-				//- include ./menubar/teacher-menu.pug
+				- var role = session.role
+				case role!==undefined
+					when role == 'user' : include ./menubar/user-menu.pug
+					when role == 'admin' : include ./menubar/admin-menu.pug
+					when role == 'teacher' : include ./menubar/teacher-menu.pug

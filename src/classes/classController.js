@@ -70,7 +70,14 @@ function authController(aModel=false) {
     const model = aModel || new authModel();
     router.post('/login', async(req,res)=>{        
         handleRequest(req, res, async(body)=>{
-            return model.login(body);
+            const user = await model.login(body);
+            console.log({user})
+            req.session.user_id = user.data._id;
+            req.session.name = user.data.name;
+            req.session.role = user.data.role;
+            req.session.photo = user.data.photo;
+            req.session.online = true;
+            return user
         });
     })
 
