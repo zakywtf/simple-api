@@ -2,6 +2,7 @@ import { Router }  from "express";
 import apiResponse from "../helpers/apiResponse";
 import { authModel } from "./authModel"
 import handleRequest from "../helpers/handleRequest"
+import { decode } from "../middlewares/authMiddleware";
 
 function controller(model) {
     let router = Router();
@@ -86,6 +87,15 @@ function authController(aModel=false) {
     router.post('/register', async(req,res)=>{        
         handleRequest(req, res, async(body)=>{
             return model.register(body, req.useragent);
+        });
+    })
+
+    router.post('/logout', async(req,res)=>{        
+        handleRequest(req, res, async(body)=>{
+            const token = req.headers['authorization']?.split(' ')[1];
+            res.locals.udata = await decode(token)
+            console.log({token, udata: res.locals.udata})
+            return model.logout(req, res.locals.udata._id);
         });
     })
 

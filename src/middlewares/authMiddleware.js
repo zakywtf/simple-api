@@ -64,7 +64,20 @@ const verify = async (req, res, next) => {
     
 }
 
+const decode = async (token) => {
+    return new Promise((resolve, reject) => {
+        jwt.verify(token, secret, (err, decoded) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(decoded);
+            }
+        });
+    });
+}
+
 module.exports = { 
     signer, 
-    verify 
+    verify,
+    decode
 }

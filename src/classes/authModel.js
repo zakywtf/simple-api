@@ -44,6 +44,8 @@ class authModel extends Models{
         // console.log({user})
         if (!user) throw new NotFoundError('NISN tidak ditemukan!')
         if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
+        user.isOnline = true
+        await user.save()
         
         var payload = {
             _id: user._id,
@@ -69,6 +71,17 @@ class authModel extends Models{
         await user.save()
 
         return { msg: 'Login Success.', data:payload }
+
+    }
+
+    async logout(req, user_id) {
+        let user = await this.model.findOne({ _id: user_id })
+        user.isOnline = false
+        await user.save()
+
+        delete req.session.online;
+
+        return { msg: 'Logout Success.', data: {_id: user._id, name: user.name} }
 
     }
 

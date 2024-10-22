@@ -6,3 +6,33 @@ script(src="/assets/libs/apexcharts/dist/apexcharts.min.js")
 script(src="/assets/libs/simplebar/dist/simplebar.js")
 script(src="/assets/js/dashboard.js")
 script(src="/assets/js/customChart.js")
+script.
+	$(document).ready(function() {
+			$('#logout').click(function() {
+				// AJAX GET request
+				var host = window.location.origin;
+				const token = localStorage.getItem('token');
+				$.ajax({
+					url: host + '/api/v1/auth/logout', // Example API
+					method: 'POST',
+					headers: {
+						'Authorization': 'Bearer ' + token // Include the token in the header
+					},
+					success: function(response) {
+						//- console.log({response})
+						if (response.status == 200){
+							localStorage.clear();
+							window.location.href = host
+						}
+					},
+					error: function(xhr, status, error) {
+						//- console.log({xhr, status, error})
+						console.error('Error submitting data: ', error);
+						$('#response-container').html('<p>Error submitting data. Please try again later.</p>');
+					}
+				});
+			});
+		});
+	function logout(){
+		
+	}
