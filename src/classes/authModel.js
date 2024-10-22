@@ -51,6 +51,8 @@ class authModel extends Models{
             name: user.name,
             role: user.role,
             status: user.status,
+            gender: user.gender,
+            school_id: (user.school_id != null) ? user.school_id._id : null,
             last_login: user.last_login,
             total_login: user.total_login
         }
