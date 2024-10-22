@@ -4,6 +4,7 @@ import OpenAI from 'openai';
 import apiResponse from "../helpers/apiResponse";
 import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
+import Schools from "../schemas/schools";
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
 
@@ -221,7 +222,8 @@ const IndexController = {
     },
 
     schools: async (req, res) => {
-        res.render('schools/index');
+        const datas = await Schools.find({isDeleted: false}).sort({cretaed_at: -1})
+        res.render('schools/index', {datas});
     },
 
     recommendation: async (req, res) => {
