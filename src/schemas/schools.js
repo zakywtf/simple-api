@@ -20,10 +20,15 @@ let sch = new Schema({
         type: String,
         default: null
     },
-    status : {
+    school_status : {
         type:String, 
         enum:['negeri', 'swasta'], 
         default:'negeri'
+    },
+    status:{
+        type:String, 
+        enum:['registered', 'active', 'inactive', 'unpaid', 'suspend'], 
+        default:'active'
     },
     category : {
         type:String, 

@@ -6,6 +6,7 @@ import { signer } from "../middlewares/authMiddleware";
 import { deserializeUser } from "passport";
 import bcrypt from "bcryptjs";
 import moment from "moment-timezone";
+import { createDefaultWellnessDetail } from "../helpers/masterFunction"
 
 class authModel extends Models{
     constructor(){
@@ -33,6 +34,7 @@ class authModel extends Models{
         }
 
         const resp = await this.model.create({ ...body, pin: pinHash, user_agent: ug, school_id: school._id })
+        if(body.role == 'user') await createDefaultWellnessDetail(resp)
         if(!resp) throw new ServerError('Gagal register!')
         
         return { msg: 'Register Success.', data: { nisn: resp.nisn, pin: body.pin, name: resp.name }}
