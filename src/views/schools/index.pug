@@ -23,11 +23,12 @@ block content
 								th No
 								th NPSN Sekolah
 								th Nama Sekolah
-								th Status
+								th Status Sekolah
 								th Bentuk Pendidikan
 								th Alamat
 								th Latitude
 								th Longitude
+								th Status
 								th Aksi
 
 						tbody
@@ -50,6 +51,15 @@ block content
 									td #{data.address}
 									td #{data.latitude}
 									td #{data.longitude}
+									td.border-bottom-0
+										.d-flex.align-items-center.gap-2
+										if (data.status == 'active')
+											span.badge.bg-success.rounded-3.fw-semibold Active
+										else if (data.status == 'suspend')
+											span.badge.bg-warning.rounded-3.fw-semibold Suspend
+										else
+											span.badge.bg-danger.rounded-3.fw-semibold Inactive
+
 									td
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 											| Aksi
