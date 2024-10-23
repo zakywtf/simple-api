@@ -35,7 +35,8 @@ block content
 							each data in datas
 								tr
 									td #{no++}
-									td #{data.npsn}
+									td 
+										b #{data.npsn}
 									td #{data.name}
 									//- td #{data.status}
 									td.border-bottom-0
@@ -50,12 +51,12 @@ block content
 									td #{data.latitude}
 									td #{data.longitude}
 									td
-										button.btn.btn-lg.btn-outline-dark.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
+										button.btn.btn-lg.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 											| Aksi
 										ul.dropdown-menu
-											li
-												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Detail
-											.dropdown-divider
+											//- li
+											//- 	a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Detail
+											//- .dropdown-divider
 											li
 												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
 												

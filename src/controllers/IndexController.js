@@ -5,6 +5,7 @@ import apiResponse from "../helpers/apiResponse";
 import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
 import Schools from "../schemas/schools";
+import Devices from "../schemas/devices";
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
 
@@ -218,11 +219,15 @@ const IndexController = {
     },
 
     devices: async (req, res) => {
-        res.render('devices/index');
+        const datas = await Devices.find({isDeleted: false}).sort({cretaed_at: -1})
+        const schools = await Schools.find({isDeleted: false}).sort({cretaed_at: -1})
+
+        res.render('devices/index', {datas, schools});
     },
 
     schools: async (req, res) => {
         const datas = await Schools.find({isDeleted: false}).sort({cretaed_at: -1})
+        
         res.render('schools/index', {datas});
     },
 
