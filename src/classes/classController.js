@@ -78,6 +78,7 @@ function authController(aModel=false) {
             req.session.role = user.data.role;
             req.session.photo = user.data.photo;
             req.session.gender = user.data.gender;
+            req.session.school_id = user.data.school_id;
             school_id: user.data.school_id,
             req.session.online = true;
             return user

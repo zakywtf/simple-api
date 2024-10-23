@@ -215,7 +215,10 @@ const IndexController = {
     },
 
     users: async (req, res) => {
-        res.render('users/index');
+        console.log({user: req.session})
+        const datas = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({cretaed_at: -1})
+
+        res.render('users/index', {datas});
     },
 
     devices: async (req, res) => {
@@ -227,7 +230,7 @@ const IndexController = {
 
     schools: async (req, res) => {
         const datas = await Schools.find({isDeleted: false}).sort({cretaed_at: -1})
-        
+
         res.render('schools/index', {datas});
     },
 
