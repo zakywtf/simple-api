@@ -1,10 +1,52 @@
 meta(charset="utf-8")
 meta(name="viewport", content="width=device-width, initial-scale=1")
 title Wellness Point
-link(rel="shortcut icon", type="image/png", href="/assets/images/logos/wellness.png")
+link(rel="shortcut icon", type="image/png", href="/assets/images/logos/icon.png")
 link(rel="stylesheet", href="/assets/css/styles.min.css")
 //- link(rel="stylesheet", href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css")
 style.
-    .pagination {
-        justify-content: center;
-    }
+	body {
+		font-family: 'Helvetica Now', sans-serif;
+	}
+	.pagination {
+		justify-content: center;
+	}
+
+	.tabs {
+		display: flex;
+		justify-content: left;
+		position: relative; /* Make the parent relative for positioning the underline */
+	}
+
+	.tab {
+		color: #5a6a85;
+		padding: 10px 20px;
+		margin: 0 5px;
+		border: none;
+		background-color: white;
+		cursor: pointer;
+		font-size: 15px;
+		position: relative; /* Make the tab position relative */
+		transition: color 0.3s;
+	}
+
+	.tab.active {
+		color: #18b1c6; /* Change text color for active tab */
+	}
+
+	.tab:after {
+		content: "";
+		display: block;
+		height: 2px; /* Height of the underline */
+		background: #18b1c6; /* Color of the underline */
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -5px; /* Position the underline below the tab */
+		transform: scaleX(0); /* Initially scale down the underline */
+		transition: transform 0.3s ease; /* Animation for the underline */
+	}
+
+	.tab.active:after {
+		transform: scaleX(1); /* Scale to full width for active tab */
+	}
