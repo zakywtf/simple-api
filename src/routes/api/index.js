@@ -7,5 +7,7 @@ router.use('/auth', require('./authRoutes'));
 router.use('/users', require('./usersRoutes'));
 router.use('/schools', require('./schoolsRoutes'));
 router.use('/devices', require('./devicesRoutes'));
+router.use('/histories', require('./historyRoutes'));
+router.use('/check-up', require('./historyRoutes'));
 
 module.exports = router;

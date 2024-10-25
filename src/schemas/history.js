@@ -55,4 +55,4 @@ let sch = new Schema({
 sch.plugin(timestamp);
 sch.plugin(require('mongoose-autopopulate'))
 
-module.exports = mongoose.model("wellness_details", sch);
+module.exports = mongoose.model("history", sch);

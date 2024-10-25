@@ -41,7 +41,7 @@ class Models {
         return body
     }
     convertParam(body, updated=false){
-        body.created_by=this.udata._id
+        body.user_id=this.udata._id
         if(updated) body.updated_at=Date.now()
         return this.doConvertParam(body)
     }
