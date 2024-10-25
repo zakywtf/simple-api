@@ -69,7 +69,7 @@ block content
 					//- 		i.ti.ti-square-x
 					//- 	span.sr-only close
 				.modal-body
-					form.form-validation(role="form", action='/web/v1/positions/insert', enctype='multipart/form-data', method='post', accept=".jpg, .jpeg, .png")
+					form#data-form.form-validation
 						.form-group.row
 							label.col-sm-4.form-control-label(for="device_number") Nomor Mesin
 								span.text-danger *
@@ -86,7 +86,7 @@ block content
 							label.col-sm-4.form-control-label(for="hori-pass1") Penempatan
 								span.text-danger *
 							.col-sm-8
-								select.form-control(name="school_id", id='', required="required")
+								select#school_id.form-control(name="school_id", required="required")
 									each school in schools
 										option(value=school._id) #{school.npsn} - #{school.name}
 						br
@@ -167,4 +167,38 @@ block content
 
 		$(document).ready(function () {
 			displayTable(currentPage);
+		});
+
+	script.
+		document.getElementById('data-form').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var host = window.location.origin;
+			const token = localStorage.getItem('token');
+			const formData = new FormData(this);
+			const data = Object.fromEntries(formData);
+
+			// Option 1: Using fetch API
+			fetch(host + '/api/v1/devices', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => {
+				console.log({response})
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				//- return response.json(); 
+				window.location.href = host+'/devices'
+
+			})
+			.then(data => {
+				console.log('Success:', data);
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
 		});
