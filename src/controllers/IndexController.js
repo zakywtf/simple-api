@@ -6,6 +6,7 @@ import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
 import Schools from "../schemas/schools";
 import Devices from "../schemas/devices";
+import History from "../schemas/history";
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
 
@@ -211,7 +212,9 @@ const IndexController = {
     },
 
     history: async (req, res) => {
-        res.render('history/index');
+        const datas = await History.find({isDeleted: false, user_id: req.session.user_id}).sort({cretaed_at: -1})
+
+        res.render('history/index', { datas });
     },
 
     users: async (req, res) => {
