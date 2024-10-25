@@ -212,28 +212,28 @@ const IndexController = {
     },
 
     history: async (req, res) => {
-        const datas = await History.find({isDeleted: false, user_id: req.session.user_id}).sort({cretaed_at: -1})
+        const datas = await History.find({isDeleted: false, user_id: req.session.user_id}).sort({created_at: -1})
 
         res.render('history/index', { datas });
     },
 
     users: async (req, res) => {
         console.log({user: req.session})
-        const datas = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({cretaed_at: -1})
+        const datas = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({created_at: -1})
 
         res.render('users/index', {datas});
     },
 
     devices: async (req, res) => {
-        const datas = await Devices.find({isDeleted: false}).sort({cretaed_at: -1})
-        const schools = await Schools.find({isDeleted: false}).sort({cretaed_at: -1})
+        const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
+        const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
 
         res.render('devices/index', {datas, schools});
     },
 
     schools: async (req, res) => {
-        const datas = await Schools.find({isDeleted: false}).sort({cretaed_at: -1})
-
+        const datas = await Schools.find({isDeleted: false}).sort({ created_at: -1 })
+        
         res.render('schools/index', {datas});
     },
 
