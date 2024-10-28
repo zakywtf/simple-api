@@ -17,7 +17,10 @@ block content
 								th NISN
 								th Nama
 								th Jenis Kelamin
-								th Kategori BMI
+								th Tinggi Badan
+								th Berat Badan
+								th BMI Skor
+								th BMI Kategori
 								th Aksi
 
 						tbody
@@ -33,7 +36,18 @@ block content
 											| Laki-laki
 										else 
 											| Perempuan
-									td -
+									td #{data.height} Cm
+									td #{data.weight} Kg
+									td #{data.bmi_score}
+									td 
+										if (data.bmi_category == 'Kurang Berat Badan')
+											.text-primary #{data.bmi_category}
+										else if (data.bmi_category == 'Normal')
+											.text-success #{data.bmi_category}
+										else if (data.bmi_category == 'Kelebihan Berat Badan')
+											.text-warning #{data.bmi_category}
+										else if (data.bmi_category == 'Obesitas')
+											.text-danger #{data.bmi_category}
 									td
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 											| Aksi

@@ -7,6 +7,8 @@ import Users from "../schemas/users";
 import Schools from "../schemas/schools";
 import Devices from "../schemas/devices";
 import History from "../schemas/history";
+import WellnessDetail from "../schemas/wellness_details";
+
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
 import { saveDataRecommendation } from "../helpers/masterFunction"
@@ -213,7 +215,12 @@ const IndexController = {
     },
 
     dashboard: async (req, res) => {
-        res.render('dashboard/index');
+        let data
+        if (req.session.role == 'user') {
+            data = await WellnessDetail.findOne({user_id: req.session.user_id})
+        }
+        console.log({data})
+        res.render('dashboard/index', {data});
     },
 
     history: async (req, res) => {
@@ -224,8 +231,13 @@ const IndexController = {
 
     users: async (req, res) => {
         console.log({user: req.session})
-        const datas = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({created_at: -1})
-
+        const datas = []
+        const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({created_at: -1})
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            const user_detail = await WellnessDetail.findOne({user_id: user._id})
+            datas.push({ ...user._doc, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight})
+        }
         res.render('users/index', {datas});
     },
 
