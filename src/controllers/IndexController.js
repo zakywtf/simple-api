@@ -9,6 +9,7 @@ import Devices from "../schemas/devices";
 import History from "../schemas/history";
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
+import { saveDataRecommendation } from "../helpers/masterFunction"
 
 
 const IndexController = {
@@ -133,6 +134,15 @@ const IndexController = {
 
     },  
 
+    textToJson: async (req, res) => {
+        const text = '[{"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Jumping Jack", "repetisi": "10 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Push up", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Squat", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Pull up", "repetisi": "5-8 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Plank", "repetisi": "30 detik", "set": "3 set"}, {"keterangan": "Lakukan pendinginan setelah berolahraga", "latihan": "Stretching", "repetisi": "5 menit", "set": "1 set"}], "hari": "Senin"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Jogging ringan", "repetisi": "15 menit", "set": "1 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Burpees", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Lunges", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Dips", "repetisi": "5-8 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Bicycle crunch", "repetisi": "15 kali", "set": "3 set"}, {"keterangan": "Lakukan pendinginan setelah berolahraga", "latihan": "Stretching", "repetisi": "5 menit", "set": "1 set"}], "hari": "Rabu"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Lompat tali", "repetisi": "100 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Push up incline", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Bulgarian split squat", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Chin up", "repetisi": "5-8 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Reverse crunch", "repetisi": "15 kali", "set": "3 set"}, {"keterangan": "Lakukan pendinginan setelah berolahraga", "latihan": "Stretching", "repetisi": "5 menit", "set": "1 set"}], "hari": "Jumat"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Bersepeda", "repetisi": "30 menit", "set": "1 set"}, {"keterangan": "", "latihan": "Bebas", "repetisi": "", "set": ""}], "hari": "Minggu"}]\n'
+        const json = JSON.parse(text)
+        const planner = await saveDataRecommendation(text)
+        // console.log({planner})
+        return apiResponse.successResponseWithData(res, "great!", json)
+
+    },
+
     testGemini: async (req, res) => {
         const schema = {
             description: "Workout Planner",
@@ -167,15 +177,10 @@ const IndexController = {
                                 description: "keterangan dari latihan",
                                 type: SchemaType.STRING,
                             },
-                            // "cost": {
-                            //     "description": "Cost of requirement material for running the recipe. Unit is dollar.",
-                            //     "type": "number",
-                            // }
                         },
                         required: ["latihan", "set", "repetisi", "keterangan"]
                     },
               },
-            //   required: ["hari", "aktivitas"],
             },
           }
         }

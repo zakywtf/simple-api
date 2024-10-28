@@ -14,6 +14,7 @@ router.get('/imt', IndexController.testImt);
 router.get('/rand-string', IndexController.randString);
 router.get('/contact_us', IndexController.contactUs);
 router.get('/email-test', IndexController.testSendEmail);
+router.get('/text-json', IndexController.textToJson);
 
 
 // Routes Prefixes / API

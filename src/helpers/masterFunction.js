@@ -1,7 +1,9 @@
 import moment from 'moment'
+import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import Users from "../schemas/users";
 import WellnessDetail from "../schemas/wellness_details";
 import History from "../schemas/history";
+import Recommendation from "../schemas/recommendations";
 
 const createDefaultWellnessDetail = async (obj) => {
     // console.log({obj})
@@ -28,8 +30,33 @@ const createHistory = async (obj) => {
     return resp
 }
 
+const getGeminiAI = async (height, weight) => {
+
+}
+
+const saveDataRecommendation = async (text, user_id=null) => {
+    const array = JSON.parse(text)
+    const planner = []
+    for (let i = 0; i < array.length; i++) {
+        const e = array[i];
+        const activities = e.aktivitas
+        const practices = []
+        for (let ii = 0; ii < activities.length; ii++) {
+            const activity = activities[ii];
+            // console.log({activity})
+            practices.push({name: activity.latihan, set: activity.set, repetitions: activity.repetisi, information: activity.keterangan})
+        }
+        // console.log({practices})
+        planner.push({day: e.hari, practices})
+    }
+
+    await Recommendation.create({user_id: user_id, planner})
+} 
+
 module.exports = {
     createDefaultWellnessDetail,
     updateWellnessDetail,
-    createHistory
+    createHistory,
+    getGeminiAI,
+    saveDataRecommendation
 }

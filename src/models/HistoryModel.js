@@ -5,6 +5,7 @@ import { updateWellnessDetail, createHistory } from "../helpers/masterFunction"
 class historyModel extends Models{
     constructor(){
         super(sch)
+        this.sorting = { created_at: -1 }
     }
 
     async create(obj){
@@ -15,6 +16,16 @@ class historyModel extends Models{
         // await createHistory(detail)
 
         return this.insert_result(resp)
+    }
+
+    async getAll(query={}){
+        // console.log({udata: this.udata, query})
+        const resp = await this.model.find({...query, user_id: this.udata._id}).sort(this.sorting)
+
+        // console.log({resp})
+        if(resp.length < 1) throw new NotFoundError('Data Not Found.')
+
+        return { msg: 'Data retrieved.', data: resp}
     }
 
 }

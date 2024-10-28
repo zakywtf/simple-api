@@ -9,5 +9,6 @@ router.use('/schools', require('./schoolsRoutes'));
 router.use('/devices', require('./devicesRoutes'));
 router.use('/histories', require('./historyRoutes'));
 router.use('/check-up', require('./historyRoutes'));
+router.use('/recommendations', require('./recommendationsRoutes'));
 
 module.exports = router;
