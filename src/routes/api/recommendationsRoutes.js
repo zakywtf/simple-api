@@ -4,6 +4,6 @@ import {verify} from "../../middlewares/authMiddleware"
 
 const router = express.Router();
 
-router.use('/', controller);
+router.use('/', verify, controller);
 
 module.exports = router;

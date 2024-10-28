@@ -9,7 +9,7 @@ class recommendationsModel extends Models{
 
     async getAll(query={}){
         // console.log({udata: this.udata, query})
-        const resp = await this.model.findOne({...query}).sort(this.sorting)
+        const resp = await this.model.findOne({...query, user_id: this.udata._id}).sort(this.sorting)
 
         // console.log({resp})
         if(resp.length < 1) throw new NotFoundError('Data Not Found.')

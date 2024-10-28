@@ -1,6 +1,6 @@
 import Models from "../classes/classModel";
 import sch from "../schemas/history";
-import { updateWellnessDetail, createHistory } from "../helpers/masterFunction"
+import { updateWellnessDetail, createHistory, getGeminiAI } from "../helpers/masterFunction"
 
 class historyModel extends Models{
     constructor(){
@@ -13,7 +13,7 @@ class historyModel extends Models{
         const detail = await updateWellnessDetail(obj, this.udata._id)
         const body = { ...obj, school_id: detail.school_id }
         let resp = await this.model.create(this.convertParam(body, false))
-        // await createHistory(detail)
+        await getGeminiAI(obj.height, obj.weight, this.udata._id)
 
         return this.insert_result(resp)
     }
