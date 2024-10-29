@@ -270,10 +270,10 @@ const IndexController = {
         const dayIndex = today.getDay();
         const dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
         const currentDay = dayNames[dayIndex];
-        console.log({currentDay})
+        // console.log({currentDay})
         for (let i = 0; i < activities.length; i++) {
             const act = activities[i];
-            console.log({act})
+            // console.log({act})
             if (act.hari == currentDay) {
                 datas.push(act)
             }

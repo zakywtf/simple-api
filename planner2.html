@@ -70,6 +70,20 @@
             border-radius: 4px;
             background: #f9f9f9;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f0f0f0;
+        }
 
 
     </style>
@@ -157,8 +171,14 @@
             function loadContent(dayIndex) {
                 // Simulate an AJAX request with a timeout
                 const mockData = {
-                    0: "Sunday: Rest day. Plan for the week ahead.",
-                    1: "Monday: Cardio and strength training.",
+                    0: [
+                        {name: "Item 1", value: "Value 1"},
+                        {name: "Item 2", value: "Value 2"},
+                    ],
+                    1: [
+                        {name: "Item 1", value: "Value 1"},
+                        {name: "Item 2", value: "Value 2"},
+                    ],
                     2: "Tuesday: Yoga and flexibility exercises.",
                     3: "Wednesday: High-intensity interval training (HIIT).",
                     4: "Thursday: Weight lifting and core exercises.",
@@ -192,6 +212,44 @@
                 });
             });
         });
+
+        $(document).ready(function() {
+            $('.tab-button').click(function() {
+                var tabId = $(this).data('tab');
+                
+                $('.tab-button').removeClass('active');
+                $(this).addClass('active');
+
+                // Load content via AJAX
+                loadContent(tabId);
+            });
+
+            function loadContent(tabId) {
+                // Example data for demonstration
+                var content = {
+                    tab1: [
+                        {name: "Item 1", value: "Value 1"},
+                        {name: "Item 2", value: "Value 2"},
+                    ],
+                    tab2: [
+                        {name: "Item A", value: "Value A"},
+                        {name: "Item B", value: "Value B"},
+                    ]
+                };
+
+                var html = '<table><tr><th>Name</th><th>Value</th></tr>';
+                content[tabId].forEach(function(item) {
+                    html += '<tr><td>' + item.name + '</td><td>' + item.value + '</td></tr>';
+                });
+                html += '</table>';
+
+                $('#content').html(html);
+            }
+
+            // Load the first tab content by default
+            $('.tab-button').first().click();
+        });
+
 
 
     </script>

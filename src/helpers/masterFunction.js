@@ -110,7 +110,7 @@ const getGeminiAI = async (height, weight, user_id) => {
             },
         });
 
-        const prompt = `workout planner untuk tinggi badan ${height}cm dan berat badan ${weight}kg`;
+        const prompt = `workout planner untuk tinggi badan ${height}cm dan berat badan ${weight}kg dari senin sampai minggu`;
 
         const result = await model.generateContent(prompt);
         // console.log({result})
