@@ -56,7 +56,9 @@ block content
 										if (data.status == 'active')
 											span.badge.bg-success.rounded-3.fw-semibold Active
 										else if (data.status == 'suspend')
-											span.badge.bg-warning.rounded-3.fw-semibold Suspend
+											span.badge.bg-danger.rounded-3.fw-semibold Suspend
+										else if (data.status == 'unpaid')
+											span.badge.bg-warning.rounded-3.fw-semibold Unpaid
 										else
 											span.badge.bg-danger.rounded-3.fw-semibold Inactive
 
@@ -64,10 +66,10 @@ block content
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 											| Aksi
 										ul.dropdown-menu
-											if (data.status == 'active')
+											if (data.status == 'active' || data.status == 'unpaid')
 												li
 													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
-											else if (data.status == 'suspend')
+											else if (data.status == 'suspend' || data.status == 'unpaid')
 												li
 													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
 											else if (data.status == 'suspend')
