@@ -27,8 +27,12 @@ let sch = new Schema({
     },
     status: {
         type:String, 
-        enum:['unpaid', 'paid', 'expired'], 
-        default:'unpaid'
+        enum:['paid', 'paid', 'expired'], 
+        default:'paid'
+    },
+    expired_date: {
+        type: Date,
+        default: null
     },
     isDeleted: {
         type: Boolean,

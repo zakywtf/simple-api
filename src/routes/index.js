@@ -30,6 +30,6 @@ router.get('/recommendation', auth, IndexController.recommendation)
 router.get('/users', auth, IndexController.users)
 router.get('/schools', auth, IndexController.schools)
 router.get('/devices', auth, IndexController.devices)
-router.get('/payment', auth, IndexController.payment)
+router.get('/payments', auth, IndexController.payment)
 
 module.exports = router;

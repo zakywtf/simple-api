@@ -10,7 +10,7 @@ const _getDataLastIndex = (datas) => {
 }
 
 const imagesUploader = async (image, path = null) => {
-    // console.log({images, path, length: images.length})
+    console.log({image, path, length: image.length})
     const fileNames = []
 
     if(!fs.existsSync(path)) {
@@ -20,7 +20,7 @@ const imagesUploader = async (image, path = null) => {
     let generated_name = await generate(33, false)
     let ext = await _getExt(image.name)
     var newFileName = generated_name+'.'+ext;
-    // console.log({newFileName});
+    console.log({newFileName});
     
     image.mv(path+newFileName)
 

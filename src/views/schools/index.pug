@@ -1,6 +1,17 @@
 extends ../layouts/base
 
 block content
+	-function prettyDate(dateString){
+		//if it's already a date object and not a string you don't need this line:
+		-var date = new Date(dateString);
+		-var d = date.getDate();
+		-var monthNames = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
+		-var m = monthNames[date.getMonth()];
+		-var dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+		-var currentDay = dayNames[date.getDay()];
+		-var y = date.getFullYear();
+		-return currentDay+', '+d+' '+m+' '+y;
+	-}
 	.container-fluid
 		br
 		//- br
@@ -29,6 +40,7 @@ block content
 								th Latitude
 								th Longitude
 								th Status
+								th Masa Aktif
 								th Aksi
 
 						tbody
@@ -61,18 +73,24 @@ block content
 											span.badge.bg-warning.rounded-3.fw-semibold Unpaid
 										else
 											span.badge.bg-danger.rounded-3.fw-semibold Inactive
+									td #{prettyDate(data.expired_date)}
+									
 
 									td
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 											| Aksi
 										ul.dropdown-menu
-											if (data.status == 'active' || data.status == 'unpaid')
+											if (data.status == 'active')
 												li
 													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
-											else if (data.status == 'suspend' || data.status == 'unpaid')
+											else if (data.status == 'suspend')
 												li
 													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
-											else if (data.status == 'suspend')
+											else if (data.status == 'unpaid')
+												li
+													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
+												li
+													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
 											.dropdown-divider
 											li
 												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
@@ -148,6 +166,12 @@ block content
 								//- span.text-danger *
 							.col-sm-8
 								input#longitude.form-control(type="text", placeholder="Longitude", name="longitude")
+						br
+						.form-group.row
+							label.col-sm-4.form-control-label(for="expired_date") Masa Aktif
+								//- span.text-danger *
+							.col-sm-8
+								input#expired_date.form-control(type="date", name="expired_date")
 						br
 						.form-group.row
 							.col-sm-12.col-sm-offset-4

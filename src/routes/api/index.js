@@ -10,5 +10,6 @@ router.use('/devices', require('./devicesRoutes'));
 router.use('/histories', require('./historyRoutes'));
 router.use('/check-up', require('./historyRoutes'));
 router.use('/recommendations', require('./recommendationsRoutes'));
+router.use('/payments', require('./paymentRoutes'));
 
 module.exports = router;

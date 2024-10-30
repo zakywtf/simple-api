@@ -1,6 +1,22 @@
 extends ../layouts/base
 
 block content
+	-function formatRupiah(amount) {
+		-return new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0}).format(amount);
+	-}
+
+	-function prettyDate(dateString){
+		//if it's already a date object and not a string you don't need this line:
+		-var date = new Date(dateString);
+		-var d = date.getDate();
+		-var monthNames = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
+		-var m = monthNames[date.getMonth()];
+		-var dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+		-var currentDay = dayNames[date.getDay()];
+		-var y = date.getFullYear();
+		-return currentDay+', '+d+' '+m+' '+y;
+	-}
+
 	.container-fluid
 		br
 		//- br
@@ -26,32 +42,32 @@ block content
 								th Total
 								th Keterangan
 								th Bukti Pembayaran
-								th Tanggal
+								th Tanggal Input
 								th Aksi
 
 						tbody
-							//- -var no = 1;
-							//- each data in datas
-							tr
-								td 1
-								td 
-									b #12345
-								td 1234 - SMK Test
-								td Rp.3.500.000,-
-								td Pembayaran SMK Test di bulan Oktober 2024
-								td 
-									a(data-toggle='modal', href='', data-target='#nota', style="text-decoration: underline;") Lihat Bukti
-								td Senin, 10 Oktober 2024
-								td
-									button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
-										| Aksi
-									ul.dropdown-menu
-										li
-											a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
-											
-										li 
-											a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
-							
+							-var no = 1;
+							each data in datas
+								tr
+									td #{no++}
+									td 
+										b ##{data.invoice}
+									td #{data.school_id.npsn} - #{data.school_id.name}
+									td #{formatRupiah(data.total_price)}
+									td #{data.notes}
+									td 
+										a(data-toggle='modal', href='', data-target='#nota'+data._id, style="text-decoration: underline;") Lihat Bukti
+									td #{prettyDate(data.created_at)}
+									td
+										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
+											| Aksi
+										ul.dropdown-menu
+											li
+												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
+												
+											li 
+												a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
+								
 							
 					nav
 						ul#pagination.pagination
@@ -61,56 +77,63 @@ block content
 			.modal-content
 				.modal-header
 					h2
-						b Tambah Mesin
+						b Tambah Pembayaran
 					//- button.close(type="button", data-dismiss="modal")
 					//- 	span(aria-hidden="true")
 					//- 		i.ti.ti-square-x
 					//- 	span.sr-only close
 				.modal-body
-					form.form-validation(role="form", action='/web/v1/positions/insert', enctype='multipart/form-data', method='post', accept=".jpg, .jpeg, .png")
+					form#data-form.form-validation(enctype="multipart/form-data")
 						.form-group.row
-							label.col-sm-4.form-control-label(for="device_number") Nomor Mesin
+							label.col-sm-4.form-control-label(for="hori-pass1") Sekolah
 								span.text-danger *
 							.col-sm-8
-								input#device_number.form-control(type="text", required, placeholder="Nomor Mesin", name="device_number")
+								select#school_id.form-control(name="school_id", required="required")
+									each school in schools
+										option(value=school._id) #{school.npsn} - #{school.name}
 						br
 						.form-group.row
-							label.col-sm-4.form-control-label(for="name") Nama Mesin
+							label.col-sm-4.form-control-label(for="name") Total Pembayaran
 								span.text-danger *
 							.col-sm-8
-								input#name.form-control(type="text", placeholder="Nama Mesin", required, name="name")
+								input#total_price.form-control(type="number", placeholder="Total Pembayaran", required, name="name")
 						br
 						.form-group.row
-							label.col-sm-4.form-control-label(for="hori-pass1") Penempatan
+							label.col-sm-4.form-control-label(for="name") Bukti Pembayaran
+								//- span.text-danger *
+							.col-sm-8
+								input#proof_of_payment.form-control(type="file", placeholder="Bukti Pembayaran", name="proof_of_payment")
+						br
+						.form-group.row
+							label.col-sm-4.form-control-label(for="expired_date") Masa Aktif
 								span.text-danger *
 							.col-sm-8
-								select.form-control(name="school_id", id='', required="required")
-									//- each school in schools
-									//- 	option(value=school._id) #{school.npsn} - #{school.name}
+								input#expired_date.form-control(type="date", name="expired_date")
 						br
 						.form-group.row
 							label.col-sm-4.form-control-label(for="name") Keterangan
-								span.text-danger *
+								//- span.text-danger *
 							.col-sm-8
-								textarea#notes.form-control(row="3", placeholder="Keterangan", required, name="notes")
+								textarea#notes.form-control(row="3", placeholder="Keterangan", name="notes")
 						br
 						.form-group.row
 							.col-sm-12.col-sm-offset-4
 								button.btn.btn-primary.waves-effect.waves-light.float-right(type="submit", style="float: right;")
 									| Submit
 
-	.modal.fade(id='nota',tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
-		.modal-dialog(style="width: 800px;")
-			.modal-content
-				.modal-header
-					h2
-						b Invoice #1234
-					//- button.close(type="button", data-dismiss="modal")
-					//- 	span(aria-hidden="true")
-					//- 		i.ti.ti-square-x
-					//- 	span.sr-only close
-				.modal-body
-					p tes
+	each data in datas
+		.modal.fade(id='nota'+data._id, tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog(style="width: 800px;")
+				.modal-content
+					.modal-header
+						h2
+							b Invoice ##{data.invoice}
+						//- button.close(type="button", data-dismiss="modal")
+						//- 	span(aria-hidden="true")
+						//- 		i.ti.ti-square-x
+						//- 	span.sr-only close
+					.modal-body
+						img(src=data.proof_of_payment, alt="image", width='100%' style="display: block;")
 
 	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
 	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
@@ -178,4 +201,53 @@ block content
 
 		$(document).ready(function () {
 			displayTable(currentPage);
+		});
+
+	script.
+		document.getElementById('data-form').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var host = window.location.origin;
+			const token = localStorage.getItem('token');
+			const proof_of_payment = document.getElementById('proof_of_payment');
+			const notes = document.getElementById('notes');
+			const school_id = document.getElementById('school_id');
+			const total_price = document.getElementById('total_price');
+			const expired_date = document.getElementById('expired_date');
+
+			const file = proof_of_payment.files[0];
+			const vnote = notes.value; 
+			const vsch = school_id.value; 
+			const vtp = total_price.value; 
+			const ved = expired_date.value; 
+			//- const data = Object.fromEntries(formData);
+			const formData = new FormData();
+			formData.append('proof_of_payment', file);
+			formData.append('notes', vnote); 
+			formData.append('school_id', vsch); 
+			formData.append('total_price', vtp); 
+			formData.append('expired_date', ved); 
+			// Option 1: Using fetch API
+			fetch(host + '/api/v1/payments/create', {
+				method: 'POST',
+				headers: {
+					//- 'Content-Type': 'multipart/form-data',
+					'Authorization': `Bearer ${token}`
+				},
+				body: formData
+			})
+			.then(response => {
+				console.log({response})
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				//- return response.json(); 
+				window.location.href = host+'/payments'
+
+			})
+			.then(data => {
+				console.log('Success:', data);
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
 		});

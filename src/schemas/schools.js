@@ -35,6 +35,10 @@ let sch = new Schema({
         enum:['SD', 'MI', 'SMP', 'MTS', 'SMA', 'SMK', 'MA'], 
         default:'SD'
     },
+    expired_date: {
+        type: Date,
+        default: null
+    },
     isDeleted: {
         type: Boolean,
         default: false

@@ -8,6 +8,7 @@ import Schools from "../schemas/schools";
 import Devices from "../schemas/devices";
 import History from "../schemas/history";
 import WellnessDetail from "../schemas/wellness_details";
+import Payments from "../schemas/payments";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
@@ -255,7 +256,10 @@ const IndexController = {
     },
 
     payment: async (req, res) => {
-        res.render('payment/index');
+        const datas = await Payments.find({isDeleted: false}).sort({ created_at: -1 })
+        const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
+
+        res.render('payment/index', {datas, schools});
     },
 
     recommendation: async (req, res) => {
