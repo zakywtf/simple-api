@@ -80,17 +80,17 @@ block content
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 											| Aksi
 										ul.dropdown-menu
-											if (data.status == 'active')
+											if (data.status == 'active' || data.status == 'unpaid')
 												li
 													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
 											else if (data.status == 'suspend')
 												li
 													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
-											else if (data.status == 'unpaid')
-												li
-													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
-												li
-													a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
+											//- else if (data.status == 'unpaid')
+											//- 	li
+											//- 		a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
+											//- 	li
+											//- 		a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
 											.dropdown-divider
 											li
 												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit

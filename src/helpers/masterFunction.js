@@ -4,6 +4,7 @@ import Users from "../schemas/users";
 import WellnessDetail from "../schemas/wellness_details";
 import History from "../schemas/history";
 import Recommendation from "../schemas/recommendations";
+import Schools from "../schemas/schools";
 
 const createDefaultWellnessDetail = async (obj) => {
     // console.log({obj})
@@ -19,15 +20,15 @@ const updateWellnessDetail = async (obj, user_id) => {
     const weight = parseInt(obj.weight)
 
     const bmi_score = weight / ((height/100)*(height/100))
-    let bmi_category
+    var bmi_category = null
     if (bmi_score < 18.5) {
-        bmi_category = 'Kurang Berat Badan';
+        bmi_category = 'Kurang Berat Badan'
     } else if (bmi_score >= 18.5 && bmi_score < 24.9) {
-        bmi_category = 'Normal';
+        bmi_category = 'Normal'
     } else if (bmi_score >= 25 && bmi_score < 29.9) {
-        bmi_category = 'Kelebihan Berat Badan';
+        bmi_category = 'Kelebihan Berat Badan'
     } else {
-        bmi_category = 'Obesitas';
+        bmi_category = 'Obesitas'
     }
 
     const body = { ...obj, updated_at: moment(), user_id: user_id, bmi_score: bmi_score.toFixed(2), bmi_category: bmi_category}
@@ -137,10 +138,19 @@ const saveDataRecommendation = async (text, user_id, height, weight) => {
     await Recommendation.create({user_id: user_id, planner, height: height, weight: weight})
 } 
 
+const updateStatusPaymentOnSchool = async (school_id, expired_date) => {
+    const data = await Schools.findOne({_id: school_id})
+    data.status = 'active'
+    data.expired_date = expired_date
+
+    await data.save()
+}
+
 module.exports = {
     createDefaultWellnessDetail,
     updateWellnessDetail,
     createHistory,
     getGeminiAI,
-    saveDataRecommendation
+    saveDataRecommendation,
+    updateStatusPaymentOnSchool
 }
