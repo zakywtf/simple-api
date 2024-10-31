@@ -217,11 +217,34 @@ const IndexController = {
 
     dashboard: async (req, res) => {
         let data
+        let total_users = 0
+        let total_devices = 0
+        let total_schools = 0
+        let schools_unpaid = []
+        let total_kurus = 0
+        let total_normal = 0
+        let total_gemuk = 0
+        let total_obesitas = 0
+
         if (req.session.role == 'user') {
             data = await WellnessDetail.findOne({user_id: req.session.user_id})
+        } else if (req.session.role == 'admin'){
+            total_users = await Users.find({isDeleted: false}).countDocuments()
+            total_devices = await Devices.find({isDeleted: false}).countDocuments()
+            total_schools = await Schools.find({isDeleted: false}).countDocuments()
+            const schools = await Schools.find({isDeleted: false, status: "unpaid"})
+            for (let i = 0; i < schools.length; i++) {
+                const sch = schools[i];
+                schools_unpaid.push({npsn: sch.npsn, name: sch.name, status: sch.status})
+            }
+        } else if (req.session.role == 'teacher'){
+            total_kurus = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kurang Berat Badan'}).countDocuments()
+            total_normal = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Normal'}).countDocuments()
+            total_gemuk = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kelebihan Berat Badan'}).countDocuments()
+            total_obesitas = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Obesitas'}).countDocuments()
         }
-        console.log({data})
-        res.render('dashboard/index', {data});
+        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas})
+        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas});
     },
 
     history: async (req, res) => {

@@ -11,7 +11,7 @@ $(function () {
     ],
 
     chart: {
-      type: "bar",
+      type: "sparkline3",
       height: 345,
       offsetX: -15,
       toolbar: { show: true },
@@ -208,4 +208,34 @@ $(function () {
     },
   };
   new ApexCharts(document.querySelector("#earning"), earning).render();
+
+  var options = {
+    chart: {
+      type: 'line', // Specify the chart type
+      height: 350,
+    },
+    series: [{
+      name: 'Sales',
+      data: [30, 40, 35, 50, 49, 60, 70, 91, 125] // Sample data
+    }],
+    xaxis: {
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'] // X-axis labels
+    },
+    // title: {
+    //   text: 'Monthly Sales Data',
+    //   align: 'center'
+    // },
+    stroke: {
+      curve: 'smooth' // Makes the line smooth
+    },
+    markers: {
+      size: 5, // Size of the markers on the line
+    },
+    tooltip: {
+      shared: true,
+      intersect: false,
+    },
+  };
+
+  new ApexCharts(document.querySelector("#chart-sales"), options).render();
 })

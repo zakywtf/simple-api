@@ -5,7 +5,15 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Jumlah Mesin
-						h3.fw-semibold.mb-3 5
+						.row 
+							.col-2 
+								h2.fw-semibold.mb-3 #{total_devices}
+							.col-10
+								.d-flex.align-items-center.mb-3
+									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+										i.ti.ti-arrow-up-left.text-success
+									p.text-dark.me-1.fs-3.mb-0 +9%
+									p.fs-3.mb-0 bulan lalu
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -16,7 +24,15 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Jumlah Pengguna
-						h3.fw-semibold.mb-3 500
+						.row 
+							.col-2 
+								h2.fw-semibold.mb-3 #{total_users}
+							.col-10
+								.d-flex.align-items-center.mb-3
+									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+										i.ti.ti-arrow-up-left.text-success
+									p.text-dark.me-1.fs-3.mb-0 +9%
+									p.fs-3.mb-0 bulan lalu
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -27,7 +43,15 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Jumlah Sekolah
-						h3.fw-semibold.mb-3 33
+						.row 
+							.col-2 
+								h3.fw-semibold.mb-3 #{total_schools}
+							.col-10
+								.d-flex.align-items-center.mb-3
+									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+										i.ti.ti-arrow-up-left.text-success
+									p.text-dark.me-1.fs-3.mb-0 +9%
+									p.fs-3.mb-0 bulan lalu
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -38,53 +62,150 @@
 			.card-body
 				.d-sm-flex.d-block.align-items-center.justify-content-between.mb-9
 					.mb-3.mb-sm-0
-						h5.card-title.fw-semibold Laporan Penjualan
-					div
-						select.form-select
-							option(value="1") Oktober 2024
-							option(value="2") November 2024
-							option(value="3") Desember 2024
-				#chart
+						h5.card-title.fw-semibold Laporan Pendapatan
+						br
+					//- div
+					//- 	select.form-select
+					//- 		option(value="1") Oktober 2024
+					//- 		option(value="2") November 2024
+					//- 		option(value="3") Desember 2024
+				#chart-sales
 	.col-lg-4
-		.row
-			.col-lg-12
-				// Yearly Breakup
-				.card.overflow-hidden
-					.card-body.p-4
-						h5.card-title.mb-9.fw-semibold Pendapatan Tahunan
+		.row 
+			.col-lg-6 
+				.card.overflow-hidden 
+					.card-body
+						h6.card-title.mb-4.fw-semibold Tahunan
+						hr
 						.row.align-items-center
-							.col-8
-								h4.fw-semibold.mb-3 Rp.54.000.000,-
+							.col-12
+								br
+								h6.fw-semibold.mb-9 Rp.54.000.000
 								.d-flex.align-items-center.mb-3
 									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
 										i.ti.ti-arrow-up-left.text-success
-									p.text-dark.me-1.fs-3.mb-0 +9%
-									p.fs-3.mb-0 tahun lalu
-								.d-flex.align-items-center
-									.me-4
-										span.round-8.bg-primary.rounded-circle.me-2.d-inline-block
-										span.fs-2 2023
-									div
-										span.round-8.bg-light-primary.rounded-circle.me-2.d-inline-block
-										span.fs-2 2023
-							.col-4
-								.d-flex.justify-content-center
-									#breakup
-			.col-lg-12
-				// Monthly Earnings
-				.card
+									p.text-dark.me-1.fs-2.mb-0 +9%
+									p.fs-2.mb-0 tahun lalu
+			.col-lg-6
+				.card.overflow-hidden 
 					.card-body
-						.row.alig.n-items-start
-							.col-8
-								h5.card-title.mb-9.fw-semibold  Penghasilan Bulanan 
-								h4.fw-semibold.mb-3 Rp.3.000.000,-
-								.d-flex.align-items-center.pb-1
-									span.me-2.rounded-circle.bg-light-danger.round-20.d-flex.align-items-center.justify-content-center
-										i.ti.ti-arrow-down-right.text-danger
-									p.text-dark.me-1.fs-3.mb-0 +9%
-									p.fs-3.mb-0 tahun lalu
-							.col-4
-								.d-flex.justify-content-end
-									.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
-										i.ti.ti-currency-dollar.fs-6
-					#earning
+						h6.card-title.mb-4.fw-semibold Bulanan
+						hr
+						.row.align-items-center
+							.col-12
+								br
+								h6.fw-semibold.mb-9 Rp.4.000.000
+								.d-flex.align-items-center.mb-3
+									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+										i.ti.ti-arrow-up-left.text-success
+									p.text-dark.me-1.fs-2.mb-0 +9%
+									p.fs-2.mb-0 bulan lalu
+		.row
+			//- .col-lg-12 
+			//- 	.card.overflow-hidden
+			//- 		.card-title 
+			//- 		.card-body
+			//- 			h5.fw-semibold Total Pendapatan
+			//- 			hr
+			//- 			.row 
+			//- 				.col-6 
+			//- 					h6.card-title.mb-9.fw-semibold Tahunan
+			//- 						.row.align-items-center
+			//- 							.col-12
+			//- 								br
+			//- 								h5.fw-semibold.mb-9 Rp.54.000.000
+			//- 								.d-flex.align-items-center.mb-3
+			//- 									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+			//- 										i.ti.ti-arrow-up-left.text-success
+			//- 									p.text-dark.me-1.fs-3.mb-0 +9%
+			//- 									p.fs-3.mb-0 bulan lalu
+			//- 				.col-6
+			//- 					h6.card-title.mb-9.fw-semibold Bulanan
+			//- 						.row.align-items-center
+			//- 							.col-12
+			//- 								br
+			//- 								h5.fw-semibold.mb-9 Rp.4.000.000
+			//- 								.d-flex.align-items-center.mb-3
+			//- 									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+			//- 										i.ti.ti-arrow-up-left.text-success
+			//- 									p.text-dark.me-1.fs-3.mb-0 +9%
+			//- 									p.fs-3.mb-0 bulan lalu
+			
+			.col-lg-12 
+				.card.w-100
+					.card-body.p-4
+						h5.card-title.fw-semibold.mb-4 Peringatan Pembayaran
+						.table-responsive(style="max-height: 150px; overflo-y: auto;")
+							table.table.text-nowrap.mb-0.align-middle
+								//- thead.text-dark.fs-4
+								//- 	tr
+								//- 		th.border-bottom-0
+								//- 			h6.fw-semibold.mb-0 Sekolah
+								//- 		th.border-bottom-0
+								//- 			h6.fw-semibold.mb-0 Status
+								tbody
+									each sch in schools_unpaid
+										tr
+											td.border-bottom-0
+												h6.fw-semibold.mb-1 #{sch.npsn}
+												span.fw-normal #{sch.name}
+											td.border-bottom-0
+												.d-flex.align-items-center.gap-2
+													span.badge.bg-warning.rounded-3.fw-semibold Unpaid
+									//- tr
+									//- 	td.border-bottom-0
+									//- 		h6.fw-semibold.mb-1 20407123
+									//- 		span.fw-normal SMK TES JAYA
+									//- 	td.border-bottom-0
+									//- 		.d-flex.align-items-center.gap-2
+									//- 			span.badge.bg-warning.rounded-3.fw-semibold Unpaid
+									//- tr
+									//- 	td.border-bottom-0
+									//- 		h6.fw-semibold.mb-1 20407123
+									//- 		span.fw-normal SMK TES JAYA
+									//- 	td.border-bottom-0
+									//- 		.d-flex.align-items-center.gap-2
+									//- 			span.badge.bg-warning.rounded-3.fw-semibold Unpaid
+									
+
+			//- .col-lg-12
+			//- 	// Yearly Breakup
+			//- 	.card.overflow-hidden
+			//- 		.card-body.p-4
+			//- 			h5.card-title.mb-9.fw-semibold Pendapatan Tahunan
+			//- 			.row.align-items-center
+			//- 				.col-12
+			//- 					h4.fw-semibold.mb-3 Rp.54.000.000,-
+			//- 					.d-flex.align-items-center.mb-3
+			//- 						span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+			//- 							i.ti.ti-arrow-up-left.text-success
+			//- 						p.text-dark.me-1.fs-3.mb-0 +9%
+			//- 						p.fs-3.mb-0 tahun lalu
+			//- 					//- .d-flex.align-items-center
+			//- 					//- 	.me-4
+			//- 					//- 		span.round-8.bg-primary.rounded-circle.me-2.d-inline-block
+			//- 					//- 		span.fs-2 2023
+			//- 					//- 	div
+			//- 					//- 		span.round-8.bg-light-primary.rounded-circle.me-2.d-inline-block
+			//- 					//- 		span.fs-2 2023
+			//- 				//- .col-4
+			//- 				//- 	.d-flex.justify-content-center
+			//- 				//- 		#breakup
+			//- .col-lg-12
+			//- 	// Monthly Earnings
+			//- 	.card
+			//- 		.card-body
+			//- 			.row.alig.n-items-start
+			//- 				.col-8
+			//- 					h5.card-title.mb-9.fw-semibold  Penghasilan Bulanan 
+			//- 					h4.fw-semibold.mb-3 Rp.3.000.000,-
+			//- 					.d-flex.align-items-center.pb-1
+			//- 						span.me-2.rounded-circle.bg-light-danger.round-20.d-flex.align-items-center.justify-content-center
+			//- 							i.ti.ti-arrow-down-right.text-danger
+			//- 						p.text-dark.me-1.fs-3.mb-0 +9%
+			//- 						p.fs-3.mb-0 tahun lalu
+			//- 				.col-4
+			//- 					.d-flex.justify-content-end
+			//- 						.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+			//- 							i.ti.ti-currency-dollar.fs-6
+					//- #earning
