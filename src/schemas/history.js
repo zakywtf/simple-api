@@ -31,6 +31,10 @@ let sch = new Schema({
         type: String,
         default: '0'
     },
+    oxygen_saturation: {
+        type: String,
+        default: '0'
+    },
     school_id : {
         type: Schema.Types.ObjectId, 
         autopopulate: { select: 'npsn name address category status school_status'}, 

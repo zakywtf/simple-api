@@ -31,6 +31,10 @@ let sch = new Schema({
         type: String,
         default: '0'
     },
+    oxygen_saturation: {
+        type: String,
+        default: '0'
+    },
     bmi_score: {
         type: Number,
         default: 0

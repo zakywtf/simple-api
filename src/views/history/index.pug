@@ -29,8 +29,9 @@ block content
 								th Berat Badan
 								th Suhu Badan
 								th Tekanan Darah
-								th Gula Darah
-								th Hemoglobin
+								//- th Gula Darah
+								//- th Hemoglobin
+								th Saturasi Oksigen
 								th Tanggal
 
 						tbody
@@ -42,8 +43,9 @@ block content
 									td #{data.weight} Kg
 									td #{data.temperature} Celcius
 									td #{data.blood_pressure} mmHg
-									td #{data.blood_sugar} mg/dL
-									td #{data.hemoglobin} g/dL
+									//- td #{data.blood_sugar} mg/dL
+									//- td #{data.hemoglobin} g/dL
+									td #{data.oxygen_saturation} %
 									td #{prettyDate(data.created_at)}
 					nav
 						ul#pagination.pagination
