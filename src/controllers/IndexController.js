@@ -225,9 +225,18 @@ const IndexController = {
         let total_normal = 0
         let total_gemuk = 0
         let total_obesitas = 0
+        let cat_bp = 'normal'
+        let cat_os = 'normal'
 
         if (req.session.role == 'user') {
             data = await WellnessDetail.findOne({user_id: req.session.user_id})
+            const blood_pressure = data.blood_pressure
+            const split_bp = blood_pressure.split("/")
+            const bp = parseInt(split_bp[0])
+            const os = parseInt(data.oxygen_saturation)
+            console.log({bp, os})
+            cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
+            cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'
         } else if (req.session.role == 'admin'){
             total_users = await Users.find({isDeleted: false}).countDocuments()
             total_devices = await Devices.find({isDeleted: false}).countDocuments()
@@ -243,8 +252,8 @@ const IndexController = {
             total_gemuk = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kelebihan Berat Badan'}).countDocuments()
             total_obesitas = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Obesitas'}).countDocuments()
         }
-        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas})
-        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas});
+        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os})
+        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os});
     },
 
     history: async (req, res) => {

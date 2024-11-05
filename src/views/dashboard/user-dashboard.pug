@@ -100,7 +100,12 @@
 									p.mb-0.fw-semibold #{data.blood_pressure} mmHg
 								td.border-bottom-0
 									.d-flex.align-items-center.gap-2
-										span.badge.bg-danger.rounded-3.fw-semibold Tinggi
+										if(cat_bp === "rendah")
+											span.badge.bg-warning.rounded-3.fw-semibold Rendah
+										else if(cat_bp === "tinggi")
+											span.badge.bg-danger.rounded-3.fw-semibold Tinggi
+										else if(cat_bp === "normal")
+											span.badge.bg-success.rounded-3.fw-semibold Normal
 								td.border-bottom-0
 									h6.fw-normal.mb-0 #{prettyDate(data.updated_at)}
 							//- tr
@@ -137,7 +142,12 @@
 									p.mb-0.fw-semibold #{data.oxygen_saturation} %
 								td.border-bottom-0
 									.d-flex.align-items-center.gap-2
-										span.badge.bg-warning.rounded-3.fw-semibold Rendah
+										if(cat_os === "rendah")
+											span.badge.bg-warning.rounded-3.fw-semibold Rendah
+										else if(cat_os === "sangat_rendah")
+											span.badge.bg-danger.rounded-3.fw-semibold Sangat Rendah
+										else if(cat_os === "normal")
+											span.badge.bg-success.rounded-3.fw-semibold Normal
 								td.border-bottom-0
 									h6.fw-normal.mb-0 #{prettyDate(data.updated_at)}
 
