@@ -71,6 +71,7 @@ html(lang="en")
 								$('#data-form')[0].reset();
 							} else if (response.status == 200){
 								localStorage.setItem('token', response.data.token);
+								localStorage.setItem('status', response.data.status);
 								window.location.href = host+'/dashboard'
 							}
 						},

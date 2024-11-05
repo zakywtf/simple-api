@@ -1,3 +1,5 @@
+#response-container.alert.alert-danger(role="alert", style="display:none;")
+
 .row 
 	.col-lg-3
 		.card
@@ -122,3 +124,16 @@
 //- 											.d-flex.justify-content-end
 //- 												.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
 //- 													i.ti.ti-currency-dollar.fs-6
+
+script(src="../assets/libs/jquery/dist/jquery.min.js")
+//- script(src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js")
+script.
+	$(document).ready(function() {
+		const status = localStorage.getItem('status');
+		if (status == 'unpaid') {
+			console.log({status})
+			var error = document.getElementById("response-container");
+			error.style.display = "block";
+			$('#response-container').html('<p>Sekolah anda telat melakukan pembayaran. Silahkan hubungi admin agar akun anda tidak di bekukan.</p>');
+		}
+	})
