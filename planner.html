@@ -1,174 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paginated DataTable with Bootstrap</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>User Profile - Edit</title>
+    <!-- Bootstrap CSS (from CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            margin: 20px;
-            background-color: #f4f4f4;
+        .profile-container {
+            max-width: 900px;
+            margin: 50px auto;
         }
-        table {
-            margin-bottom: 20px;
+
+        .profile-header {
+            margin-bottom: 30px;
         }
-        .pagination {
-            justify-content: center;
+
+        .profile-form {
+            margin-top: 20px;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1 class="text-center">Paginated DataTable</h1>
-        <!-- <input type="text" id="search" class="form-control mb-3" placeholder="Search..." onkeyup="filterTable()">
-        <table class="table table-bordered" id="dataTable">
-            <thead class="thead-light">
-                <tr>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Country</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>John Doe</td>
-                    <td>28</td>
-                    <td>USA</td>
-                </tr>
-                <tr>
-                    <td>Jane Smith</td>
-                    <td>34</td>
-                    <td>UK</td>
-                </tr>
-                <tr>
-                    <td>Sam Johnson</td>
-                    <td>23</td>
-                    <td>Australia</td>
-                </tr>
-                <tr>
-                    <td>Linda Brown</td>
-                    <td>45</td>
-                    <td>Canada</td>
-                </tr>
-                <tr>
-                    <td>Mike Wilson</td>
-                    <td>30</td>
-                    <td>USA</td>
-                </tr>
-                <tr>
-                    <td>Sara Connor</td>
-                    <td>40</td>
-                    <td>UK</td>
-                </tr>
-                <tr>
-                    <td>Tom Hardy</td>
-                    <td>35</td>
-                    <td>Australia</td>
-                </tr>
-                <tr>
-                    <td>Emily Davis</td>
-                    <td>50</td>
-                    <td>Canada</td>
-                </tr>
-                <tr>
-                    <td>Mark Lee</td>
-                    <td>28</td>
-                    <td>USA</td>
-                </tr>
-                <tr>
-                    <td>Anna Bell</td>
-                    <td>22</td>
-                    <td>UK</td>
-                </tr>
-            </tbody>
-        </table>
-        <nav>
-            <ul class="pagination" id="pagination"></ul>
-        </nav> -->
-        <p id="test"></p>
+    <div class="container profile-container">
+        <!-- Profile Header -->
+        <div class="profile-header text-center">
+            <h1>Your Profile</h1>
+            <p>Manage and update your account details below.</p>
+        </div>
+
+        <!-- Profile Information Section (View Mode) -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Profile Information</h5>
+                        <p><strong>Name:</strong> John Doe</p>
+                        <p><strong>Email:</strong> john.doe@example.com</p>
+                        <p><strong>Phone:</strong> +1 234 567 890</p>
+                        <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+
+                        <!-- Edit Button -->
+                        <button class="btn btn-primary" id="editButton">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Profile Form (Initially Hidden) -->
+            <div class="col-md-6" id="editForm" style="display: none;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Edit Profile</h5>
+                        <form class="profile-form" id="profileForm">
+                            <div class="mb-3">
+                                <label for="editName" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="editName" value="John Doe" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="editEmail" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="editEmail" value="john.doe@example.com" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="editPhone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="editPhone" value="+1 234 567 890" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="editAddress" class="form-label">Address</label>
+                                <input type="text" class="form-control" id="editAddress" value="123 Main Street, City, Country" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-success">Save Changes</button>
+                            <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS (from CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript to handle Edit and Save actions -->
     <script>
-        // const str = `
-        // ## Workout Planner untuk Tinggi Badan 173cm & Berat Badan 79kg\n\n**Tujuan:** Meningkatkan kekuatan, ketahanan, dan keseimbangan. Mengurangi lemak tubuh dan membentuk otot.\n\n**Catatan:**\n\n* Konsultasikan dengan dokter atau pelatih profesional sebelum memulai program latihan baru.\n* Pastikan untuk melakukan pemanasan sebelum setiap latihan dan pendinginan setelahnya.\n* Makan makanan sehat dan minum banyak air selama program latihan.\n* Berikan waktu istirahat yang cukup antara setiap sesi latihan.\n\n**Frekuensi:** 4-5 hari dalam seminggu.\n\n**Durasi:** 45-60 menit per sesi latihan.\n\n**Latihan:**\n\n**Senin:** Kekuatan\n\n* **Squats:** 3 set x 10-12 repetisi\n* **Push-ups:** 3 set x maksimal repetisi\n* **Pull-ups:** 3 set x maksimal repetisi (jika tidak bisa, gunakan bar yang dibantu)\n* **Deadlifts:** 3 set x 8-10 repetisi\n* **Barbell bench press:** 3 set x 8-10 repetisi\n\n**Selasa:** Kardio & Core\n\n* **Interval running:** 20 menit dengan 1 menit lari cepat, 1 menit joging.\n* **Plank:** 3 set x 30-60 detik\n* **Bicycle crunches:** 3 set x 15-20 repetisi\n* **Russian twists:** 3 set x 15-20 repetisi\n* **Leg raises:** 3 set x 15-20 repetisi\n\n**Rabu:** Istirahat\n\n**Kamis:** Kekuatan\n\n* **Overhead press:** 3 set x 10-12 repetisi\n* **Dumbbell rows:** 3 set x 10-12 repetisi\n* **Lunges:** 3 set x 10-12 repetisi per kaki\n* **Barbell back squats:** 3 set x 8-10 repetisi\n* **Dumbbell shoulder press:** 3 set x 8-10 repetisi\n\n**Jumat:** Kardio & Fleksibilitas\n\n* **Cycling:** 30 menit dengan kecepatan sedang.\n* **Yoga:** 30 menit (fokus pada peregangan)\n* **Stretching:** 15 menit\n\n**Sabtu:** Istirahat\n\n**Minggu:** Aktif\n\n* **Hiking:** 1-2 jam\n* **Bermain olahraga:** 1-2 jam (misalnya, basket, tenis)\n* **Berenang:** 30-60 menit\n\n**Catatan:**\n\n* Anda dapat memodifikasi program latihan ini berdasarkan level kebugaran dan preferensi Anda.\n* Pastikan untuk mendengarkan tubuh Anda dan istirahat jika perlu.\n* Anda dapat menambah atau mengurangi beban sesuai kebutuhan.\n* Penting untuk makan dengan benar dan minum banyak air selama program latihan.\n\n**Contoh Makanan Sehat:**\n\n* Sayuran, buah-buahan, dan biji-bijian utuh\n* Protein tanpa lemak, seperti ikan, ayam, dan tahu\n* Lemak sehat, seperti alpukat dan kacang-kacangan\n\n**Tips:**\n\n* Mulailah dengan lambat dan tingkatkan secara bertahap.\n* Jangan ragu untuk meminta bantuan dari pelatih profesional.\n* Tetap konsisten dengan program latihan dan pola makan Anda.\n* Penting untuk bersenang-senang dan menikmati prosesnya.\n\n**Semoga program latihan ini membantu Anda mencapai tujuan kebugaran Anda!**\n
-        // `
-        const str = `## Saran Nutrisi untuk Tinggi Badan 173cm, Berat Badan 79kg, Tekanan Darah 120/80 mmHg\n\nDengan tinggi badan 173cm dan berat badan 79kg, Anda memiliki BMI (Body Mass Index) sekitar 26, yang berada di kategori overweight. Tekanan darah Anda 120/80 mmHg tergolong normal. \n\nBerikut saran nutrisi untuk Anda:\n\n**1. Pola Makan Sehat**:\n\n* **Batasi Konsumsi Lemak Jenuh dan Lemak Trans**: Konsumsi lemak sehat seperti minyak zaitun, alpukat, kacang-kacangan, dan biji-bijian. \n* **Kurangi Konsumsi Gula**: Batasi konsumsi minuman manis, makanan olahan, dan makanan yang mengandung gula tambahan.\n* **Tingkatkan Konsumsi Serat**: Serat membantu dalam mengontrol berat badan, menurunkan kolesterol, dan melancarkan pencernaan. Konsumsi buah, sayur, kacang-kacangan, dan biji-bijian.\n* **Pilih Protein Berkualitas**: Pilih protein seperti ikan, ayam tanpa kulit, telur, kacang-kacangan, dan lentil. \n* **Pilih Karbohidrat Kompleks**: Pilih karbohidrat kompleks seperti beras merah, quinoa, dan kentang.\n\n**2. Mengatur Asupan Kalori**:\n\n* Untuk menurunkan berat badan, Anda perlu mengonsumsi kalori lebih sedikit daripada yang Anda bakar. Konsultasikan dengan ahli gizi untuk menentukan kebutuhan kalori harian Anda.\n* Pastikan asupan kalori Anda seimbang antara karbohidrat, protein, dan lemak.\n\n**3. Mengatur Tekanan Darah**:\n\n* **Kurangi Asupan Garam**: Batasi konsumsi garam dan makanan olahan yang tinggi garam.\n* **Tingkatkan Konsumsi Kalium**: Konsumsi buah dan sayur seperti pisang, kentang, dan bayam yang kaya kalium.\n* **Minum Air Putih Cukup**: Minum air putih minimal 8 gelas per hari.\n\n**4. Tips Lainnya**:\n\n* **Makan Secara Teratur**: Makan 3 kali sehari dengan 2-3 kali camilan sehat di antara waktu makan.\n* **Olahraga Secara Teratur**: Lakukan olahraga minimal 30 menit setiap hari.\n* **Kelola Stres**: Stres dapat mempengaruhi tekanan darah, tidurlah cukup dan lakukan teknik relaksasi.\n\n**5. Konsultasi dengan Profesional**:\n\n* **Ahli Gizi**: Untuk mendapatkan rencana diet yang tepat dan disesuaikan dengan kebutuhan Anda.\n* **Dokter**: Untuk memantau tekanan darah dan kesehatan Anda secara keseluruhan.\n\n**Ingat**:\n\n* Setiap orang memiliki kebutuhan nutrisi yang berbeda. \n* Saran ini hanya panduan umum. \n* Konsultasikan dengan ahli gizi untuk mendapatkan informasi yang lebih spesifik dan sesuai dengan kondisi kesehatan Anda.`
-        // const str = `## Workout Planner untuk Tinggi Badan 173cm dan Berat Badan 79kg\n\n**Catatan:** \n* **Konsultasikan dengan dokter atau pelatih profesional sebelum memulai program latihan baru.** \n* **Sesuaikan intensitas dan durasi latihan sesuai dengan kemampuan fisik Anda.**\n* **Penting untuk makan makanan bergizi seimbang dan cukup minum air.**\n* **Istirahat yang cukup sangat penting untuk pemulihan otot.**\n\n**Hari** | **Latihan** | **Set** | **Repetisi** | **Keterangan**\n------- | -------- | -------- | -------- | --------\n**Senin** | **Push-up** | 3 | 10-12 | Pastikan dada menyentuh lantai, jaga punggung tetap lurus\n**Senin** | **Pull-up** | 3 | 8-10 | Gunakan bantuan jika diperlukan \n**Senin** | **Squat** | 3 | 10-12 | Jaga punggung tetap lurus, turunkan tubuh hingga paha sejajar dengan lantai\n**Senin** | **Deadlift** | 3 | 5-8 | Gunakan teknik yang benar, pastikan punggung tetap lurus\n**Senin** | **Cardio (lari, bersepeda, renang)** | 1 | 30 menit | Pilih intensitas yang sesuai dengan kemampuan Anda\n**Selasa** | **Rest/Active Recovery** | - | - | Jalan santai, yoga, peregangan\n**Rabu** | **Barbell Bench Press** | 3 | 8-10 | Jaga punggung tetap lurus, turunkan bar hingga dada menyentuh bar\n**Rabu** | **Barbell Row** | 3 | 8-10 | Jaga punggung tetap lurus, tarik bar hingga ke dada\n**Rabu** | **Overhead Press** | 3 | 8-10 | Pastikan bar tetap berada di atas kepala\n**Rabu** | **Lunges** | 3 | 10-12 per kaki | Jaga punggung tetap lurus, turunkan tubuh hingga lutut depan sejajar dengan lantai\n**Rabu** | **Cardio (lari, bersepeda, renang)** | 1 | 30 menit | Pilih intensitas yang sesuai dengan kemampuan Anda\n**Kamis** | **Rest/Active Recovery** | - | - | Jalan santai, yoga, peregangan\n**Jumat** | **Push-up** | 3 | 10-12 | Pastikan dada menyentuh lantai, jaga punggung tetap lurus\n**Jumat** | **Pull-up** | 3 | 8-10 | Gunakan bantuan jika diperlukan \n**Jumat** | **Squat** | 3 | 10-12 | Jaga punggung tetap lurus, turunkan tubuh hingga paha sejajar dengan lantai\n**Jumat** | **Deadlift** | 3 | 5-8 | Gunakan teknik yang benar, pastikan punggung tetap lurus\n**Jumat** | **Cardio (lari, bersepeda, renang)** | 1 | 30 menit | Pilih intensitas yang sesuai dengan kemampuan Anda\n**Sabtu** | **Rest/Active Recovery** | - | - | Jalan santai, yoga, peregangan\n**Minggu** | **Rest** | - | - | Istirahat total\n\n**Catatan:**\n* Anda dapat menyesuaikan latihan ini dengan preferensi Anda. \n* Fokus pada teknik yang benar dan jangan terlalu memaksakan diri.\n* Dengarkan tubuh Anda dan istirahat jika diperlukan.\n\n**Semoga workout planner ini bermanfaat untuk Anda!**\n`
-        // const str = `[{\n"aktivitas": [\n{\n"latihan": "Push-up",\n"set": "3 x 8-12 repetisi"\n},\n{\n"latihan": "Pull-up",\n"set": "3 x Sebanyak mungkin repetisi"\n},\n{\n"latihan": "Squat",\n"set": "3 x 10-15 repetisi"\n},\n{\n"latihan": "Overhead Press",\n"set": "3 x 8-12 repetisi"\n},\n{\n"latihan": "Plank",\n"set": "3 x 30-60 detik"\n}\n],\n"hari": "Senin"\n},\n{\n"aktivitas": [\n{\n"latihan": "Jogging ringan",\n"set": "30 menit"\n}\n],\n"hari": "Selasa"\n},\n{\n"aktivitas": [\n{\n"latihan": "Barbell Rows",\n"set": "3 x 8-12 repetisi"\n},\n{\n"latihan": "Bench Press",\n"set": "3 x 8-12 repetisi"\n},\n{\n"latihan": "Deadlift",\n"set": "3 x 5-8 repetisi"\n},\n{\n"latihan": "Dumbbell Shoulder Press",\n"set": "3 x 8-12 repetisi"\n},\n{\n"latihan": "Crunches",\n"set": "3 x 15-20 repetisi"\n}\n],\n"hari": "Rabu"\n},\n{\n"aktivitas": [\n{\n"latihan": "Istirahat"\n,\n"set": "Full"\n}\n],\n"hari": "Kamis"\n},\n{\n"aktivitas": [\n{\n"latihan": "Pull-up/Chin-up",\n"set": "3 x Sebanyak mungkin repetisi"\n},\n{\n"latihan": "Dips",\n"set": "3 x Sebanyak mungkin repetisi"\n},\n{\n"latihan": "Lunges",\n"set": "3 x 10-12 repetisi per kaki"\n},\n{\n"latihan": "Pike Push-ups",\n"set": "3 x 8-12 repetisi"\n},\n{\n"latihan": "Bicycle Crunches",\n"set": "3 x 15-20 repetisi"\n}\n],\n"hari": "Jumat"\n},\n{\n"aktivitas": [\n{\n"latihan": "Berenang",\n"set": "30-60 menit"\n}\n],\n"hari": "Sabtu"\n},\n{\n"aktivitas": [\n{\n"latihan": "Istirahat"\n,\n"set": "Full"\n}\n],\n"hari": "Minggu"\n}\n]\n`
-        // const str = `[{"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Pemanasan", "repetisi": "1 menit", "set": "1"}, {"keterangan": "Berlari dengan kecepatan sedang", "latihan": "Lari", "repetisi": "20 menit", "set": "1"}, {"keterangan": "Lakukan pendinginan setelah berlari", "latihan": "Pendinginan", "repetisi": "1 menit", "set": "1"}], "hari": "Senin"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Pemanasan", "repetisi": "1 menit", "set": "1"}, {"keterangan": "Lakukan push up dengan benar", "latihan": "Push Up", "repetisi": "10", "set": "3"}, {"keterangan": "Lakukan squat dengan benar", "latihan": "Squat", "repetisi": "10", "set": "3"}, {"keterangan": "Lakukan pull up dengan benar", "latihan": "Pull Up", "repetisi": "5", "set": "3"}, {"keterangan": "Lakukan plank dengan benar", "latihan": "Plank", "repetisi": "30 detik", "set": "3"}, {"keterangan": "Lakukan crunches dengan benar", "latihan": "Crunches", "repetisi": "15", "set": "3"}, {"keterangan": "Lakukan pendinginan setelah selesai workout", "latihan": "Pendinginan", "repetisi": "1 menit", "set": "1"}], "hari": "Selasa"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Pemanasan", "repetisi": "1 menit", "set": "1"}, {"keterangan": "Bersepeda dengan kecepatan sedang", "latihan": "Bersepeda", "repetisi": "30 menit", "set": "1"}, {"keterangan": "Lakukan pendinginan setelah selesai bersepeda", "latihan": "Pendinginan", "repetisi": "1 menit", "set": "1"}], "hari": "Rabu"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Pemanasan", "repetisi": "1 menit", "set": "1"}, {"keterangan": "Lakukan jumping jack dengan benar", "latihan": "Jumping Jack", "repetisi": "20", "set": "3"}, {"keterangan": "Lakukan burpees dengan benar", "latihan": "Burpees", "repetisi": "10", "set": "3"}, {"keterangan": "Lakukan mountain climbers dengan benar", "latihan": "Mountain Climbers", "repetisi": "15", "set": "3"}, {"keterangan": "Lakukan jumping lunges dengan benar", "latihan": "Jumping Lunges", "repetisi": "10", "set": "3"}, {"keterangan": "Lakukan plank jacks dengan benar", "latihan": "Plank Jacks", "repetisi": "10", "set": "3"}, {"keterangan": "Lakukan pendinginan setelah selesai workout", "latihan": "Pendinginan", "repetisi": "1 menit", "set": "1"}], "hari": "Kamis"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Pemanasan", "repetisi": "1 menit", "set": "1"}, {"keterangan": "Bergabung dengan kelas yoga", "latihan": "Yoga", "repetisi": "60 menit", "set": "1"}, {"keterangan": "Lakukan pendinginan setelah selesai yoga", "latihan": "Pendinginan", "repetisi": "1 menit", "set": "1"}], "hari": "Jumat"}, {"aktivitas": [{"keterangan": "Hari ini adalah hari istirahat", "latihan": "Istirahat", "repetisi": "1 hari", "set": "1"}], "hari": "Sabtu"}, {"aktivitas": [{"keterangan": "Lakukan kegiatan ringan seperti berjalan-jalan", "latihan": "Aktivitas Ringan", "repetisi": "30 menit", "set": "1"}], "hari": "Minggu"}]\n`
-        // x = str.replace(/(?:\r\n|\r|\n)/g, "<br>");
-        test.innerHTML = str;
-    </script>
-    <script>
-        let currentPage = 1;
-        const rowsPerPage = 5;
+        // DOM elements
+        const editButton = document.getElementById('editButton');
+        const editForm = document.getElementById('editForm');
+        const profileInfo = document.querySelector('.card-body');
+        const cancelButton = document.getElementById('cancelButton');
+        const profileForm = document.getElementById('profileForm');
 
-        function displayTable(page) {
-            const rows = $('#dataTable tbody tr');
-            const totalRows = rows.length;
-            const totalPages = Math.ceil(totalRows / rowsPerPage);
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
+        // Handle the 'Edit Profile' button click
+        editButton.addEventListener('click', () => {
+            // Hide the profile info and show the edit form
+            profileInfo.style.display = 'none';
+            editForm.style.display = 'block';
+        });
 
-            rows.hide().slice(start, end).show();
-            updatePagination(totalPages);
-        }
+        // Handle the 'Cancel' button click to go back to profile view
+        cancelButton.addEventListener('click', () => {
+            // Hide the edit form and show the profile info again
+            profileInfo.style.display = 'block';
+            editForm.style.display = 'none';
+        });
 
-        function updatePagination(totalPages) {
-            const pagination = $('#pagination');
-            pagination.empty();
+        // Handle form submission (this can be connected to a backend)
+        profileForm.addEventListener('submit', (event) => {
+            event.preventDefault();
 
-            const prevButton = $('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
-            if (currentPage === 1) prevButton.addClass('disabled');
-            prevButton.click(function () {
-                if (currentPage > 1) {
-                    currentPage--;
-                    displayTable(currentPage);
-                }
-            });
-            pagination.append(prevButton);
+            // Get the updated values from the form
+            const updatedName = document.getElementById('editName').value;
+            const updatedEmail = document.getElementById('editEmail').value;
+            const updatedPhone = document.getElementById('editPhone').value;
+            const updatedAddress = document.getElementById('editAddress').value;
 
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-                if (currentPage === i) pageButton.addClass('active');
-                pageButton.click(function () {
-                    currentPage = i;
-                    displayTable(currentPage);
-                });
-                pagination.append(pageButton);
-            }
+            // Update the profile information (this can be done by sending the data to a server)
+            alert(`Profile updated:
+            Name: ${updatedName}
+            Email: ${updatedEmail}
+            Phone: ${updatedPhone}
+            Address: ${updatedAddress}`);
 
-            const nextButton = $('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
-            if (currentPage === totalPages) nextButton.addClass('disabled');
-            nextButton.click(function () {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    displayTable(currentPage);
-                }
-            });
-            pagination.append(nextButton);
-        }
+            // For demonstration, we'll just show the updated values in the profile view
+            profileInfo.innerHTML = `
+                <h5 class="card-title">Profile Information</h5>
+                <p><strong>Name:</strong> ${updatedName}</p>
+                <p><strong>Email:</strong> ${updatedEmail}</p>
+                <p><strong>Phone:</strong> ${updatedPhone}</p>
+                <p><strong>Address:</strong> ${updatedAddress}</p>
+                <button class="btn btn-primary" id="editButton">Edit Profile</button>
+            `;
 
-        function filterTable() {
-            const filter = $('#search').val().toLowerCase();
-            const filteredRows = $('#dataTable tbody tr').filter(function () {
-                return $(this).text().toLowerCase().includes(filter);
-            });
-
-            $('#dataTable tbody').empty().append(filteredRows);
-
-            currentPage = 1; // Reset to first page
-            displayTable(currentPage);
-        }
-
-        $(document).ready(function () {
-            displayTable(currentPage);
+            // Hide the edit form and show the profile info again
+            profileInfo.style.display = 'block';
+            editForm.style.display = 'none';
         });
     </script>
 </body>
+
 </html>
