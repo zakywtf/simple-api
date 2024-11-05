@@ -95,8 +95,16 @@ function authController(aModel=false) {
         handleRequest(req, res, async(body)=>{
             const token = req.headers['authorization']?.split(' ')[1];
             res.locals.udata = await decode(token)
-            console.log({token, udata: res.locals.udata})
             return model.logout(req, res.locals.udata._id);
+        });
+    })
+
+    router.post('/update-pin', async(req,res)=>{        
+        handleRequest(req, res, async(body)=>{
+            const token = req.headers['authorization']?.split(' ')[1];
+            res.locals.udata = await decode(token)
+            console.log({body, udata: res.locals.udata})
+            return model.updatePin(body, res.locals.udata._id);
         });
     })
 

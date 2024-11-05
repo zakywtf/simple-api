@@ -87,6 +87,18 @@ class authModel extends Models{
 
     }
 
+    async updatePin(body, user_id) {
+        console.log({body, user_id})
+        let pinHash = await bcrypt.hash(body.newPassword + process.env.SALT, 10);
+
+        let user = await this.model.findOne({ _id: user_id })
+        user.pin = pinHash
+        await user.save()
+
+        return { msg: 'Update PIN Success.', data: {_id: user._id, name: user.name} }
+
+    }
+
 }
 
 module.exports=authModel

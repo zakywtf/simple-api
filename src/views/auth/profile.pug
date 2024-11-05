@@ -72,6 +72,7 @@ block content
 					.card
 						.card-body
 							h5.card-title Ubah PIN
+							#message.mt-3
 							form.update-pin-form
 								.mb-3
 									label.form-label(for="currentPassword") PIN Lama
@@ -151,6 +152,34 @@ block content
 			const confirmPassword = document.getElementById('confirmPassword').value;
 
 			if (newPassword !== confirmPassword) {
-				alert("PIN baru tidak cocok!");
+				$('#message').html('<div class="alert alert-danger">PIN baru tidak cocok.</div>');
+				return;
 			} 
+			else {
+				// AJAX GET request
+				var host = window.location.origin;
+				const token = localStorage.getItem('token');
+				$.ajax({
+					url: host + '/api/v1/auth/update-pin', // Example API
+					method: 'POST',
+					headers: {
+						'Authorization': 'Bearer ' + token // Include the token in the header
+					},
+					contentType: 'application/json',
+					data: JSON.stringify({currentPassword: currentPassword, newPassword: newPassword}),
+					success: function(response) {
+						console.log({response})
+						if (response.status == 200) {
+							$('#message').html('<div class="alert alert-success">PIN berhasil di perbaharui.</div>');
+						} else {
+							$('#message').html('<div class="alert alert-danger">' + response.message + '</div>');
+						}
+					},
+					error: function(xhr, status, error) {
+						//- console.log({xhr, status, error})
+						console.error('Error submitting data: ', error);
+						$('#response-container').html('<p>Error submitting data. Please try again later.</p>');
+					}
+				});
+			}
 		});
