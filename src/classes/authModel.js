@@ -46,6 +46,7 @@ class authModel extends Models{
         // console.log({user})
         if (!user) throw new NotFoundError('NISN tidak ditemukan!')
         if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
+        if (user.status == 'suspend') throw new NotFoundError('Akun anda dibekukan! Silahkan hubungi admin.')
         user.isOnline = true
         await user.save()
         
@@ -88,7 +89,7 @@ class authModel extends Models{
     }
 
     async updatePin(body, user_id) {
-        console.log({body, user_id})
+        // console.log({body, user_id})
         let pinHash = await bcrypt.hash(body.newPassword + process.env.SALT, 10);
 
         let user = await this.model.findOne({ _id: user_id })
