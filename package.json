@@ -1,7 +1,7 @@
 {
-  "name": "health-monitoring-v1",
+  "name": "wellness-point-v1",
   "version": "1.1",
-  "description": "Very Simple API for health-monitoring-v1",
+  "description": "Very Simple API for wellness-point-v1",
   "author": {
     "name": "Nova Zaky",
     "email": "novazaky1@gmail.com"

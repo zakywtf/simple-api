@@ -1,6 +1,6 @@
-# wellness-monitoring-v1
+# wellness-point-v1
 
-Dashboard Wellness Monitoring
+Dashboard Wellness Point
 
 # Requiments:
 
@@ -11,7 +11,7 @@ Dashboard Wellness Monitoring
 Dev Enviroments:
 
 ```cmd
-$ cd wellness-monitoring-v1
+$ cd wellness-point-v1
 $ npm install
 $ npm run dev
 ```
@@ -19,7 +19,7 @@ $ npm run dev
 Production Enviroments:
 
 ```cmd
-$ cd wellness-monitoring-v1
+$ cd wellness-point-v1
 $ npm install
 $ npm start
 ```
@@ -60,4 +60,4 @@ localhost:3500
 Coming soon
 ```
 
-# wellness-monitoring-v1
+# wellness-point-v1

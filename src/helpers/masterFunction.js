@@ -144,6 +144,43 @@ const updateStatusPaymentOnSchool = async (school_id, expired_date) => {
     data.expired_date = expired_date
 
     await data.save()
+    const user = await Users.updateMany({ school_id: school_id }, {$set:{status: 'active', isExpired: false}})
+
+}
+
+const autoUnpaidSchools = async () => {
+    const start = moment().startOf('day').toDate()
+    const end = moment().startOf('day').add(1, 'day').toDate()
+    const suspend_date = moment().startOf('day').add(10, 'day').toDate()
+
+    const schools = await Schools.find({expired_date: {$gte: start, $lt: end}, status: 'active'})
+    if (schools.length > 0) {
+        for (let i = 0; i < schools.length; i++) {
+            const sch = schools[i];
+            const sch_id = sch._id
+            const user = await Users.updateMany({ school_id: sch_id }, {$set:{status: 'unpaid', isExpired: true}})
+        }
+    
+        await Schools.updateMany({expired_date: {$gte: start, $lt: end}, status: 'active' },{ $set: {status: 'unpaid', suspend_date: suspend_date}})
+    }
+}
+
+const autoSuspendSchools = async () => {
+    const start = moment().startOf('day').toDate()
+    const end = moment().startOf('day').add(1, 'day').toDate()
+
+    const schools = await Schools.find({suspend_date: {$gte: start, $lt: end}, status: 'unpaid'})
+    if (schools.length > 0) {
+        for (let i = 0; i < schools.length; i++) {
+            const sch = schools[i];
+            const sch_id = sch._id
+            const user = await Users.updateMany({ school_id: sch_id }, {$set:{status: 'suspend'}})
+        }
+
+        await Schools.updateMany({suspend_date: {$gte: start, $lt: end}, status: 'unpaid' },{ $set: {status: 'suspend'}})
+    }
+
+
 }
 
 module.exports = {
@@ -152,5 +189,7 @@ module.exports = {
     createHistory,
     getGeminiAI,
     saveDataRecommendation,
-    updateStatusPaymentOnSchool
+    updateStatusPaymentOnSchool,
+    autoUnpaidSchools,
+    autoSuspendSchools
 }

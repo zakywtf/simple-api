@@ -16,7 +16,7 @@ require("dotenv").config();
 
 import routes from './routes';
 import apiResponse from "./helpers/apiResponse";
-import { expiredMembership } from "./helpers/masterFunction"
+import { autoUnpaidSchools, autoSuspendSchools } from "./helpers/masterFunction"
 
 const app = express();
 
@@ -49,7 +49,7 @@ mongoose
 mongoose.set('debug', process.env.NODE_ENV == 'development' ? true : false);
 
 // SESSION
-app.use(session({ secret: 'sim_internal_beehive', resave: true, saveUninitialized: true, cookie: { maxAge: process.env.SESSION_DURATION * 60 * 60 * 1000 } }));
+app.use(session({ secret: 'zakywtf', resave: true, saveUninitialized: true, cookie: { maxAge: process.env.SESSION_DURATION * 60 * 60 * 1000 } }));
 
 app.use(function(req,res,next){
     res.locals.session = req.session;
@@ -83,7 +83,7 @@ app.use(cors());
 // Adding Helmet to enhance API's security
 app.use(helmet());
 app.use(helmet.hidePoweredBy({
-    setTo: 'Skynet Server 2.0.93'
+    setTo: 'zakywtf 2024'
 }))
 
 // •••••••••••••• FavIcon •••••••••••••••••
@@ -101,10 +101,12 @@ app.use('/', routes);
 //CRON Job 
 //0 0 0 * * * -> every midnight
 //* * * * *   -> every minute
-// cron.schedule("0 0 0 * * *", async function() {
+cron.schedule("0 0 0 * * *", async function() {
 // cron.schedule("* * * * *", async function() {
-
-// });
+    console.log('This task runs every midnight');
+    await autoUnpaidSchools()
+    await autoSuspendSchools()
+});
 // CronJob
 
 // const job = CronJob.from({

@@ -39,6 +39,10 @@ let sch = new Schema({
         type: Date,
         default: null
     },
+    suspend_date: {
+        type: Date,
+        default: null
+    },
     isDeleted: {
         type: Boolean,
         default: false
