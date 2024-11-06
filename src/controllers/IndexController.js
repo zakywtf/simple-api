@@ -290,8 +290,14 @@ const IndexController = {
     payment: async (req, res) => {
         const datas = await Payments.find({isDeleted: false}).sort({ created_at: -1 })
         const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
-
+        
         res.render('payment/index', {datas, schools});
+    },
+
+    invoice: async (req, res) => {
+        const data = await Payments.findOne({isDeleted: false, _id: req.query._id}).sort({ created_at: -1 })
+
+        res.render('payment/invoice', {data});
     },
 
     profile: async (req, res) => {

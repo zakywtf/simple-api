@@ -31,6 +31,7 @@ router.get('/users', auth, IndexController.users)
 router.get('/schools', auth, IndexController.schools)
 router.get('/devices', auth, IndexController.devices)
 router.get('/payments', auth, IndexController.payment)
+router.get('/payments/invoice', auth, IndexController.invoice)
 router.get('/profile', auth, IndexController.profile)
 
 module.exports = router;
