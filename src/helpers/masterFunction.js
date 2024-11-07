@@ -145,7 +145,6 @@ const updateStatusPaymentOnSchool = async (school_id, expired_date) => {
 
     await data.save()
     const user = await Users.updateMany({ school_id: school_id }, {$set:{status: 'active', isExpired: false}})
-
 }
 
 const autoUnpaidSchools = async () => {
@@ -179,8 +178,6 @@ const autoSuspendSchools = async () => {
 
         await Schools.updateMany({suspend_date: {$gte: start, $lt: end}, status: 'unpaid' },{ $set: {status: 'suspend'}})
     }
-
-
 }
 
 module.exports = {
