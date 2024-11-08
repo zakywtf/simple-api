@@ -1,4 +1,6 @@
 const fetch = require('node-fetch');
+import moment from 'moment'
+
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import OpenAI from 'openai';
 import apiResponse from "../helpers/apiResponse";
@@ -277,14 +279,50 @@ const IndexController = {
     devices: async (req, res) => {
         const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
         const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
-        console.log({school: schools[0], datas: datas[0]})
+        // console.log({school: schools[0], datas: datas[0]})
         res.render('devices/index', {datas, schools});
+    },
+
+    deviceUpdate: async (req, res, next) => {
+        try {
+            await Devices.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
+            res.redirect('/devices');
+        } catch (error) {
+            console.log('error ', error);
+        }
+    },
+
+    deviceDelete: async (req, res, next) => {
+        try {
+            await Devices.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
+            res.redirect('/devices');
+        } catch (error) {
+            console.log('error ', error);
+        }
     },
 
     schools: async (req, res) => {
         const datas = await Schools.find({isDeleted: false}).sort({ created_at: -1 })
         
         res.render('schools/index', {datas});
+    },
+
+    schoolUpdate: async (req, res, next) => {
+        try {
+            await Schools.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
+            res.redirect('/schools');
+        } catch (error) {
+            console.log('error ', error);
+        }
+    },
+
+    schoolDelete: async (req, res, next) => {
+        try {
+            await Schools.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
+            res.redirect('/schools');
+        } catch (error) {
+            console.log('error ', error);
+        }
     },
 
     payment: async (req, res) => {

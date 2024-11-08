@@ -52,7 +52,7 @@ block content
 												a.dropdown-item(title='', data-original-title="Edit Mesin", data-toggle='modal', href='', data-target='#edit'+data._id) Edit
 												
 											li 
-												a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
+												a.dropdown-item(title='', data-original-title="Delete Mesin", data-toggle='modal', href='', data-target='#delete'+data._id) Delete
 							
 							
 					nav
@@ -113,7 +113,7 @@ block content
 						//- 		i.ti.ti-square-x
 						//- 	span.sr-only close
 					.modal-body
-						form#edit-form.form-validation
+						form#edit-form.form-validation(action='/devices/update/'+data._id, method='post')
 							.form-group.row
 								label.col-sm-4.form-control-label(for="device_number") Nomor Mesin
 									span.text-danger *
@@ -155,7 +155,25 @@ block content
 									button.btn.btn-primary.waves-effect.waves-light.float-right(type="submit", style="float: right;")
 										| Submit
 
+	// pop up delete data
+	each data in datas
+		.modal.fade(id='delete'+data._id ,tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						h4#myModalLabel.modal-title Peringatan!
+					.modal-body
+						h5 Apakah anda yakin untuk menghapus data #{data.name} ?
+					.modal-footer
+						a.btn.btn-danger#tambah(type='button', href='devices/delete/'+data._id) Ya
+						button.btn.btn-primary(type='button', data-dismiss='modal') Tidak
+				// /.modal-content
+			// /.modal-dialog
+		// /.modal
+
+
 	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+	script(src="../assets/libs/jquery/dist/jquery.min.js")
 	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
 	script.
 		let currentPage = 1;

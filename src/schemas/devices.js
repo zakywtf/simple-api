@@ -17,7 +17,7 @@ let sch = new Schema({
     },
     condition : {
         type:String, 
-        enum:['good', 'damaged'], 
+        enum:['good', 'broken'], 
         default:'good'
     },
     notes: {

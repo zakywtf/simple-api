@@ -38,8 +38,8 @@ block content
 								th Status Sekolah
 								th Bentuk Pendidikan
 								th Alamat
-								th Latitude
-								th Longitude
+								//- th Latitude
+								//- th Longitude
 								th Status
 								th Masa Aktif
 								th Aksi
@@ -62,8 +62,8 @@ block content
 												
 									td #{data.category}
 									td #{data.address}
-									td #{data.latitude}
-									td #{data.longitude}
+									//- td #{data.latitude}
+									//- td #{data.longitude}
 									td.border-bottom-0
 										.d-flex.align-items-center.gap-2
 										if (data.status == 'active')
@@ -92,12 +92,13 @@ block content
 											//- 		a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Active
 											//- 	li
 											//- 		a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Suspend
-											//- .dropdown-divider
+											li
+												a.dropdown-item(href=`https://maps.google.com/?q=${data.latitude},${data.longitude}`, target='_blank') Open Maps
+											.dropdown-divider
 											li
 												a.dropdown-item(title='', data-original-title="Edit Sekolah", data-toggle='modal', href='', data-target='#edit'+data._id) Edit
-												
-											//- li 
-											//- 	a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
+											li 
+												a.dropdown-item(title='', data-original-title="Delete Mesin", data-toggle='modal', href='', data-target='#delete'+data._id) Delete
 							
 							
 					nav
@@ -191,7 +192,7 @@ block content
 						//- 		i.ti.ti-square-x
 						//- 	span.sr-only close
 					.modal-body
-						form#edit-form.form-validation
+						form#edit-form.form-validation(action='/schools/update/'+data._id, method='post')
 							.form-group.row
 								label.col-sm-4.form-control-label(for="npsn") NPSN Sekolah
 									span.text-danger *
@@ -256,6 +257,22 @@ block content
 								.col-sm-12.col-sm-offset-4
 									button.btn.btn-primary.waves-effect.waves-light(type="submit", style="float: right;")
 										| Submit
+
+	// pop up delete data
+	each data in datas
+		.modal.fade(id='delete'+data._id ,tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						h4#myModalLabel.modal-title Peringatan!
+					.modal-body
+						h5 Apakah anda yakin untuk menghapus data #{data.name} ?
+					.modal-footer
+						a.btn.btn-danger#tambah(type='button', href='schools/delete/'+data._id) Ya
+						button.btn.btn-primary(type='button', data-dismiss='modal') Tidak
+				// /.modal-content
+			// /.modal-dialog
+		// /.modal
 
 	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
 	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
@@ -365,38 +382,38 @@ block content
 			});
 		});
 
-	script.
-		document.getElementById('edit-form').addEventListener('submit', function(event) {
-			event.preventDefault();
-			var host = window.location.origin;
-			const token = localStorage.getItem('token');
-			const formData = new FormData(this);
-			const data = Object.fromEntries(formData);
-			const _id = document.getElementById("_id").value;
+	//- script.
+	//- 	document.getElementById('edit-form').addEventListener('submit', function(event) {
+	//- 		event.preventDefault();
+	//- 		var host = window.location.origin;
+	//- 		const token = localStorage.getItem('token');
+	//- 		const formData = new FormData(this);
+	//- 		const data = Object.fromEntries(formData);
+	//- 		const _id = document.getElementById("_id").value;
 
-			// Option 1: Using fetch API
-			fetch(host + '/api/v1/schools/update/'+_id, {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${token}`
-				},
-				body: JSON.stringify(data)
-			})
-			.then(response => {
-				console.log({response})
-				if (!response.ok) {
-					throw new Error('Network response was not ok');
-				}
-				//- return response.json(); 
-				window.location.href = host+'/schools'
+	//- 		// Option 1: Using fetch API
+	//- 		fetch(host + '/api/v1/schools/update/'+_id, {
+	//- 			method: 'PUT',
+	//- 			headers: {
+	//- 				'Content-Type': 'application/json',
+	//- 				'Authorization': `Bearer ${token}`
+	//- 			},
+	//- 			body: JSON.stringify(data)
+	//- 		})
+	//- 		.then(response => {
+	//- 			console.log({response})
+	//- 			if (!response.ok) {
+	//- 				throw new Error('Network response was not ok');
+	//- 			}
+	//- 			//- return response.json(); 
+	//- 			window.location.href = host+'/schools'
 
-			})
-			.then(data => {
-				console.log('Success:', data);
-			})
-			.catch(error => {
-				console.error('Error:', error);
-			});
-		});
+	//- 		})
+	//- 		.then(data => {
+	//- 			console.log('Success:', data);
+	//- 		})
+	//- 		.catch(error => {
+	//- 			console.error('Error:', error);
+	//- 		});
+	//- 	});
 		
