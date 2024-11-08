@@ -277,7 +277,7 @@ const IndexController = {
     devices: async (req, res) => {
         const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
         const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
-
+        console.log({school: schools[0], datas: datas[0]})
         res.render('devices/index', {datas, schools});
     },
 

@@ -49,7 +49,7 @@ block content
 											| Aksi
 										ul.dropdown-menu
 											li
-												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
+												a.dropdown-item(title='', data-original-title="Edit Mesin", data-toggle='modal', href='', data-target='#edit'+data._id) Edit
 												
 											li 
 												a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
@@ -100,6 +100,60 @@ block content
 							.col-sm-12.col-sm-offset-4
 								button.btn.btn-primary.waves-effect.waves-light.float-right(type="submit", style="float: right;")
 									| Submit
+
+	each data in datas 
+		.modal.fade(id='edit'+data._id, tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog(style="width: 800px;")
+				.modal-content
+					.modal-header
+						h2
+							b Edit Mesin
+						//- button.close(type="button", data-dismiss="modal")
+						//- 	span(aria-hidden="true")
+						//- 		i.ti.ti-square-x
+						//- 	span.sr-only close
+					.modal-body
+						form#edit-form.form-validation
+							.form-group.row
+								label.col-sm-4.form-control-label(for="device_number") Nomor Mesin
+									span.text-danger *
+								.col-sm-8
+									input#_id.form-control(type="hidden", name="_id", value=data._id)
+									input#device_number.form-control(type="text", required, placeholder="Nomor Mesin", name="device_number", value=data.device_number)
+							br
+							.form-group.row
+								label.col-sm-4.form-control-label(for="name") Nama Mesin
+									span.text-danger *
+								.col-sm-8
+									input#name.form-control(type="text", placeholder="Nama Mesin", required, name="name", value=data.name)
+							br
+							.form-group.row
+								label.col-sm-4.form-control-label(for="hori-pass1") Penempatan
+									span.text-danger *
+								.col-sm-8
+									select#school_id.form-control(name="school_id", required="required")
+										each school in schools
+											option(value=school._id, selected=(data.school_id.name==school.name)?'yes':undefined) #{school.npsn} - #{school.name}
+							br
+							.form-group.row
+								label.col-sm-4.form-control-label(for="condition") Kondisi
+									span.text-danger *
+								.col-sm-8
+									select#condition.form-control(name="condition", required="required")
+										option(value='') -- Pilih Kondisi --
+										option(value="good", selected=(data.condition=='good')?'yes':undefined) Baik
+										option(value="broken", selected=(data.condition=='broken')?'yes':undefined ) Rusak
+							br
+							.form-group.row
+								label.col-sm-4.form-control-label(for="name") Keterangan
+									span.text-danger *
+								.col-sm-8
+									textarea#notes.form-control(row="3", placeholder="Keterangan", required, name="notes") #{data.notes}
+							br
+							.form-group.row
+								.col-sm-12.col-sm-offset-4
+									button.btn.btn-primary.waves-effect.waves-light.float-right(type="submit", style="float: right;")
+										| Submit
 
 	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
 	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")

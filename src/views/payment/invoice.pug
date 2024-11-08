@@ -30,7 +30,8 @@ html(lang="zxx")
 			-var dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 			-var currentDay = dayNames[date.getDay()];
 			-var y = date.getFullYear();
-			-return currentDay+', '+d+' '+m+' '+y;
+			//- -return currentDay+', '+d+' '+m+' '+y;
+			-return d+'/'+date.getMonth()+'/'+y;
 		-}
 		.invoice-2.invoice-content
 			.container
@@ -43,13 +44,13 @@ html(lang="zxx")
 										.col-sm-6
 											.container
 												br
-												img(src="../assets/images/logos/logo2.png", width="200", alt=)
+												img(src="../assets/images/logos/logo2.png", width="250", alt=)
 										.col-sm-6
 											.invoice-id
 												.info
 													//- h1.inv-header-1 Invoice
 													//- if data.status == 'paid'
-													span(style="color: #779500; font-weight: 700 !important; font-size: 30px;") PAID
+													span(style="color: #779500; font-weight: 700 !important; font-size: 40px;") PAID
 													//- else if data.status == 'unpaid'
 													//- 	span(style="color: #cc0000; font-weight: 700 !important; font-size: 30px;") UNPAID
 													p.mb-1 Invoice Number: 
@@ -93,7 +94,7 @@ html(lang="zxx")
 													td
 														.item-desc-1
 															span 1
-													td.pl0 #{data.notes}
+													td.pl0 Pembayaran wellness point - #{data.school_id.name} - #{data.notes}
 													td.text-center 1
 													td.text-end #{formatRupiah(data.total_price)}
 												

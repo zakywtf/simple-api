@@ -49,11 +49,12 @@ const verify = async (req, res, next) => {
             req.token = await signer(payload)
             const isExpired = await checkExpired(user._id)
             if (isExpired == true) {
-                if (req.baseUrl == '/api/v1/transactions' || req.baseUrl == '/api/v1/users') {
-                    next()
-                } else {
-                    return apiResponse.suspendResponse(res, 'Paket membership sudah kadaluarsa. Silahkan perpanjang paket atau pilih ulang paket');
-                }
+                next()
+                // if (req.baseUrl == '/api/v1/transactions' || req.baseUrl == '/api/v1/users') {
+                //     next()
+                // } else {
+                //     return apiResponse.suspendResponse(res, 'Paket membership sudah kadaluarsa. Silahkan perpanjang paket atau pilih ulang paket');
+                // }
             } else {
                 next()
             }
