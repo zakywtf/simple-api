@@ -12,6 +12,10 @@ block content
 		-var y = date.getFullYear();
 		-return currentDay+', '+d+' '+m+' '+y;
 	-}
+	
+	-function formatRupiah(amount) {
+		-return new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0}).format(amount);
+	-}
 	.container-fluid
 		br
 		- var role = session.role

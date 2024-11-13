@@ -5,6 +5,7 @@ import WellnessDetail from "../schemas/wellness_details";
 import History from "../schemas/history";
 import Recommendation from "../schemas/recommendations";
 import Schools from "../schemas/schools";
+import Payments from "../schemas/payments";
 
 const createDefaultWellnessDetail = async (obj) => {
     // console.log({obj})
@@ -180,6 +181,96 @@ const autoSuspendSchools = async () => {
     }
 }
 
+const groupingPayments = async (data) => {
+    const result = [];
+    data.reduce(function(res, v) {
+        if (!res[v.x]) {
+            res[v.x] = { x: v.x, y: 0};
+            result.push(res[v.x])
+        }
+        res[v.x].y += v.y;
+        return res;
+    }, {});
+    // console.log({result});
+    return result
+}
+
+const getSales = async (cat) => {
+    const arr_revenue = []
+
+    const d = new Date();
+    let dmonth = d.getMonth()+1;
+    let dyear = d.getFullYear();
+
+    console.log({d, dmonth, dyear})
+
+    if (cat == 'year') {
+        for (let i = 1; i <= 12; i++) {
+            const month = i;
+            const year = dyear;
+            // const startDate = new Date(year, month);
+            const endDate = new Date(year, month);
+    
+            const filters = {
+                created_at: {
+                    $gte: new Date(dyear+"-"+i+"-01"),
+                    $lt: endDate,
+                },
+            };
+            const payments = await Payments.find({isDeleted: false}).where(filters)
+            if (payments.length > 0) {
+                for (let k = 0; k < payments.length; k++) {
+                    const e = payments[k];
+                    arr_revenue.push({x: i, y: e.total_price})
+                }
+            } else {
+                arr_revenue.push({x: i, y: 0})
+            }
+        }
+    } else if (cat == 'month') {
+        const endDate = new Date(dyear, dmonth);
+        const filters = {
+            created_at: {
+                $gte: new Date(dyear+"-"+dmonth+"-01"),
+                $lt: endDate,
+            },
+        };
+        const payments = await Payments.find({isDeleted: false}).where(filters)
+        if (payments.length > 0) {
+            for (let k = 0; k < payments.length; k++) {
+                const e = payments[k];
+                arr_revenue.push({x: dmonth, y: e.total_price})
+            }
+        } else {
+            arr_revenue.push({x: dmonth, y: 0})
+        }
+    }
+
+    return arr_revenue
+}
+
+const yearlyRevenue = async () => {
+    const datas = await getSales('year')
+    const grouping = await groupingPayments(datas)
+    var total = 0
+
+    for (let i = 0; i < grouping.length; i++) {
+        const e = grouping[i];
+        total += e.y
+    }
+    console.log({total})
+
+    return total
+}
+
+const monthlyRevenue = async () => {
+    const datas = await getSales('month')
+    const grouping = await groupingPayments(datas)
+    console.log({tes2: grouping})
+
+    return grouping[0].y
+}
+
 module.exports = {
     createDefaultWellnessDetail,
     updateWellnessDetail,
@@ -188,5 +279,7 @@ module.exports = {
     saveDataRecommendation,
     updateStatusPaymentOnSchool,
     autoUnpaidSchools,
-    autoSuspendSchools
+    autoSuspendSchools,
+    yearlyRevenue,
+    monthlyRevenue
 }

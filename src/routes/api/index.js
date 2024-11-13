@@ -12,5 +12,6 @@ router.use('/check-up', require('./historyRoutes'));
 router.use('/recommendations', require('./recommendationsRoutes'));
 router.use('/payments', require('./paymentRoutes'));
 router.use('/majority', require('./majorityRoutes'));
+router.use('/dashboard', require('./indexRoutes'))
 
 module.exports = router;

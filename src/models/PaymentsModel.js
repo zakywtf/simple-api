@@ -25,6 +25,68 @@ class paymentsModel extends Models{
 
     }
 
+    async charts(){
+        const arr_revenue = []
+        
+        const d = new Date();
+        let dyear = d.getFullYear();
+        
+        for (let i = 1; i <= 12; i++) {
+            const month = i;
+            const year = dyear;
+            // const startDate = new Date(year, month);
+            const endDate = new Date(year, month);
+
+            const filters = {
+                created_at: {
+                    $gte: new Date(dyear+"-"+i+"-01"),
+                    $lt: endDate,
+                },
+            };
+            // console.log({filters})
+            const payments = await this.model.find({isDeleted: false}).where(filters)
+            // console.log({payments})
+            if (payments.length > 0) {
+                for (let k = 0; k < payments.length; k++) {
+                    const e = payments[k];
+                    arr_revenue.push({x: i, y: e.total_price})
+                }
+            } else {
+                arr_revenue.push({x: i, y: 0})
+            }
+        }
+
+        const grouping = await this.groupingPayments(arr_revenue)
+        const formarArr = await this.arrFormat(grouping)
+        // return arr_revenue
+        return { msg: 'Data revenue succesfully.', data: formarArr }
+
+    }
+
+    async groupingPayments(data) {
+        const result = [];
+        data.reduce(function(res, v) {
+            if (!res[v.x]) {
+                res[v.x] = { x: v.x, y: 0};
+                result.push(res[v.x])
+            }
+            res[v.x].y += v.y;
+            return res;
+        }, {});
+        // console.log({result});
+        return result
+    }
+
+    async arrFormat(datas) {
+        const arr = []
+        for (let i = 0; i < datas.length; i++) {
+            const e = datas[i];
+            arr.push(e.y)
+        }
+
+        return arr
+    }
+
 }
 
 module.exports=paymentsModel

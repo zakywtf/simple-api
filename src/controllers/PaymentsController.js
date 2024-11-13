@@ -16,4 +16,12 @@ rtr.post('/create', async (req, res, next) => {
     });
 })
 
+rtr.get('/revenue/charts', async (req, res, next) => {
+    console.log({user: req.user})
+    handleRequest(req, res, async(body)=>{
+        model.setUdata(req.user)
+        return await model.charts();
+    });
+})
+
 module.exports = rtr

@@ -15,7 +15,7 @@ import Majority from "../schemas/majority";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
-import { saveDataRecommendation } from "../helpers/masterFunction"
+import { saveDataRecommendation, yearlyRevenue, monthlyRevenue } from "../helpers/masterFunction"
 
 
 const IndexController = {
@@ -230,6 +230,11 @@ const IndexController = {
         let total_obesitas = 0
         let cat_bp = 'normal'
         let cat_os = 'normal'
+        let revenue_yearly = 0
+        let revenue_monthly = 0
+
+        const d = new Date();
+        let dyear = d.getFullYear();
 
         if (req.session.role == 'user') {
             data = await WellnessDetail.findOne({user_id: req.session.user_id})
@@ -249,6 +254,8 @@ const IndexController = {
                 const sch = schools[i];
                 schools_unpaid.push({npsn: sch.npsn, name: sch.name, status: sch.status})
             }
+            revenue_yearly = await yearlyRevenue()
+            revenue_monthly = await monthlyRevenue()
         } else if (req.session.role == 'teacher'){
             total_kurus = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kurang Berat Badan'}).countDocuments()
             total_normal = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Normal'}).countDocuments()
@@ -256,7 +263,7 @@ const IndexController = {
             total_obesitas = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Obesitas'}).countDocuments()
         }
         console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os})
-        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os});
+        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, year: dyear, revenue_yearly, revenue_monthly});
     },
 
     history: async (req, res) => {
@@ -382,6 +389,40 @@ const IndexController = {
             console.log('error ', error);
         }
     },
+
+    statisticCharts: async (req, res) => {
+        const arr_revenue = []
+        var total = 0
+
+        const d = new Date();
+        let dyear = d.getFullYear();
+
+        for (let i = 1; i <= 12; i++) {
+            const month = i;
+            const year = dyear;
+            // const startDate = new Date(year, month);
+            const endDate = new Date(year, month);
+
+            const filters = {
+                created_at: {
+                    $gte: new Date(dyear+"-"+i+"-01"),
+                    $lt: endDate,
+                },
+            };
+            const payments = await Payments.find({isDeleted: false}).where(filters)
+
+            for (let k = 0; k < payments.length; k++) {
+                const e = payments[k];
+                total += e.total_price
+
+                arr_revenue.push(total)
+            }
+        }
+
+        // console.log({ arr_kesejahteraan, arr_infra, arr_fasum })
+        res.json({ success: 200, data: { arr_revenue }})
+        
+    }
 
     
     
