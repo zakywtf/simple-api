@@ -37,5 +37,8 @@ router.get('/devices/delete/:_id', auth, IndexController.deviceDelete)
 router.get('/payments', auth, IndexController.payment)
 router.get('/payments/invoice', auth, IndexController.invoice)
 router.get('/profile', auth, IndexController.profile)
+router.get('/majority', auth, IndexController.majority)
+router.post('/majority/update/:_id', auth, IndexController.majorityUpdate)
+
 
 module.exports = router;

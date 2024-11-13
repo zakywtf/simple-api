@@ -11,6 +11,7 @@ import Devices from "../schemas/devices";
 import History from "../schemas/history";
 import WellnessDetail from "../schemas/wellness_details";
 import Payments from "../schemas/payments";
+import Majority from "../schemas/majority";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
@@ -365,7 +366,22 @@ const IndexController = {
             }
         }
         res.render('recommended/index', { datas })
-    }
+    },
+
+    majority: async (req, res) => {
+        const datas = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({ created_at: -1 })
+        
+        res.render('majority/index', {datas});
+    },
+
+    majorityUpdate: async (req, res, next) => {
+        try {
+            await Majority.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
+            res.redirect('/majority');
+        } catch (error) {
+            console.log('error ', error);
+        }
+    },
 
     
     
