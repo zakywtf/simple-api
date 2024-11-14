@@ -8,12 +8,12 @@
 						.row 
 							.col-2 
 								h2.fw-semibold.mb-3 #{total_devices}
-							.col-10
-								.d-flex.align-items-center.mb-3
-									span.me-1.rounded-circle.bg-light-danger.round-20.d-flex.align-items-center.justify-content-center
-										i.ti.ti-arrow-down-left.text-danger
-									p.text-dark.me-1.fs-3.mb-0 -9%
-									p.fs-3.mb-0 bulan lalu
+							//- .col-10
+							//- 	.d-flex.align-items-center.mb-3
+							//- 		span.me-1.rounded-circle.bg-light-danger.round-20.d-flex.align-items-center.justify-content-center
+							//- 			i.ti.ti-arrow-down-left.text-danger
+							//- 		p.text-dark.me-1.fs-3.mb-0 -9%
+							//- 		p.fs-3.mb-0 bulan lalu
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -27,12 +27,12 @@
 						.row 
 							.col-2 
 								h2.fw-semibold.mb-3 #{total_users}
-							.col-10
-								.d-flex.align-items-center.mb-3
-									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
-										i.ti.ti-arrow-up-left.text-success
-									p.text-dark.me-1.fs-3.mb-0 +9%
-									p.fs-3.mb-0 bulan lalu
+							//- .col-10
+							//- 	.d-flex.align-items-center.mb-3
+							//- 		span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+							//- 			i.ti.ti-arrow-up-left.text-success
+							//- 		p.text-dark.me-1.fs-3.mb-0 +9%
+							//- 		p.fs-3.mb-0 bulan lalu
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -46,73 +46,93 @@
 						.row 
 							.col-2 
 								h3.fw-semibold.mb-3 #{total_schools}
-							.col-10
-								.d-flex.align-items-center.mb-3
-									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
-										i.ti.ti-arrow-up-left.text-success
-									p.text-dark.me-1.fs-3.mb-0 +9%
-									p.fs-3.mb-0 bulan lalu
+							//- .col-10
+							//- 	.d-flex.align-items-center.mb-3
+							//- 		span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+							//- 			i.ti.ti-arrow-up-left.text-success
+							//- 		p.text-dark.me-1.fs-3.mb-0 +9%
+							//- 		p.fs-3.mb-0 bulan lalu
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
 								i.ti.ti-school.fs-6
 .row
-	.col-lg-8.d-flex.align-items-strech
+	.col-lg-7.d-flex.align-items-strech
 		.card.w-100
 			.card-body
 				.d-sm-flex.d-block.align-items-center.justify-content-between.mb-9
 					.mb-3.mb-sm-0
-						h5.card-title.fw-semibold Laporan Pendapatan Tahun #{year}
-						br
+						h5.card-title.fw-semibold Laporan Pendapatan
+						p.fs-3 Laporan pendapatan tahun #{year}
 					//- div
 					//- 	select.form-select
 					//- 		option(value="1") Oktober 2024
 					//- 		option(value="2") November 2024
 					//- 		option(value="3") Desember 2024
 				#chart-sales
-	.col-lg-4
+	.col-lg-5
 		.row 
 			.col-lg-6 
-				.card.overflow-hidden 
+				.card.overflow-hidden
 					.card-body
-						h6.card-title.mb-4.fw-semibold Tahunan
-						hr
-						.row.align-items-center
-							.col-12
+						.row.alig.n-items-start
+							.col-10
+								h5.card-title.mb-9.fw-semibold.align-items-center Tahunan
+							.col-2
+								.d-flex.justify-content-end
+									.text-white.bg-success.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+										i.ti.ti-currency-dollar.fs-6
+						.row 
+							.col-12 
 								br
-								h6.fw-semibold.mb-9 #{formatRupiah(revenue_yearly)}
-								.d-flex.align-items-center.mb-3
-									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
-										i.ti.ti-arrow-up-left.text-success
-									p.text-dark.me-1.fs-2.mb-0 +9%
-									p.fs-2.mb-0 tahun lalu
+								h5.fw-semibold.mb-3 #{formatRupiah(revenue_yearly)}
+
+						.row 
+							.col-12 
+								.d-flex.align-items-center.pb-1
+									if (percentage_yearly_revenue.status == 'up')
+										span.me-2.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+											i.ti.ti-arrow-up-right.text-success
+										p.text-dark.me-1.fs-3.mb-0 +#{percentage_yearly_revenue.percentage}%
+									else 
+										span.me-2.rounded-circle.bg-light-danger.round-20.d-flex.align-items-center.justify-content-center
+											i.ti.ti-arrow-down-right.text-danger
+										p.text-dark.me-1.fs-3.mb-0 #{percentage_yearly_revenue.percentage}%
+									p.fs-3.mb-0 tahun lalu
+
 			.col-lg-6
-				.card.overflow-hidden 
+				.card.overflow-hidden
 					.card-body
-						h6.card-title.mb-4.fw-semibold Bulanan
-						hr
-						.row.align-items-center
-							.col-12
+						.row.alig.n-items-start
+							.col-10
+								h5.card-title.mb-9.fw-semibold Bulanan
+							.col-2
+								.d-flex.justify-content-end
+									.text-white.bg-success.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
+										i.ti.ti-currency-dollar.fs-6
+						.row 
+							.col-12 
 								br
-								h6.fw-semibold.mb-9 #{formatRupiah(revenue_monthly)}
-								.d-flex.align-items-center.mb-3
-									span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
-										i.ti.ti-arrow-up-left.text-success
-									p.text-dark.me-1.fs-2.mb-0 +9%
-									p.fs-2.mb-0 bulan lalu
+								h5.fw-semibold.mb-3 #{formatRupiah(revenue_monthly)}
+						.row 
+							.col-12 
+								.d-flex.align-items-center.pb-1
+									if (percentage_monthly_revenue.status == 'up')
+										span.me-2.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center
+											i.ti.ti-arrow-up-right.text-success
+										p.text-dark.me-1.fs-3.mb-0 +#{percentage_monthly_revenue.percentage}%
+									else 
+										span.me-2.rounded-circle.bg-light-danger.round-20.d-flex.align-items-center.justify-content-center
+											i.ti.ti-arrow-down-right.text-danger
+										p.text-dark.me-1.fs-3.mb-0 #{percentage_monthly_revenue.percentage}%
+									p.fs-3.mb-0 bulan lalu
 		.row
 			.col-lg-12 
-				.card.w-100
+				.card.w-100.overflow-hidden
 					.card-body.p-4
 						h5.card-title.fw-semibold.mb-4 Peringatan Pembayaran
-						.table-responsive(style="max-height: 150px; overflo-y: auto;")
+						.table-responsive(style="max-height: 150px; overflow-x: auto; overflow-y: visible; overflow: scroll; ")
 							table.table.text-nowrap.mb-0.align-middle
-								//- thead.text-dark.fs-4
-								//- 	tr
-								//- 		th.border-bottom-0
-								//- 			h6.fw-semibold.mb-0 Sekolah
-								//- 		th.border-bottom-0
-								//- 			h6.fw-semibold.mb-0 Status
 								tbody
 									each sch in schools_unpaid
 										tr
@@ -142,7 +162,7 @@ script.
 					var options = {
 						chart: {
 							type: 'line', // Specify the chart type
-							height: 350,
+							height: 310,
 						},
 						series: [{
 							name: 'Total Pendapatan',

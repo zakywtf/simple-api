@@ -195,14 +195,8 @@ const groupingPayments = async (data) => {
     return result
 }
 
-const getSales = async (cat) => {
+const getSales = async (cat, dmonth, dyear) => {
     const arr_revenue = []
-
-    const d = new Date();
-    let dmonth = d.getMonth()+1;
-    let dyear = d.getFullYear();
-
-    console.log({d, dmonth, dyear})
 
     if (cat == 'year') {
         for (let i = 1; i <= 12; i++) {
@@ -250,7 +244,11 @@ const getSales = async (cat) => {
 }
 
 const yearlyRevenue = async () => {
-    const datas = await getSales('year')
+    const d = new Date();
+    let dmonth = d.getMonth()+1;
+    let dyear = d.getFullYear();
+
+    const datas = await getSales('year', dmonth, dyear)
     const grouping = await groupingPayments(datas)
     var total = 0
 
@@ -258,17 +256,66 @@ const yearlyRevenue = async () => {
         const e = grouping[i];
         total += e.y
     }
-    console.log({total})
+    // console.log({total})
+
+    return total
+}
+
+const lastYearReveneu = async () => {
+    const d = new Date();
+    let dmonth = d.getMonth();
+    let dyear = d.getFullYear()-1;
+
+    const datas = await getSales('year', dmonth, dyear)
+    const grouping = await groupingPayments(datas)
+    var total = 0
+
+    for (let i = 0; i < grouping.length; i++) {
+        const e = grouping[i];
+        total += e.y
+    }
+    // console.log({total})
 
     return total
 }
 
 const monthlyRevenue = async () => {
-    const datas = await getSales('month')
+    const d = new Date();
+    let dmonth = d.getMonth()+1;
+    let dyear = d.getFullYear();
+
+    const datas = await getSales('month', dmonth, dyear)
     const grouping = await groupingPayments(datas)
-    console.log({tes2: grouping})
+    // console.log({tes2: grouping})
 
     return grouping[0].y
+}
+
+const lastMonthReveneu = async () => {
+    const d = new Date();
+    let dmonth = d.getMonth();
+    let dyear = d.getFullYear();
+
+    const datas = await getSales('month', dmonth, dyear)
+    const grouping = await groupingPayments(datas)
+    // console.log({tes2: grouping})
+
+    return grouping[0].y
+}
+
+const percentageReveneue = async (newReveneu, lastRevenue) => {
+    var percentage = 0
+    var status = null
+
+    if (lastRevenue == 0) {
+        percentage = '100'
+        status = 'up'
+    } else {
+        percentage = (((newReveneu - lastRevenue) / lastRevenue) * 100).toFixed(0)
+        status = (percentage > 0) ? 'up' : 'down'
+    }
+
+    return { percentage, status }
 }
 
 module.exports = {
@@ -281,5 +328,8 @@ module.exports = {
     autoUnpaidSchools,
     autoSuspendSchools,
     yearlyRevenue,
-    monthlyRevenue
+    monthlyRevenue,
+    lastYearReveneu,
+    lastMonthReveneu,
+    percentageReveneue
 }
