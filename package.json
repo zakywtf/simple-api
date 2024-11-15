@@ -10,9 +10,9 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && babel-node dist",
     "dev": "nodemon src --exec babel-node --inspect",
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir dist && node copy-views.js",
+    "start": "node dist/index.js",
     "serve": "node dist/index.js"
   },
   "type": "commonjs",
