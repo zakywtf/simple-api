@@ -45,6 +45,12 @@ let sch = new Schema({
         ref:'schools',
         default: null
     },
+    majority_id : {
+        type: Schema.Types.ObjectId, 
+        autopopulate: { select: 'class name capacity notes'}, 
+        ref:'majority',
+        default: null
+    },
     isOnline: {
         type: Boolean,
         default: false

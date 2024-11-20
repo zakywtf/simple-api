@@ -16,10 +16,11 @@ block content
 								th No
 								th NISN
 								th Nama
+								th Kelas & Jurusan
 								th Jenis Kelamin
 								th Tinggi Badan
 								th Berat Badan
-								th BMI Skor
+								//- th BMI Skor
 								th BMI Kategori
 								th Aksi
 
@@ -31,6 +32,7 @@ block content
 									td 
 										b #{data.nisn}
 									td #{data.name}
+									td #{data.majority}
 									td
 										if (data.gender == 'male')
 											| Laki-laki
@@ -38,7 +40,7 @@ block content
 											| Perempuan
 									td #{data.height} Cm
 									td #{data.weight} Kg
-									td #{data.bmi_score}
+									//- td #{data.bmi_score}
 									td 
 										if (data.bmi_category == 'Kurang Berat Badan')
 											.text-primary #{data.bmi_category}
@@ -50,16 +52,17 @@ block content
 											.text-danger #{data.bmi_category}
 									td
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
-											| Aksi
+											| Pindah Kelas
 										ul.dropdown-menu
-											//- li
-											//- 	a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Detail
+											each maj in majorities
+												li
+													a.dropdown-item(href='/users/majority/update/'+maj._id+'/'+data._id) #{maj.class} - #{maj.name}
 											//- .dropdown-divider
-											li
-												a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
+											//- li
+											//- 	a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit
 												
-											li 
-												a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
+											//- li 
+											//- 	a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
 							
 					nav
 						ul#pagination.pagination

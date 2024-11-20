@@ -284,12 +284,26 @@ const IndexController = {
         console.log({user: req.session})
         const datas = []
         const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({created_at: -1})
+        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({created_at: -1})
         for (let i = 0; i < users.length; i++) {
             const user = users[i];
+            const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
             const user_detail = await WellnessDetail.findOne({user_id: user._id})
-            datas.push({ ...user._doc, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight})
+            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight})
         }
-        res.render('users/index', {datas});
+        res.render('users/index', {datas, majorities});
+    },
+
+    userMajorityUpdate: async (req, res, next) => {
+        try {
+            const user = await Users.findOne({isDeleted: false, _id: req.params.user_id})
+            user.majority_id = req.params.majority_id
+            await user.save()
+            
+            res.redirect('/users');
+        } catch (error) {
+            console.log('error ', error);
+        }
     },
 
     devices: async (req, res) => {
