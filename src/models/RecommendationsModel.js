@@ -11,20 +11,12 @@ class recommendationsModel extends Models{
 
     async getAll(query={}){
         // console.log({udata: this.udata, query})
-        // await this.gemini()
         const resp = await this.model.findOne({...query, user_id: this.udata._id}).sort(this.sorting)
 
         // console.log({resp})
         if(resp.length < 1) throw new NotFoundError('Data Not Found.')
 
         return { msg: 'Data retrieved.', data: resp}
-    }
-
-    async gemini() {
-        const resp = await History.findOne({user_id: this.udata._id}).sort(this.sorting)
-        console.log({resp})
-        await getGeminiAI(resp.height, resp.weight, this.udata._id)
-
     }
 
 }
