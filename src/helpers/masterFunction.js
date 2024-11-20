@@ -105,7 +105,8 @@ const getGeminiAI = async (height, weight, user_id) => {
         const schema = await schemaGemini()
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-pro",
+            model: "gemini-1.5-flash-001",
+            // model: 'gemini-1.0-pro-001',
             generationConfig: {
                 responseMimeType: "application/json",
                 responseSchema: schema,
@@ -113,9 +114,9 @@ const getGeminiAI = async (height, weight, user_id) => {
         });
 
         const prompt = `workout planner untuk tinggi badan ${height}cm dan berat badan ${weight}kg dari senin sampai minggu`;
-
+        console.log({prompt})
         const result = await model.generateContent(prompt);
-        // console.log({result})
+        console.log({result})
         const text = result.response.text()
 
         await saveDataRecommendation(text, user_id, height, weight)
@@ -123,6 +124,7 @@ const getGeminiAI = async (height, weight, user_id) => {
 }
 
 const saveDataRecommendation = async (text, user_id, height, weight) => {
+    console.log({text})
     const array = JSON.parse(text)
     const planner = []
     for (let i = 0; i < array.length; i++) {

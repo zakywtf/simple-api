@@ -8,7 +8,7 @@ const router = express.Router();
 // Routes Test
 router.get('/ping', IndexController.ping);
 router.get('/planner', IndexController.testPlanner);
-router.get('/gemini', IndexController.testGemini);
+router.get('/gemini/:height/:weight', IndexController.testGemini);
 router.get('/openai', IndexController.testOpenAi);
 router.get('/imt', IndexController.testImt);
 router.get('/rand-string', IndexController.randString);

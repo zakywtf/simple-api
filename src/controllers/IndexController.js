@@ -15,7 +15,7 @@ import Majority from "../schemas/majority";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
-import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue } from "../helpers/masterFunction"
+import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI } from "../helpers/masterFunction"
 
 
 const IndexController = {
@@ -193,21 +193,21 @@ const IndexController = {
           
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
         const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-pro",
+            model: "gemini-1.5-flash-001",
             generationConfig: {
                 responseMimeType: "application/json",
                 responseSchema: schema,
             },
         });
 
-        const prompt = "workout planner untuk tinggi badan 173cm dan berat badan 79kg";
+        const prompt = `workout planner untuk tinggi badan ${req.params.height}cm dan berat badan ${req.params.weight}kg dari senin sampai minggu`;
         // const prompt = "nutrisi advice untuk badan 173cm, berat badan 79kg, tekanan darah 120/80 mmHg";
 
         const result = await model.generateContent(prompt);
         console.log({result})
         // return apiResponse.successResponseWithData(res, "great!", result.response.text()
 
-        return apiResponse.successResponseWithData(res, "great!", result)
+        return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
     },
 
     loginPage: async (req, res) => {
@@ -247,6 +247,9 @@ const IndexController = {
             console.log({bp, os})
             cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
             cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'
+            const resp = await History.findOne({user_id: req.session.user_id}).sort({created_at: -1})
+            console.log({resp})
+            await getGeminiAI(resp.height, resp.weight, req.session.user_id)
         } else if (req.session.role == 'admin'){
             total_users = await Users.find({isDeleted: false}).countDocuments()
             total_devices = await Devices.find({isDeleted: false}).countDocuments()
@@ -394,6 +397,7 @@ const IndexController = {
                 datas.push(act)
             }
         }
+        
         res.render('recommended/index', { datas })
     },
 

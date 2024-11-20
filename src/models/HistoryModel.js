@@ -13,7 +13,7 @@ class historyModel extends Models{
         const detail = await updateWellnessDetail(obj, this.udata._id)
         const body = { ...obj, school_id: detail.school_id }
         let resp = await this.model.create(this.convertParam(body, false))
-        await getGeminiAI(obj.height, obj.weight, this.udata._id)
+        // await getGeminiAI(obj.height, obj.weight, this.udata._id)
 
         return this.insert_result(resp)
     }
