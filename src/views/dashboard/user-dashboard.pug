@@ -153,27 +153,27 @@
 
 script(src="../assets/libs/jquery/dist/jquery.min.js")
 script.
-	//- $(document).ready(function() {
-	//- 	var host = window.location.origin;
-	//- 	const token = localStorage.getItem('token');
+	$(document).ready(function() {
+		var host = window.location.origin;
+		const token = localStorage.getItem('token');
 
-	//- 	$.ajax({
-	//- 		url: host + '/api/v1/recommendations', // Example API
-	//- 		method: 'GET',
-	//- 		headers: {
-	//- 			'Content-Type': 'application/json',
-	//- 			'Authorization': `Bearer ${token}`
-	//- 		},
-	//- 		success: function(response) {
-	//- 			console.log({response})
-	//- 			if (response.status == 200){
-	//- 				localStorage.setItem('planner', JSON.stringify(response.data.planner));
-	//- 			}
-	//- 		},
-	//- 		error: function(xhr, status, error) {
-	//- 			//- console.log({xhr, status, error})
-	//- 			console.error('Error submitting data: ', error);
-	//- 			$('#response-container').html('<p>Error submitting data. Please try again later.</p>');
-	//- 		}
-	//- 	});
-	//- });
+		$.ajax({
+			url: host + '/api/v1/recommendations', // Example API
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			},
+			success: function(response) {
+				console.log({response})
+				if (response.status == 200){
+					localStorage.setItem('planner', JSON.stringify(response.data.planner));
+				}
+			},
+			error: function(xhr, status, error) {
+				//- console.log({xhr, status, error})
+				console.error('Error submitting data: ', error);
+				$('#response-container').html('<p>Error submitting data. Please try again later.</p>');
+			}
+		});
+	});

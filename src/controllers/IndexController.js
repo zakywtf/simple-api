@@ -249,9 +249,9 @@ const IndexController = {
             cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'
             const resp = await History.findOne({user_id: req.session.user_id}).sort({created_at: -1})
             console.log({resp})
-            if (resp) {
-                await getGeminiAI(resp.height, resp.weight, req.session.user_id)
-            }
+            // if (resp) {
+            //     await getGeminiAI(resp.height, resp.weight, req.session.user_id)
+            // }
         } else if (req.session.role == 'admin'){
             total_users = await Users.find({isDeleted: false}).countDocuments()
             total_devices = await Devices.find({isDeleted: false}).countDocuments()
