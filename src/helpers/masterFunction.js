@@ -47,11 +47,9 @@ const createHistory = async (obj) => {
 
 const checkLastHeighAndWeight = async (height, weight, user_id) => {
     const lastRecommendation = await Recommendation.findOne({user_id: user_id}).sort({created_at: -1})
-    if (lastRecommendation.weight == weight) {
-        return true
-    } else {
-        return false
-    }
+    const status = (lastRecommendation != null) ? (lastRecommendation.weight == weight) ? true : false :false
+    
+    return status
 }
 
 const schemaGemini = async () => {
@@ -101,6 +99,7 @@ const schemaGemini = async () => {
 
 const getGeminiAI = async (height, weight, user_id) => {
     const isSameLastRecommendation = await checkLastHeighAndWeight(height, weight, user_id)
+    console.log({isSameLastRecommendation})
     if (isSameLastRecommendation == false) {
         const schema = await schemaGemini()
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
