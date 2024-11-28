@@ -210,6 +210,20 @@ const IndexController = {
         return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
     },
 
+    testingGemini: async (req, res) => {
+
+        const client = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+
+        const response = await client.generateText({
+            model: 'gemini-1.5-flash-001',
+            prompt: 'Describe a futuristic city.',
+        });
+
+        console.log(response.data);
+        return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
+
+    },
+
     loginPage: async (req, res) => {
         res.render('auth/login');
     },

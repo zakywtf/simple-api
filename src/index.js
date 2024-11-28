@@ -11,7 +11,7 @@ import cron from "node-cron";
 import useragent from 'express-useragent'
 import bodyParser from 'body-parser';
 import CronJob from 'cron';
-
+import fetch from 'node-fetch';
 require("dotenv").config();
 
 import routes from './routes';
@@ -24,8 +24,10 @@ const app = express();
  * ! •••••••••••••••••••••••••••••••
  * ! Mongoose Connection
  * ! •••••••••••••••••••••••••••••••
- */
+*/
 let MONGODB_URL = process.env.MONGODB_URL;
+globalThis.fetch = fetch;
+console.log({global: globalThis.fetch})
 
 mongoose.Promise = global.Promise;
 mongoose
