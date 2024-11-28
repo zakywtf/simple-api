@@ -12,6 +12,8 @@ import useragent from 'express-useragent'
 import bodyParser from 'body-parser';
 import CronJob from 'cron';
 import fetch from 'node-fetch';
+const { Headers } = fetch;
+
 require("dotenv").config();
 
 import routes from './routes';
@@ -27,7 +29,9 @@ const app = express();
 */
 let MONGODB_URL = process.env.MONGODB_URL;
 globalThis.fetch = fetch;
-console.log({global: globalThis.fetch})
+global.Headers = Headers;
+
+console.log({global: globalThis.fetch, header: global.Headers})
 
 mongoose.Promise = global.Promise;
 mongoose

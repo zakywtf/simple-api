@@ -212,14 +212,13 @@ const IndexController = {
 
     testingGemini: async (req, res) => {
 
-        const client = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-
-        const response = await client.generateText({
-            model: 'gemini-1.5-flash-001',
-            prompt: 'Describe a futuristic city.',
-        });
-
-        console.log(response.data);
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+        const model = genAI.getGenerativeModel({ model: "models/gemini-1.5" });
+        
+        const prompt = "Explain how AI works";
+        
+        const result = await model.generateContent(prompt);
+        console.log(result.response.text());
         return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
 
     },
