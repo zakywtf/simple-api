@@ -83,7 +83,7 @@ const schemaGemini = async () => {
                             type: SchemaType.STRING,
                         },
                         keterangan: {
-                            description: "keterangan dari latihan",
+                            description: "detail dan definisi dari latihan tersebut",
                             type: SchemaType.STRING,
                         },
                     },

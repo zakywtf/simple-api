@@ -254,7 +254,7 @@ const IndexController = {
         if (req.session.role == 'user') {
             data = await WellnessDetail.findOne({user_id: req.session.user_id})
             const blood_pressure = data.blood_pressure
-            const split_bp = blood_pressure.split("/")
+            const split_bp = (blood_pressure) ? blood_pressure.split("/") : '0'
             const bp = parseInt(split_bp[0])
             const os = parseInt(data.oxygen_saturation)
             console.log({bp, os})
