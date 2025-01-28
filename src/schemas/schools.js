@@ -32,7 +32,7 @@ let sch = new Schema({
     },
     category : {
         type:String, 
-        enum:['SD', 'MI', 'SMP', 'MTS', 'SMA', 'SMK', 'MA'], 
+        enum:['SD', 'MI', 'SMP', 'MTS', 'SMA', 'SMK', 'MA', 'PERSEROAN'], 
         default:'SD'
     },
     expired_date: {

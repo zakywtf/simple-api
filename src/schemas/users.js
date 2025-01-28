@@ -51,6 +51,18 @@ let sch = new Schema({
         ref:'majority',
         default: null
     },
+    origin_address: {
+        type: String,
+        default: null
+    },
+    domicile_address: {
+        type: String,
+        default: null
+    },
+    date_of_birth: {
+        type: Date,
+        default: null
+    },
     isOnline: {
         type: Boolean,
         default: false

@@ -12,7 +12,7 @@ block content
 		-var y = date.getFullYear();
 		-return currentDay+', '+d+' '+m+' '+y;
 	-}
-	.container-fluid
+	.container
 		br
 		//- br
 		.container.profile-container
@@ -25,10 +25,10 @@ block content
 									h4 Profil Anda
 									br
 									p
-										strong NISN: 
+										strong NIK: 
 										| #{data.nisn}
 									p 
-										strong Sekolah: 
+										strong Instansi: 
 										| #{data.school_id.name}
 									p
 										strong Nama: 
@@ -47,6 +47,7 @@ block content
 										else 
 											| 
 											| Perempuan
+									
 									//- br
 									//- br
 									// Edit Button

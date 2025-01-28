@@ -12,20 +12,20 @@ block content
 		-var y = date.getFullYear();
 		-return currentDay+', '+d+' '+m+' '+y;
 	-}
-	.container-fluid
+	.container
 		br
 		//- br
 		.card
 			.card-body
 				.row 
 					.col-lg-10 
-						h5.card-title.fw-semibold.mb-4 List Sekolah
-						p.mb-0 Berikut list sekolah yang terdaftar
+						h5.card-title.fw-semibold.mb-4 List Instansi
+						p.mb-0 Berikut list instansi yang terdaftar
 					.col-lg-2
 						a.button.btn.btn-primary.btn-round.ml-auto(title='', data-original-title="Tambah Sekolah", data-toggle='modal', href='', data-target='#create')
 							i.fa.fa-plus
 							| 
-							| Tambah Sekolah
+							| Tambah Instansi
 				br
 				//- input#search.search-input(type="text", placeholder="Search...", oninput="filterTable()")
 				.table-responsive
@@ -33,10 +33,10 @@ block content
 						thead.thead-light
 							tr
 								th No
-								th NPSN Sekolah
-								th Nama Sekolah
-								th Status Sekolah
-								th Bentuk Pendidikan
+								th Kode Instansi
+								th Nama Instansi
+								th Status
+								th Bentuk Instansi
 								th Alamat
 								//- th Latitude
 								//- th Longitude
@@ -110,7 +110,7 @@ block content
 			.modal-content
 				.modal-header
 					h2
-						b Tambah Sekolah
+						b Tambah Instansi
 					//- button.close(type="button", data-dismiss="modal")
 					//- 	span(aria-hidden="true")
 					//- 		i.ti.ti-square-x
@@ -118,32 +118,32 @@ block content
 				.modal-body
 					form#data-form.form-validation
 						.form-group.row
-							label.col-sm-4.form-control-label(for="npsn") NPSN Sekolah
+							label.col-sm-4.form-control-label(for="npsn") Kode Instansi
 								span.text-danger *
 							.col-sm-8
-								input#npsn.form-control(type="text", required, placeholder="NPSN Sekolah", name="npsn")
+								input#npsn.form-control(type="text", required, placeholder="Kode Instansi", name="npsn")
 						br
 						.form-group.row
-							label.col-sm-4.form-control-label(for="name") Nama Sekolah
+							label.col-sm-4.form-control-label(for="name") Nama Instansi
 								span.text-danger *
 							.col-sm-8
-								input#name.form-control(type="text", placeholder="Nama Sekolah", required, name="name")
+								input#name.form-control(type="text", placeholder="Nama Instansi", required, name="name")
 						br
 						.form-group.row
-							label.col-sm-4.form-control-label(for="school_status") Status Sekolah
+							label.col-sm-4.form-control-label(for="school_status") Status
 								span.text-danger *
 							.col-sm-8
 								select#school_status.form-control(name="school_status", required="required")
-									option(value='') -- Pilih Status Sekolah --
+									option(value='') -- Pilih Status --
 									option(value="negeri") Negeri
 									option(value="swasta") Swasta
 						br
 						.form-group.row
-							label.col-sm-4.form-control-label(for="category") Bentuk Pendidikan
+							label.col-sm-4.form-control-label(for="category") Bentuk Instansi
 								span.text-danger *
 							.col-sm-8
 								select#category.form-control(name="category", required="required")
-									option(value='') -- Pilih Bentuk Pendidikan --
+									option(value='') -- Pilih Bentuk Instansi --
 									//- option(value="MI") MI
 									//- option(value="SD") SD
 									option(value="SMP") SMP
@@ -151,6 +151,7 @@ block content
 									option(value="SMA") SMA
 									option(value="SMK") SMK
 									option(value="MA") MA
+									option(value="PERSEROAN") PERSEROAN
 						br
 						.form-group.row
 							label.col-sm-4.form-control-label(for="address") Alamat
@@ -187,7 +188,7 @@ block content
 				.modal-content
 					.modal-header
 						h2
-							b Edit Sekolah
+							b Edit Instansi
 						//- button.close(type="button", data-dismiss="modal")
 						//- 	span(aria-hidden="true")
 						//- 		i.ti.ti-square-x
@@ -195,33 +196,33 @@ block content
 					.modal-body
 						form#edit-form.form-validation(action='/schools/update/'+data._id, method='post')
 							.form-group.row
-								label.col-sm-4.form-control-label(for="npsn") NPSN Sekolah
+								label.col-sm-4.form-control-label(for="npsn") Kode Instansi
 									span.text-danger *
 								.col-sm-8
 									input#_id.form-control(type="hidden", placeholder="ID", name="_id", value=data._id)
-									input#npsn.form-control(type="text", required, placeholder="NPSN Sekolah", name="npsn", value=data.npsn)
+									input#npsn.form-control(type="text", required, placeholder="Kode Instansi", name="npsn", value=data.npsn)
 							br
 							.form-group.row
-								label.col-sm-4.form-control-label(for="name") Nama Sekolah
+								label.col-sm-4.form-control-label(for="name") Nama Instansi
 									span.text-danger *
 								.col-sm-8
-									input#name.form-control(type="text", placeholder="Nama Sekolah", required, name="name", value=data.name)
+									input#name.form-control(type="text", placeholder="Nama Instansi", required, name="name", value=data.name)
 							br
 							.form-group.row
-								label.col-sm-4.form-control-label(for="school_status") Status Sekolah
+								label.col-sm-4.form-control-label(for="school_status") Status
 									span.text-danger *
 								.col-sm-8
 									select#school_status.form-control(name="school_status", required="required")
-										option(value='') -- Pilih Status Sekolah --
+										option(value='') -- Pilih Status --
 										option(value="negeri", selected=(data.school_status=='negeri')?'yes':undefined) Negeri
 										option(value="swasta", selected=(data.school_status=='swasta')?'yes':undefined ) Swasta
 							br
 							.form-group.row
-								label.col-sm-4.form-control-label(for="category") Bentuk Pendidikan
+								label.col-sm-4.form-control-label(for="category") Bentuk Instansi
 									span.text-danger *
 								.col-sm-8
 									select#category.form-control(name="category", required="required")
-										option(value='') -- Pilih Bentuk Pendidikan --
+										option(value='') -- Pilih Bentuk Instansi --
 										//- option(value="MI") MI
 										//- option(value="SD") SD
 										option(value="SMP", selected=(data.category=="SMP")?"yes":undefined) SMP
@@ -229,6 +230,7 @@ block content
 										option(value="SMA", selected=(data.category=="SMA")?"yes":undefined) SMA
 										option(value="SMK", selected=(data.category=="SMK")?"yes":undefined) SMK
 										option(value="MA", selected=(data.category=="MA")?"yes":undefined) MA
+										option(value="PERSEROAN", selected=(data.category=="PERSEROAN")?"yes":undefined) PERSEROAN
 							br
 							.form-group.row
 								label.col-sm-4.form-control-label(for="address") Alamat

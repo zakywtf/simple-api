@@ -24,7 +24,7 @@ html(lang="en")
 									#response-container.alert.alert-danger(role="alert", style="display:none;")
 									form#data-form
 										.mb-3
-											label.form-label(for="exampleInputEmail1") NISN
+											label.form-label(for="exampleInputEmail1") NIK
 												span.text-danger *
 											input#nisn.form-control(type="text", name="nisn", required)
 										.mb-3
@@ -39,16 +39,28 @@ html(lang="en")
 												option(value="male") Laki-laki
 												option(value="female") Perempuan
 										.mb-3
-											label.form-label(for="") NPSN Sekolah
+											label.form-label(for="exampleInputEmail1") Tanggal Lahir
+												span.text-danger *
+											input#date_of_birth.form-control(type="date", name="date_of_birth")
+										.mb-3
+											label.form-label(for="exampleInputEmail1") Alamat Asal
+												span.text-danger *
+											input#origin_address.form-control(type="text", name="origin_address", required)
+										.mb-3
+											label.form-label(for="exampleInputEmail1") Alamat Domisili
+												span.text-danger *
+											input#domicile_address.form-control(type="text", name="domicile_address", required)
+										.mb-3
+											label.form-label(for="") Kode Instansi
 												span.text-danger *
 											input#school_npsn.form-control(type="text", name="npsn", required)
-										.mb-3
-											label.form-label(for="exampleInputEmail1") Register Sebagai
-												span.text-danger *
-											select.form-control(name="role", id='role', required="required")
-												option(value='') -- Pilih Role --
-												option(value="teacher") Guru 
-												option(value="user") Murid
+										//- .mb-3
+										//- 	label.form-label(for="exampleInputEmail1") Register Sebagai
+										//- 		span.text-danger *
+										//- 	select.form-control(name="role", id='role', required="required")
+										//- 		option(value='') -- Pilih Role --
+										//- 		option(value="teacher") Guru 
+										//- 		option(value="user") Murid
 										.mb-3
 											label.form-label(for="exampleInputPassword1") Buat PIN
 												span.text-danger *
@@ -81,10 +93,13 @@ html(lang="en")
 					const name = $('#name').val();
 					const gender = $('#gender').val();
 					const school_npsn = $('#school_npsn').val();
-					const role = $('#role').val();
+					//- const role = $('#role').val();
 					const pin = $('#pin').val();
+					const date_of_birth = $('#date_of_birth').val();
+					const origin_address = $('#origin_address').val();
+					const domicile_address = $('#domicile_address').val();
 
-					const obj = { nisn: nisn, name: name, gender: gender, school_npsn: school_npsn, role: role, pin: pin }
+					const obj = { nisn: nisn, name: name, gender: gender, school_npsn: school_npsn, role: 'user', pin: pin, date_of_birth: date_of_birth, origin_address: origin_address, domicile_address: domicile_address }
 					//- console.log({obj})
 
 					$.ajax({

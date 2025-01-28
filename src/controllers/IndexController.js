@@ -253,10 +253,10 @@ const IndexController = {
 
         if (req.session.role == 'user') {
             data = await WellnessDetail.findOne({user_id: req.session.user_id})
-            const blood_pressure = data.blood_pressure
+            const blood_pressure = (data) ? data.blood_pressure : null
             const split_bp = (blood_pressure) ? blood_pressure.split("/") : '0'
             const bp = parseInt(split_bp[0])
-            const os = parseInt(data.oxygen_saturation)
+            const os = (data) ? parseInt(data.oxygen_saturation) : 120
             console.log({bp, os})
             cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
             cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'

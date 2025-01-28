@@ -197,6 +197,7 @@ const groupingPayments = async (data) => {
 }
 
 const getSales = async (cat, dmonth, dyear) => {
+    console.log({cat, dmonth, dyear})
     const arr_revenue = []
 
     if (cat == 'year') {
@@ -212,6 +213,8 @@ const getSales = async (cat, dmonth, dyear) => {
                     $lt: endDate,
                 },
             };
+            console.log({tahunan: filters})
+            // const payments = await Payments.find({isDeleted: false})
             const payments = await Payments.find({isDeleted: false}).where(filters)
             if (payments.length > 0) {
                 for (let k = 0; k < payments.length; k++) {
@@ -230,6 +233,8 @@ const getSales = async (cat, dmonth, dyear) => {
                 $lt: endDate,
             },
         };
+        console.log({bulanan :filters})
+        // const payments = await Payments.find({isDeleted: false})
         const payments = await Payments.find({isDeleted: false}).where(filters)
         if (payments.length > 0) {
             for (let k = 0; k < payments.length; k++) {
@@ -294,8 +299,8 @@ const monthlyRevenue = async () => {
 
 const lastMonthReveneu = async () => {
     const d = new Date();
-    let dmonth = d.getMonth();
-    let dyear = d.getFullYear();
+    let dmonth = (d.getMonth() == 0) ? '12' : d.getMonth();
+    let dyear = (d.getMonth() == 0) ? '2024' : d.getFullYear();
 
     const datas = await getSales('month', dmonth, dyear)
     const grouping = await groupingPayments(datas)
