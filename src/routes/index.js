@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/ping', IndexController.ping);
 router.get('/planner', IndexController.testPlanner);
 router.get('/gemini/:height/:weight', IndexController.testGemini);
+router.get('/meal-planner/:cat', IndexController.mealPlanner);
 router.get('/testing-gemini/', IndexController.testingGemini);
 router.get('/openai', IndexController.testOpenAi);
 router.get('/imt', IndexController.testImt);
@@ -28,6 +29,7 @@ router.get('/register', IndexController.registerPage);
 router.get('/dashboard', auth, IndexController.dashboard)
 router.get('/history', auth, IndexController.history)
 router.get('/recommendation', auth, IndexController.recommendation)
+router.get('/meals', auth, IndexController.meals)
 router.get('/users', auth, IndexController.users)
 router.get('/users/majority/update/:majority_id/:user_id', auth, IndexController.userMajorityUpdate)
 router.get('/schools', auth, IndexController.schools)

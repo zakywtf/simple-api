@@ -59,6 +59,18 @@ let sch = new Schema({
         type: String,
         default: null
     },
+    position: {
+        type: String,
+        default: null
+    },
+    level: {
+        type: String,
+        default: null
+    },
+    plant: {
+        type: String,
+        default: null
+    },
     date_of_birth: {
         type: Date,
         default: null

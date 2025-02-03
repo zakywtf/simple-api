@@ -24,7 +24,7 @@ html(lang="en")
 									#response-container.alert.alert-danger(role="alert", style="display:none;")
 									form#data-form
 										.mb-3
-											label.form-label(for="exampleInputEmail1") NIK
+											label.form-label(for="exampleInputEmail1") Id Pegawai
 												span.text-danger *
 											input#nisn.form-control(type="text", name="nisn", required)
 										.mb-3
@@ -43,15 +43,19 @@ html(lang="en")
 												span.text-danger *
 											input#date_of_birth.form-control(type="date", name="date_of_birth")
 										.mb-3
-											label.form-label(for="exampleInputEmail1") Alamat Asal
+											label.form-label(for="exampleInputEmail1") Direktorat
 												span.text-danger *
-											input#origin_address.form-control(type="text", name="origin_address", required)
+											input#plant.form-control(type="text", name="plant", required)
 										.mb-3
-											label.form-label(for="exampleInputEmail1") Alamat Domisili
+											label.form-label(for="exampleInputEmail1") Bagian
 												span.text-danger *
-											input#domicile_address.form-control(type="text", name="domicile_address", required)
+											input#positon.form-control(type="text", name="positon", required)
 										.mb-3
-											label.form-label(for="") Kode Instansi
+											label.form-label(for="exampleInputEmail1") Jabatan
+												span.text-danger *
+											input#level.form-control(type="text", name="level", required)
+										.mb-3
+											label.form-label(for="") Kode Perusahaan
 												span.text-danger *
 											input#school_npsn.form-control(type="text", name="npsn", required)
 										//- .mb-3
@@ -96,10 +100,10 @@ html(lang="en")
 					//- const role = $('#role').val();
 					const pin = $('#pin').val();
 					const date_of_birth = $('#date_of_birth').val();
-					const origin_address = $('#origin_address').val();
-					const domicile_address = $('#domicile_address').val();
+					const level = $('#level').val();
+					const plant = $('#plant').val();
 
-					const obj = { nisn: nisn, name: name, gender: gender, school_npsn: school_npsn, role: 'user', pin: pin, date_of_birth: date_of_birth, origin_address: origin_address, domicile_address: domicile_address }
+					const obj = { nisn: nisn, name: name, gender: gender, school_npsn: school_npsn, role: 'user', pin: pin, date_of_birth: date_of_birth, level: origin_address, plant: plant }
 					//- console.log({obj})
 
 					$.ajax({

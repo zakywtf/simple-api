@@ -6,23 +6,23 @@ block content
 		//- br
 		.card
 			.card-body
-				h5.card-title.fw-semibold.mb-4 List Siswa
-				p.mb-0 Berikut daftar murid anda
+				h5.card-title.fw-semibold.mb-4 List Pegawai
+				p.mb-0 Berikut daftar karyawan anda
 				br
 				.table-responsive
 					table#dataTable.table.table-bordered
 						thead.thead-light
 							tr
 								th No
-								th NISN
+								th Id Pegawai
 								th Nama
-								th Kelas & Jurusan
+								//- th Kelas & Jurusan
 								th Jenis Kelamin
 								th Tinggi Badan
 								th Berat Badan
 								//- th BMI Skor
 								th BMI Kategori
-								th Aksi
+								//- th Aksi
 
 						tbody
 							-var no = 1;
@@ -32,7 +32,7 @@ block content
 									td 
 										b #{data.nisn}
 									td #{data.name}
-									td #{data.majority}
+									//- td #{data.majority}
 									td
 										if (data.gender == 'male')
 											| Laki-laki
@@ -50,13 +50,13 @@ block content
 											.text-warning #{data.bmi_category}
 										else if (data.bmi_category == 'Obesitas')
 											.text-danger #{data.bmi_category}
-									td
-										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
-											| Pindah Kelas
-										ul.dropdown-menu
-											each maj in majorities
-												li
-													a.dropdown-item(href='/users/majority/update/'+maj._id+'/'+data._id) #{maj.class} - #{maj.name}
+									//- td
+									//- 	button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
+									//- 		| Pindah Kelas
+									//- 	ul.dropdown-menu
+									//- 		each maj in majorities
+									//- 			li
+									//- 				a.dropdown-item(href='/users/majority/update/'+maj._id+'/'+data._id) #{maj.class} - #{maj.name}
 											//- .dropdown-divider
 											//- li
 											//- 	a.dropdown-item(href='/web/v1/projects/detail?_id=87654321') Edit

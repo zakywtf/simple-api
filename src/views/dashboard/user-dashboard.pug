@@ -168,6 +168,7 @@ script.
 				console.log({response})
 				if (response.status == 200){
 					localStorage.setItem('planner', JSON.stringify(response.data.planner));
+					localStorage.setItem('meals', JSON.stringify(response.data.meals));
 				}
 			},
 			error: function(xhr, status, error) {

@@ -168,7 +168,7 @@ const IndexController = {
                         type: SchemaType.OBJECT,
                         properties: {
                             latihan: {
-                                description: "latihan yang harus di lakukan setiap harinya",
+                                description: "latihan yang harus di lakukan setiap harinya menggunakan istilah bahasa indonesia",
                                 type: SchemaType.STRING,
                             },
                             set: {
@@ -200,7 +200,60 @@ const IndexController = {
             },
         });
 
-        const prompt = `workout planner untuk tinggi badan ${req.params.height}cm dan berat badan ${req.params.weight}kg dari senin sampai minggu`;
+        const prompt = `workout planner di rumah untuk tinggi badan ${req.params.height}cm dan berat badan ${req.params.weight}kg dari senin sampai minggu`;
+        // const prompt = "nutrisi advice untuk badan 173cm, berat badan 79kg, tekanan darah 120/80 mmHg";
+
+        const result = await model.generateContent(prompt);
+        console.log({result})
+        // return apiResponse.successResponseWithData(res, "great!", result.response.text()
+
+        return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
+    },
+
+    mealPlanner: async (req, res) => {
+        const schema = {
+            description: "Meal Planner",
+            type: SchemaType.ARRAY,
+            items: {
+              type: SchemaType.OBJECT,
+              properties: {
+                hari: {
+                  type: SchemaType.STRING,
+                  description: "hari",
+                  nullable: false,
+                },
+                makanan: {
+                    description: "makanan sehat setiap harinya",
+                    type: SchemaType.ARRAY,
+                    items: {
+                        type: SchemaType.OBJECT,
+                        properties: {
+                            jenis: {
+                                description: "jenis makanan untuk setiap harinya",
+                                type: SchemaType.STRING,
+                            },
+                            keterangan: {
+                                description: "keterangan dari jenis makanan",
+                                type: SchemaType.STRING,
+                            },
+                        },
+                        required: ["jenis",  "keterangan"]
+                    },
+              },
+            },
+          }
+        }
+          
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash-001",
+            generationConfig: {
+                responseMimeType: "application/json",
+                responseSchema: schema,
+            },
+        });
+
+        const prompt = `planner makanan per minggu untuk kategori ${req.params.cat} dengan makanan yang umum di indonesia`;
         // const prompt = "nutrisi advice untuk badan 173cm, berat badan 79kg, tekanan darah 120/80 mmHg";
 
         const result = await model.generateContent(prompt);
@@ -414,6 +467,12 @@ const IndexController = {
         }
         
         res.render('recommended/index', { datas })
+    },
+
+    meals: async (req, res) => {
+        // const datas = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({ created_at: -1 })
+        
+        res.render('recommended/meals', {});
     },
 
     majority: async (req, res) => {

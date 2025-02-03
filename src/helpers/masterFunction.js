@@ -71,7 +71,7 @@ const schemaGemini = async () => {
                     type: SchemaType.OBJECT,
                     properties: {
                         latihan: {
-                            description: "latihan yang harus di lakukan setiap harinya",
+                            description: "latihan yang harus di lakukan setiap harinya menggunakan istilah bahasa indonesia",
                             type: SchemaType.STRING,
                         },
                         set: {
@@ -112,7 +112,7 @@ const getGeminiAI = async (height, weight, user_id) => {
             },
         });
 
-        const prompt = `workout planner untuk tinggi badan ${height}cm dan berat badan ${weight}kg dari senin sampai minggu`;
+        const prompt = `workout planner di rumah untuk tinggi badan ${height}cm dan berat badan ${weight}kg dari senin sampai minggu`;
         console.log({prompt})
         const result = await model.generateContent(prompt);
         console.log({result})

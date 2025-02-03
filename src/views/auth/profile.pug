@@ -25,10 +25,10 @@ block content
 									h4 Profil Anda
 									br
 									p
-										strong NIK: 
+										strong Id Pegawai: 
 										| #{data.nisn}
 									p 
-										strong Instansi: 
+										strong Perusahaan: 
 										| #{data.school_id.name}
 									p
 										strong Nama: 
@@ -47,6 +47,15 @@ block content
 										else 
 											| 
 											| Perempuan
+									p
+										strong Direktorat: 
+										| #{data.plant}
+									p
+										strong Jabatan: 
+										| #{data.level}
+									p
+										strong Bagian: 
+										| #{data.position}
 									
 									//- br
 									//- br

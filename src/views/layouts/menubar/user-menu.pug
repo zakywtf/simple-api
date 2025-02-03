@@ -3,8 +3,21 @@ li.sidebar-item
 		span
 			i.ti.ti-history
 		span.hide-menu Riwayat
+//- li.sidebar-item
+//- 	a.sidebar-link(href="/recommendation", aria-expanded="false")
+//- 		span
+//- 			i.ti.ti-presentation
+//- 		span.hide-menu Rekomendasi
 li.sidebar-item
-	a.sidebar-link(href="/recommendation", aria-expanded="false")
+	a.sidebar-link(href="#sub-recomen", data-bs-toggle="collapse", aria-expanded="false", aria-controls="sub-recomen")
 		span
 			i.ti.ti-presentation
 		span.hide-menu Rekomendasi
+		span
+			i.ti.ti-caret-down
+	#sub-recomen.collapse
+		ul.sidebar.flex-column.ms-3
+			li.sidebar-item
+				a.sidebar-link(href="/recommendation") Olahraga
+			li.sidebar-item
+				a.sidebar-link(href="/meals") Makanan Sehat

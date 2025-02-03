@@ -6,11 +6,11 @@
 			.card-body
 				.row.alig.n-items-start
 					.col-8
-						//- h5.card-title.mb-9.fw-semibold Jumlah Siswa
+						//- h5.card-title.mb-9.fw-semibold Jumlah Pegawai
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
 							b(style="font-size: 1.53125rem") #{total_kurus}
 							|
-							| Siswa
+							| Pegawai
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -27,7 +27,7 @@
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
 							b(style="font-size: 1.53125rem") #{total_normal}
 							|
-							| Siswa
+							| Pegawai
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-success.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -43,7 +43,7 @@
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
 							b(style="font-size: 1.53125rem") #{total_gemuk}
 							|
-							| Siswa
+							| Pegawai
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-warning.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -60,7 +60,7 @@
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
 							b(style="font-size: 1.53125rem") #{total_obesitas}
 							|
-							| Siswa
+							| Pegawai
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-danger.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -261,10 +261,10 @@ script.
 	}
 
 
-	document.getElementById('selectedMonth').textContent = 'Jumlah siswa berdasarkan kondisi BMI di bulan ' + months[select.selectedIndex];
+	document.getElementById('selectedMonth').textContent = 'Jumlah Pegawai berdasarkan kondisi BMI di bulan ' + months[select.selectedIndex];
 	getChart(select.selectedIndex)
 
 	select.addEventListener('change', function() {
-		document.getElementById('selectedMonth').textContent = 'Jumlah siswa berdasarkan kondisi BMI di bulan ' + months[select.selectedIndex];
+		document.getElementById('selectedMonth').textContent = 'Jumlah Pegawai berdasarkan kondisi BMI di bulan ' + months[select.selectedIndex];
 		getChart(select.selectedIndex)
 	});

@@ -6,8 +6,8 @@ block content
 		.card
 			//- .card-header
 			.card-body
-				h5.card-title.fw-semibold.mb-4 Workout Planner
-				p.mb-0 Berikut rekomendasi rencana olahraga yang cocok untuk anda
+				h5.card-title.fw-semibold.mb-4 Makanan Sehat
+				p.mb-0 Berikut rekomendasi makanan sehat yang cocok untuk anda
 				br
 				//- p#test(myFunction('"+data+"'))
 
@@ -40,32 +40,32 @@ block content
 					button.tab(data-day="0") Minggu
 				br
 				#content.container
-					p Select a day to view scheduled workouts.
+					p Select a day to view scheduled meals.
 	
 	script.
 		document.addEventListener('DOMContentLoaded', function() {
 			const tabs = document.querySelectorAll('.tab');
 			const today = new Date();
 			const currentDay = today.getDay(); // Get the current day (0-6)
-			const planner = localStorage.getItem('planner');
+			const meals = localStorage.getItem('meals');
 
-			const dataPlanner = JSON.parse(planner)
+			const dataMelas = JSON.parse(meals)
 
 			function loadContent(dayIndex) {
 				if (dayIndex == 0){
-					//- console.log({day_plan: dataPlanner[7]})
-					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Latihan</th><th>Set</th><th>Repetisi</th><th>Keterangan</th></tr></thead><tbody>';
-					dataPlanner[6].practices.forEach(function(item) {
-						html += '<tr><td>' + item.name + '</td><td>' + item.set + '</td><td>' + item.repetitions + '</td><td>' + item.information + '</td></tr>';
+					//- console.log({day_plan: dataMelas[7]})
+					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Jenis</th><th>Keterangan</th></tr></thead><tbody>';
+					dataMelas[6].makanan.forEach(function(item) {
+						html += '<tr><td>' + item.jenis + '</td><td>' + item.keterangan + '</td></tr>';
 					});
 					html += '</tbody></table>';
 
 					$('#content').html(html);
 				} else {
-					//- console.log({day_plan: dataPlanner[dayIndex-1]})
-					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Latihan</th><th>Set</th><th>Repetisi</th><th>Keterangan</th></tr></thead><tbody>';
-					dataPlanner[dayIndex-1].practices.forEach(function(item) {
-						html += '<tr><td>' + item.name + '</td><td>' + item.set + '</td><td>' + item.repetitions + '</td><td>' + item.information + '</td></tr>';
+					//- console.log({day_plan: dataMelas[dayIndex-1]})
+					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Jenis</th><th>Keterangan</th></tr></thead><tbody>';
+					dataMelas[dayIndex-1].makanan.forEach(function(item) {
+						html += '<tr><td>' + item.jenis + '</td><td>' + item.keterangan + '</td></tr>';
 					});
 					html += '</tbody></table>';
 
