@@ -58,8 +58,10 @@ class authModel extends Models{
             status: user.status,
             gender: user.gender,
             school_id: (user.school_id != null) ? user.school_id._id : null,
+            date_of_birth: (user.date_of_birth != null) ? user.date_of_birth : null,
             last_login: user.last_login,
-            total_login: user.total_login
+            total_login: user.total_login,
+
         }
         // console.log({payload})
         const isMatch = await bcrypt.compare(body.pin + process.env.SALT, user.pin)

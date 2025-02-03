@@ -17,6 +17,26 @@ import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
 import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI } from "../helpers/masterFunction"
 
+const countOld = (tanggalLahir) => {
+    console.log({tanggalLahir})
+    if (tanggalLahir) {
+        let birthDate = new Date(tanggalLahir);
+        let today = new Date();
+
+        let usia = today.getFullYear() - birthDate.getFullYear();
+        let bulan = today.getMonth() - birthDate.getMonth();
+        let hari = today.getDate() - birthDate.getDate();
+
+        // Jika bulan atau hari negatif, kurangi usia
+        if (bulan < 0 || (bulan === 0 && hari < 0)) {
+            usia--;
+        }
+        console.log({usia})
+        return usia + ' Tahun';
+    } else {
+       return '-'
+    }
+}
 
 const IndexController = {
 
@@ -300,6 +320,7 @@ const IndexController = {
         let revenue_monthly = 0
         let percentage_yearly_revenue = {}
         let percentage_monthly_revenue = {}
+        let old = ''
 
         const d = new Date();
         let dyear = d.getFullYear();
@@ -310,14 +331,16 @@ const IndexController = {
             const split_bp = (blood_pressure) ? blood_pressure.split("/") : '0'
             const bp = parseInt(split_bp[0])
             const os = (data) ? parseInt(data.oxygen_saturation) : 120
-            console.log({bp, os})
+            // console.log({bp, os})
             cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
             cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'
             const resp = await History.findOne({user_id: req.session.user_id}).sort({created_at: -1})
-            console.log({resp})
+            // console.log({resp})
+            // console.log({session: req.session})
             if (resp != null) {
                 await getGeminiAI(resp.height, resp.weight, req.session.user_id)
             }
+            old = await countOld(req.session.date_of_birth)
         } else if (req.session.role == 'admin'){
             total_users = await Users.find({isDeleted: false}).countDocuments()
             total_devices = await Devices.find({isDeleted: false}).countDocuments()
@@ -341,8 +364,8 @@ const IndexController = {
             total_gemuk = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kelebihan Berat Badan'}).countDocuments()
             total_obesitas = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Obesitas'}).countDocuments()
         }
-        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os})
-        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue});
+        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, old})
+        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old});
     },
 
     history: async (req, res) => {
