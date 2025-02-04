@@ -1,146 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile - Edit</title>
-    <!-- Bootstrap CSS (from CDN) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .profile-container {
-            max-width: 900px;
-            margin: 50px auto;
-        }
-
-        .profile-header {
-            margin-bottom: 30px;
-        }
-
-        .profile-form {
-            margin-top: 20px;
-        }
-    </style>
+    <title>ApexCharts Grouping by Date</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
-
 <body>
-    <div class="container profile-container">
-        <!-- Profile Header -->
-        <div class="profile-header text-center">
-            <h1>Your Profile</h1>
-            <p>Manage and update your account details below.</p>
-        </div>
 
-        <!-- Profile Information Section (View Mode) -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Profile Information</h5>
-                        <p><strong>Name:</strong> John Doe</p>
-                        <p><strong>Email:</strong> john.doe@example.com</p>
-                        <p><strong>Phone:</strong> +1 234 567 890</p>
-                        <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+    <div id="chart"></div>
 
-                        <!-- Edit Button -->
-                        <button class="btn btn-primary" id="editButton">Edit Profile</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Edit Profile Form (Initially Hidden) -->
-            <div class="col-md-6" id="editForm" style="display: none;">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Edit Profile</h5>
-                        <form class="profile-form" id="profileForm">
-                            <div class="mb-3">
-                                <label for="editName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="editName" value="John Doe" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="editEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="editEmail" value="john.doe@example.com" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="editPhone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="editPhone" value="+1 234 567 890" required>
-                            </div>
-
-                            <div class="mb-3">
-                                <label for="editAddress" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="editAddress" value="123 Main Street, City, Country" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-success">Save Changes</button>
-                            <button type="button" class="btn btn-secondary" id="cancelButton">Cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS (from CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JavaScript to handle Edit and Save actions -->
     <script>
-        // DOM elements
-        const editButton = document.getElementById('editButton');
-        const editForm = document.getElementById('editForm');
-        const profileInfo = document.querySelector('.card-body');
-        const cancelButton = document.getElementById('cancelButton');
-        const profileForm = document.getElementById('profileForm');
+        // Data awal
+        const rawData = [
+            { date: "2024-02-01", product: "A", amount: 10 },
+            { date: "2024-02-01", product: "B", amount: 15 },
+            { date: "2024-02-01", product: "D", amount: 11 },
+            { date: "2024-02-01", product: "A", amount: 5 },
+            { date: "2024-02-02", product: "A", amount: 8 },
+            { date: "2024-02-02", product: "B", amount: 12 },
+            { date: "2024-02-02", product: "A", amount: 7 },
+            { date: "2024-02-02", product: "B", amount: 10 },
+            { date: "2024-02-03", product: "C", amount: 20 },
+            { date: "2024-02-03", product: "D", amount: 11 }
+        ];
 
-        // Handle the 'Edit Profile' button click
-        editButton.addEventListener('click', () => {
-            // Hide the profile info and show the edit form
-            profileInfo.style.display = 'none';
-            editForm.style.display = 'block';
-        });
+        // Proses grouping dan penjumlahan data
+        const groupedData = rawData.reduce((acc, { date, product, amount }) => {
+            if (!acc[date]) acc[date] = {};
+            if (!acc[date][product]) acc[date][product] = 0;
+            acc[date][product] += amount; // Menjumlahkan nilai jika produk sama
+            return acc;
+        }, {});
 
-        // Handle the 'Cancel' button click to go back to profile view
-        cancelButton.addEventListener('click', () => {
-            // Hide the edit form and show the profile info again
-            profileInfo.style.display = 'block';
-            editForm.style.display = 'none';
-        });
+        // Ambil daftar produk unik
+        const uniqueProducts = [...new Set(rawData.map(item => item.product))];
 
-        // Handle form submission (this can be connected to a backend)
-        profileForm.addEventListener('submit', (event) => {
-            event.preventDefault();
+        // Ubah hasil grouping menjadi format untuk ApexCharts
+        const series = uniqueProducts.map(product => ({
+            name: product,
+            data: Object.keys(groupedData).map(date => ({
+                x: date,
+                y: groupedData[date][product] || 0 // Jika tidak ada produk pada tanggal itu, gunakan 0
+            }))
+        }));
 
-            // Get the updated values from the form
-            const updatedName = document.getElementById('editName').value;
-            const updatedEmail = document.getElementById('editEmail').value;
-            const updatedPhone = document.getElementById('editPhone').value;
-            const updatedAddress = document.getElementById('editAddress').value;
+        // Konfigurasi Chart ApexCharts
+        const options = {
+            chart: {
+                type: "bar",
+                height: 400,
+                stacked: true // Menumpuk nilai di dalam batang
+            },
+            series: series,
+            xaxis: {
+                type: "category",
+                categories: Object.keys(groupedData) // Tanggal sebagai kategori
+            },
+            dataLabels: {
+                enabled: true
+            }
+        };
 
-            // Update the profile information (this can be done by sending the data to a server)
-            alert(`Profile updated:
-            Name: ${updatedName}
-            Email: ${updatedEmail}
-            Phone: ${updatedPhone}
-            Address: ${updatedAddress}`);
-
-            // For demonstration, we'll just show the updated values in the profile view
-            profileInfo.innerHTML = `
-                <h5 class="card-title">Profile Information</h5>
-                <p><strong>Name:</strong> ${updatedName}</p>
-                <p><strong>Email:</strong> ${updatedEmail}</p>
-                <p><strong>Phone:</strong> ${updatedPhone}</p>
-                <p><strong>Address:</strong> ${updatedAddress}</p>
-                <button class="btn btn-primary" id="editButton">Edit Profile</button>
-            `;
-
-            // Hide the edit form and show the profile info again
-            profileInfo.style.display = 'block';
-            editForm.style.display = 'none';
-        });
+        // Render Chart
+        const chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
     </script>
-</body>
 
+</body>
 </html>

@@ -5,7 +5,7 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Usia
-						h3.fw-semibold.mb-3 #{old}
+						h4.fw-semibold.mb-3 #{old}
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -16,7 +16,7 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Tinggi Badan
-						h3.fw-semibold.mb-3 #{data.height} Cm
+						h4.fw-semibold.mb-3 #{data.height} Cm
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -27,7 +27,7 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Berat Badan
-						h3.fw-semibold.mb-3 #{data.weight} Kg
+						h4.fw-semibold.mb-3 #{data.weight} Kg
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -38,7 +38,7 @@
 				.row.alig.n-items-start
 					.col-8
 						h5.card-title.mb-9.fw-semibold  Suhu Badan
-						h3.fw-semibold.mb-3 #{data.temperature} Celcius
+						h4.fw-semibold.mb-3 #{data.temperature} Celcius
 					.col-4
 						.d-flex.justify-content-end
 							.text-white.bg-primary.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
@@ -52,20 +52,26 @@
 					.card-body
 						.row.alig.n-items-start
 							.col-8
-								h6.card-title.mb-9.fw-semibold  Kategori BMI 
+								h6.card-title.mb-9.fw-semibold  Body Mass Index
 								if (data.bmi_category == 'Kurang Berat Badan')
-									h4.fw-semibold.mb-3.text-primary #{data.bmi_category}
+									h3.fw-semibold.mb-3.text-primary #{data.bmi_category}
+									h5.fw-semibold.mb-3 Skor : #{data.bmi_score}
 								else if (data.bmi_category == 'Normal')
-									h4.fw-semibold.mb-3.text-success #{data.bmi_category}
+									h6.fw-semibold.mb-3 Skor : #{data.bmi_score}
+									h3.fw-semibold.mb-3.text-success #{data.bmi_category}
 								else if (data.bmi_category == 'Kelebihan Berat Badan')
-									h4.fw-semibold.mb-3.text-warning #{data.bmi_category}
+									h3.fw-semibold.mb-3.text-warning #{data.bmi_category}
+									h5.fw-semibold.mb-3 Skor : #{data.bmi_score}
 								else if (data.bmi_category == 'Obesitas')
-									h4.fw-semibold.mb-3.text-danger #{data.bmi_category}
+									h3.fw-semibold.mb-3.text-danger #{data.bmi_category}
+									h5.fw-semibold.mb-3 Skor : #{data.bmi_score}
 								//- h5.fw-semibold.mb-3.text-warning Kelebihan Berat Badan
+
 							.col-4
 								.d-flex.justify-content-end
 									.text-white.bg-warning.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
 										i.ti.ti-weight.fs-6
+						h6.fw-semibold.mb-3 Berat badan ideal anda di angka #{broca}
 						br
 						.d-flex.align-items-center.mb-3
 							span.me-1.rounded-circle.bg-light-success.round-20.d-flex.align-items-center.justify-content-center

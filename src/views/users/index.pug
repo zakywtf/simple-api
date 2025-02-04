@@ -22,6 +22,7 @@ block content
 								th Berat Badan
 								//- th BMI Skor
 								th BMI Kategori
+								th Usia
 								//- th Aksi
 
 						tbody
@@ -50,6 +51,8 @@ block content
 											.text-warning #{data.bmi_category}
 										else if (data.bmi_category == 'Obesitas')
 											.text-danger #{data.bmi_category}
+									td #{data.old}
+									
 									//- td
 									//- 	button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
 									//- 		| Pindah Kelas

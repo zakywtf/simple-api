@@ -38,6 +38,14 @@ const countOld = (tanggalLahir) => {
     }
 }
 
+const countBroca = (tb, gender) => {
+    if (tb != 0) {
+        const rumus1 = (tb-100)
+        const rumus2 = (gender == 'male') ? ((tb-100)/10) : (((tb-100)/10)*2)
+        return rumus1-rumus2 + ' kg'
+    }
+}
+
 const IndexController = {
 
     index: async (req, res) => {
@@ -321,6 +329,9 @@ const IndexController = {
         let percentage_yearly_revenue = {}
         let percentage_monthly_revenue = {}
         let old = ''
+        let broca = '-'
+        let total_male = 0
+        let total_female = 0
 
         const d = new Date();
         let dyear = d.getFullYear();
@@ -341,6 +352,7 @@ const IndexController = {
                 await getGeminiAI(resp.height, resp.weight, req.session.user_id)
             }
             old = await countOld(req.session.date_of_birth)
+            broca = await countBroca(data.height, req.session.gender)
         } else if (req.session.role == 'admin'){
             total_users = await Users.find({isDeleted: false}).countDocuments()
             total_devices = await Devices.find({isDeleted: false}).countDocuments()
@@ -363,9 +375,13 @@ const IndexController = {
             total_normal = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Normal'}).countDocuments()
             total_gemuk = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kelebihan Berat Badan'}).countDocuments()
             total_obesitas = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Obesitas'}).countDocuments()
+            total_male = await Users.find({isDeleted: false, school_id: req.session.school_id, gender: 'male'}).countDocuments()
+            total_female = await Users.find({isDeleted: false, school_id: req.session.school_id, gender: 'female'}).countDocuments()
+            total_users = await Users.find({isDeleted: false, school_id: req.session.school_id}).countDocuments()
+
         }
-        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, old})
-        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old});
+        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, old, broca, total_male, total_female})
+        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female});
     },
 
     history: async (req, res) => {
@@ -381,9 +397,10 @@ const IndexController = {
         const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({created_at: -1})
         for (let i = 0; i < users.length; i++) {
             const user = users[i];
+            var old = await countOld(user.date_of_birth)
             const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
             const user_detail = await WellnessDetail.findOne({user_id: user._id})
-            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight})
+            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, old: old})
         }
         res.render('users/index', {datas, majorities});
     },

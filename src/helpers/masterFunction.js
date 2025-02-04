@@ -22,13 +22,13 @@ const updateWellnessDetail = async (obj, user_id) => {
 
     const bmi_score = weight / ((height/100)*(height/100))
     var bmi_category = null
-    if (bmi_score < 18.5) {
+    if (bmi_score < 18.50) {
         bmi_category = 'Kurang Berat Badan'
-    } else if (bmi_score >= 18.5 && bmi_score < 24.9) {
+    } else if (bmi_score >= 18.51 && bmi_score < 24.90) {
         bmi_category = 'Normal'
-    } else if (bmi_score >= 25 && bmi_score < 29.9) {
+    } else if (bmi_score >= 24.91 && bmi_score < 29.90) {
         bmi_category = 'Kelebihan Berat Badan'
-    } else {
+    } else if (bmi_score >= 29.91){
         bmi_category = 'Obesitas'
     }
 
