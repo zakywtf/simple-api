@@ -1,4 +1,6 @@
 script(src="/assets/libs/jquery/dist/jquery.min.js")
+script(src="/assets/libs/datatables/datatables.min.js")
+
 script(src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js")
 script(src="/assets/js/sidebarmenu.js")
 script(src="/assets/js/app.min.js")
@@ -32,4 +34,38 @@ script.
 				}
 			});
 		});
+	});
+
+script.
+	$(document).ready(function() {
+		var table = $('#basic-datatables').DataTable({
+			"paging": true,
+			"searching": true,
+			"info": true,
+			"ordering": true,
+			"lengthMenu": [10, 25, 50, 100]
+		});
+		$('#categoryFilter').on('change', function () {
+			var selectedCategory = $(this).val();
+			//- console.log({selectedCategory})
+			table.column(2).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
+		});
+		$('.dataTables_length').html(`
+			<label>Show
+				<select id="customEntries" class="custom-entries">
+					<option value="10" selected>10</option>
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="100">100</option>
+				</select> entries
+			</label>
+		`);
+
+		// Event listener untuk dropdown custom
+		$('#customEntries').on('change', function() {
+			var value = $(this).val();
+			table.page.len(value).draw();
+		});
+		//- $('.dataTables_length').clone().appendTo('.custom-footer').show();
+		
 	});

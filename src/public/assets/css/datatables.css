@@ -1,0 +1,74 @@
+/* Style Label "Show Entries" */
+/* .dataTables_length {
+    display: none;
+} */
+
+.dataTables_length label {
+    font-size: 14px;
+    font-weight: normal;
+    /* color: #007bff; */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Style Custom Dropdown */
+.custom-entries {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    /* border: 2px solid #007bff; */
+    background-color: #fff;
+    /* color: #007bff; */
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.custom-entries:hover {
+    background-color: #18b1c6;
+    color: white;
+}
+
+/* Dropdown Focus Effect */
+.custom-entries:focus {
+    border-color: #18b1c6;
+    box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
+}
+
+/* Pindahkan Show Entries ke footer */
+.custom-footer {
+    display: flex;
+    justify-content: start;
+    margin-top: 10px;
+}
+
+/* Pindahkan search box ke header */
+.dataTables_filter {
+    position: absolute;
+    top: 50px;
+    right: 260px;
+}
+
+/* Search box styling */
+.dataTables_filter input {
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Placeholder warna */
+.dataTables_filter input::placeholder {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.filter-container {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}

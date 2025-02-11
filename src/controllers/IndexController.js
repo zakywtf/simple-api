@@ -491,14 +491,14 @@ const IndexController = {
     users: async (req, res) => {
         console.log({user: req.session})
         const datas = []
-        const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({name: -1})
-        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: -1})
+        const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({name: 1})
+        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: 1})
         for (let i = 0; i < users.length; i++) {
             const user = users[i];
             var old = await countOld(user.date_of_birth)
             const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
             const user_detail = await WellnessDetail.findOne({user_id: user._id})
-            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, old: old})
+            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, blood_pressure: user_detail.blood_pressure, temperature: user_detail.temperature, old: old})
         }
         res.render('users/index', {datas, majorities});
     },

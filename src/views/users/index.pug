@@ -7,20 +7,37 @@ block content
 		.card
 			.card-body
 				h5.card-title.fw-semibold.mb-4 List Pegawai
-				p.mb-0 Berikut daftar karyawan anda
+				p.mb-0 Berikut daftar pegawai anda
 				br
+				.filter-container
+					label(for="categoryFilter") Filter Kategori:
+					br
+					select#categoryFilter.form-control.dropdown
+						option(value='' selected) Semua
+						option(value="Kurang Berat Badan") Kurang Berat Badan
+						option(value="Normal") Normal
+						option(value="Kelebihan Berat Badan") Kelebihan Berat Badan
+						option(value="Obesitas") Obesitas
+				// Tabel Data
 				.table-responsive
-					table#dataTable.table.table-bordered
+					//- table#dataTable.table.table-bordered
+					//- table#myTable.display.table.table-bordered.table-hover
+					table#basic-datatables.display.table.table-bordered.table-hover
 						thead.thead-light
 							tr
 								th No
 								th Id Pegawai
 								//- th Id Sistem
 								th Nama
+								th Posisi Pekerjaan
+								th Bagian
 								//- th Kelas & Jurusan
 								th Jenis Kelamin
 								th Tinggi Badan
 								th Berat Badan
+								th Tekanan Darah
+								th Saturasi Oksigen
+								th Suhu Badan
 								//- th BMI Skor
 								th BMI Kategori
 								th Usia
@@ -36,6 +53,8 @@ block content
 									//- td 
 									//- 	b #{data._id}
 									td #{data.name}
+									td #{data.position}
+									td #{data.plant}
 									//- td #{data.majority}
 									td
 										if (data.gender == 'male')
@@ -44,6 +63,9 @@ block content
 											| Perempuan
 									td #{data.height} Cm
 									td #{data.weight} Kg
+									td #{data.blood_pressure} mmHg
+									td #{data.oxygen_saturation} %
+									td #{data.temperature} C
 									//- td #{data.bmi_score}
 									td 
 										if (data.bmi_category == 'Kurang Berat Badan')
@@ -69,12 +91,28 @@ block content
 												
 											//- li 
 											//- 	a.dropdown-item(href="/web/v1/projects/task?_id=87654321") Delete
-							
-					nav
-						ul#pagination.pagination
+					.custom-footer
+					//- nav
+					//- 	ul#pagination.pagination
 
-	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
-	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
+	script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+	//- script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
+	//- script(src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js")
+
+	//- script.
+	//- 	$(document).ready(function () {
+	//- 		if (typeof $.fn.DataTable === 'undefined') {
+	//- 			console.log("Error: DataTables.js belum dimuat!");
+	//- 		} else { // Inisialisasi DataTable
+	//- 			// Filter berdasarkan kategori
+	//- 			$('#categoryFilter').on('change', function () {
+	//- 				var selectedCategory = $(this).val();
+	//- 				console.log({selectedCategory})
+	//- 				table.column(2).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
+	//- 			});
+	
+	//- 		}
+	//- 	});
 	script.
 		let currentPage = 1;
 		const rowsPerPage = 20;
