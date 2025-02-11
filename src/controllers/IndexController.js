@@ -498,7 +498,7 @@ const IndexController = {
             var old = await countOld(user.date_of_birth)
             const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
             const user_detail = await WellnessDetail.findOne({user_id: user._id})
-            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, blood_pressure: user_detail.blood_pressure, temperature: user_detail.temperature, old: old})
+            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, blood_pressure: user_detail.blood_pressure, temperature: user_detail.temperature, oxygen_saturation: user_detail.oxygen_saturation, old: old})
         }
         res.render('users/index', {datas, majorities});
     },
