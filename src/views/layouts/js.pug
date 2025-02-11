@@ -47,8 +47,8 @@ script.
 		});
 		$('#categoryFilter').on('change', function () {
 			var selectedCategory = $(this).val();
-			//- console.log({selectedCategory})
-			table.column(2).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
+			console.log({selectedCategory})
+			table.column(11).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
 		});
 		$('.dataTables_length').html(`
 			<label>Show
