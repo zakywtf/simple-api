@@ -7,6 +7,8 @@ import Recommendation from "../schemas/recommendations";
 import Schools from "../schemas/schools";
 import Payments from "../schemas/payments";
 
+
+
 const createDefaultWellnessDetail = async (obj) => {
     // console.log({obj})
     const { _id, school_id } = obj
