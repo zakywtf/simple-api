@@ -149,7 +149,7 @@ const IndexController = {
             user.isDeleted = true
             await user.save()
 
-            const detail = await WellnessDetail.findOne({ user_id: d })
+            const detail = await WellnessDetail.findOne({ user_id: e })
             // console.log({detail})
             detail.isDeleted = true
             await detail.save()
