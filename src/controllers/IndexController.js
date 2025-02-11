@@ -393,8 +393,8 @@ const IndexController = {
     users: async (req, res) => {
         console.log({user: req.session})
         const datas = []
-        const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({created_at: -1})
-        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({created_at: -1})
+        const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({name: -1})
+        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: -1})
         for (let i = 0; i < users.length; i++) {
             const user = users[i];
             var old = await countOld(user.date_of_birth)
