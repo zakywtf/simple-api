@@ -4,6 +4,7 @@ import Users from "../schemas/users";
 import WellnessDetail from "../schemas/wellness_details";
 import History from "../schemas/history";
 import Recommendation from "../schemas/recommendations";
+import MealsRecommendation from "../schemas/meals_recommendation";
 import Schools from "../schemas/schools";
 import Payments from "../schemas/payments";
 
@@ -140,6 +141,93 @@ const saveDataRecommendation = async (text, user_id, height, weight) => {
     }
 
     await Recommendation.create({user_id: user_id, planner, height: height, weight: weight})
+} 
+
+const checkLastBloodPressure = async (height, weight, blood_pressure, user_id) => {
+    const lastRecommendation = await MealsRecommendation.findOne({user_id: user_id}).sort({created_at: -1})
+    const status = (lastRecommendation != null) ? (lastRecommendation.weight == weight && lastRecommendation.blood_pressure == blood_pressure) ? true : false :false
+    
+    return status
+}
+
+const schemaGemini2 = async () => {
+    const schema = {
+        description: "Meal Planner",
+        type: SchemaType.ARRAY,
+        items: {
+          type: SchemaType.OBJECT,
+          properties: {
+            hari: {
+              type: SchemaType.STRING,
+              description: "hari",
+              nullable: false,
+            },
+            makanan: {
+                description: "makanan sehat setiap harinya",
+                type: SchemaType.ARRAY,
+                items: {
+                    type: SchemaType.OBJECT,
+                    properties: {
+                        jenis: {
+                            description: "jenis makanan untuk setiap harinya",
+                            type: SchemaType.STRING,
+                        },
+                        keterangan: {
+                            description: "keterangan dari jenis makanan",
+                            type: SchemaType.STRING,
+                        },
+                    },
+                    required: ["jenis",  "keterangan"]
+                },
+          },
+        },
+      }
+    }
+
+    return schema
+}
+
+const getGeminiAI2 = async (height, weight, blood_pressure, user_id) => {
+    const isSameLastRecommendation = await checkLastBloodPressure(height, weight, blood_pressure, user_id)
+    console.log({isSameLastRecommendation})
+    if (isSameLastRecommendation == false) {
+        const schema = await schemaGemini2()
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash-001",
+            // model: 'gemini-1.0-pro-001',
+            generationConfig: {
+                responseMimeType: "application/json",
+                responseSchema: schema,
+            },
+        });
+
+        const prompt = `planner makanan per minggu untuk tinggi badan ${height}kg, berat badan ${weight}cm dan tekanan darah ${blood_pressure}mmHg dengan makanan yang umum di indonesia`;
+        console.log({prompt})
+        const result = await model.generateContent(prompt);
+        console.log({result})
+        const text = result.response.text()
+
+        await saveDataMealsRecommendation(text, user_id, height, weight, blood_pressure)
+    }
+}
+
+const saveDataMealsRecommendation = async (text, user_id, height, weight, blood_pressure) => {
+    console.log({text})
+    const array = JSON.parse(text)
+    const meals = []
+    for (let i = 0; i < array.length; i++) {
+        const e = array[i];
+        const meal = e.makanan
+        const makanan = []
+        for (let ii = 0; ii < meal.length; ii++) {
+            const m = meal[ii];
+            makanan.push({jenis: m.jenis, keterangan: m.keterangan})
+        }
+        meals.push({hari: e.hari, makanan})
+    }
+
+    await MealsRecommendation.create({user_id: user_id, meals, height: height, weight: weight, blood_pressure: blood_pressure})
 } 
 
 const updateStatusPaymentOnSchool = async (school_id, expired_date) => {
@@ -331,6 +419,7 @@ module.exports = {
     updateWellnessDetail,
     createHistory,
     getGeminiAI,
+    getGeminiAI2,
     saveDataRecommendation,
     updateStatusPaymentOnSchool,
     autoUnpaidSchools,

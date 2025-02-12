@@ -15,7 +15,7 @@ import Majority from "../schemas/majority";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
-import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI } from "../helpers/masterFunction"
+import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2 } from "../helpers/masterFunction"
 
 const countOld = (tanggalLahir) => {
     console.log({tanggalLahir})
@@ -379,7 +379,7 @@ const IndexController = {
             },
         });
 
-        const prompt = `planner makanan per minggu untuk kategori ${req.params.cat} dengan makanan yang umum di indonesia`;
+        const prompt = `planner makanan per minggu untuk tinggi badan ${req.params.height}kg, berat badan ${req.params.weight}cm dan tekanan darah 143 /81mmHg dengan makanan yang umum di indonesia`;
         // const prompt = "nutrisi advice untuk badan 173cm, berat badan 79kg, tekanan darah 120/80 mmHg";
 
         const result = await model.generateContent(prompt);
@@ -448,6 +448,7 @@ const IndexController = {
             // console.log({session: req.session})
             if (resp != null) {
                 await getGeminiAI(resp.height, resp.weight, req.session.user_id)
+                await getGeminiAI2(resp.height, resp.weight, resp.blood_pressure, req.session.user_id)
             }
             old = await countOld(req.session.date_of_birth)
             broca = await countBroca(data.height, req.session.gender)

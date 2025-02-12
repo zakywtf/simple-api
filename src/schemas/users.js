@@ -5,6 +5,7 @@ const timestamp = require('./plugins/timestamps');
 let sch = new Schema({
     nisn: {
         type: String,
+        unique: true,
     },
     pin: {
         type: String,
