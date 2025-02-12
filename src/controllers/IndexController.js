@@ -504,6 +504,13 @@ const IndexController = {
         res.render('users/index', {datas, majorities});
     },
 
+    userHistory: async (req, res) => {
+        const user = await Users.findOne({ _id: req.query._id })
+        const datas = await History.find({isDeleted: false, user_id: req.query._id}).sort({created_at: -1})
+        
+        res.render('users/detail', { name: user.name, datas });
+    },
+
     userMajorityUpdate: async (req, res, next) => {
         try {
             const user = await Users.findOne({isDeleted: false, _id: req.params.user_id})

@@ -48,8 +48,9 @@ block content
 							each data in datas
 								tr
 									td #{no++}
-									td 
-										b #{data.nisn}
+									td
+										a(href='/users/history?_id='+data._id)
+											b(style='text-decoration: underline;') #{data.nisn}
 									//- td 
 									//- 	b #{data._id}
 									td #{data.name}

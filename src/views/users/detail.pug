@@ -1,0 +1,125 @@
+extends ../layouts/base
+
+block content
+	-function prettyDate(dateString){
+		//if it's already a date object and not a string you don't need this line:
+		-var date = new Date(dateString);
+		-var d = date.getDate();
+		-var monthNames = [ "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember" ];
+		-var m = monthNames[date.getMonth()];
+		-var dayNames = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+		-var currentDay = dayNames[date.getDay()];
+		-var y = date.getFullYear();
+		-return currentDay+', '+d+' '+m+' '+y;
+	-}
+	.container
+		br
+		//- br
+		.card
+			.card-body
+				a.button.btn.btn-primary.btn-round.ml-auto(href='/users')
+					i.ti.ti-arrow-left.fs-4
+					| 
+					| Kembali
+				br
+				br
+				h5.card-title.fw-semibold.mb-4 Riwayat dari #{name}
+				p.mb-0 List riwayat pengecekan
+				br
+				.table-responsive
+					table#dataTable.table.table-bordered
+						thead.thead-light
+							tr
+								th No.
+								th Tinggi Badan
+								th Berat Badan
+								th Suhu Badan
+								th Tekanan Darah
+								//- th Gula Darah
+								//- th Hemoglobin
+								th Saturasi Oksigen
+								th Tanggal
+
+						tbody
+							-var no = 1;
+							each data in datas
+								tr
+									td #{no++}
+									td #{data.height} Cm
+									td #{data.weight} Kg
+									td #{data.temperature} Celcius
+									td #{data.blood_pressure} mmHg
+									//- td #{data.blood_sugar} mg/dL
+									//- td #{data.hemoglobin} g/dL
+									td #{data.oxygen_saturation} %
+									td #{prettyDate(data.created_at)}
+					nav
+						ul#pagination.pagination
+
+	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
+	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
+	script.
+		let currentPage = 1;
+		const rowsPerPage = 10;
+
+		function displayTable(page) {
+			const rows = $('#dataTable tbody tr');
+			const totalRows = rows.length;
+			const totalPages = Math.ceil(totalRows / rowsPerPage);
+			const start = (page - 1) * rowsPerPage;
+			const end = start + rowsPerPage;
+
+			rows.hide().slice(start, end).show();
+			updatePagination(totalPages);
+		}
+
+		function updatePagination(totalPages) {
+			const pagination = $('#pagination');
+			pagination.empty();
+
+			const prevButton = $('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
+			if (currentPage === 1) prevButton.addClass('disabled');
+			prevButton.click(function () {
+				if (currentPage > 1) {
+					currentPage--;
+					displayTable(currentPage);
+				}
+			});
+			pagination.append(prevButton);
+
+			for (let i = 1; i <= totalPages; i++) {
+				const pageButton = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
+				if (currentPage === i) pageButton.addClass('active');
+				pageButton.click(function () {
+					currentPage = i;
+					displayTable(currentPage);
+				});
+				pagination.append(pageButton);
+			}
+
+			const nextButton = $('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
+			if (currentPage === totalPages) nextButton.addClass('disabled');
+			nextButton.click(function () {
+				if (currentPage < totalPages) {
+					currentPage++;
+					displayTable(currentPage);
+				}
+			});
+			pagination.append(nextButton);
+		}
+
+		function filterTable() {
+			const filter = $('#search').val().toLowerCase();
+			const filteredRows = $('#dataTable tbody tr').filter(function () {
+				return $(this).text().toLowerCase().includes(filter);
+			});
+
+			$('#dataTable tbody').empty().append(filteredRows);
+
+			currentPage = 1; // Reset to first page
+			displayTable(currentPage);
+		}
+
+		$(document).ready(function () {
+			displayTable(currentPage);
+		});
