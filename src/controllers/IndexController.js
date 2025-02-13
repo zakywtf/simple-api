@@ -15,7 +15,7 @@ import Majority from "../schemas/majority";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
-import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2 } from "../helpers/masterFunction"
+import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2, ageCategory, catBloodPress, conNormalBloodPress, conNormalTemperature } from "../helpers/masterFunction"
 
 const countOld = (tanggalLahir) => {
     console.log({tanggalLahir})
@@ -430,6 +430,9 @@ const IndexController = {
         let broca = '-'
         let total_male = 0
         let total_female = 0
+        let age_cat = 'Dewasa'
+        let con_normal_bp = '-'
+        let con_normal_temp  = '-'
 
         const d = new Date();
         let dyear = d.getFullYear();
@@ -441,7 +444,7 @@ const IndexController = {
             const bp = parseInt(split_bp[0])
             const os = (data) ? parseInt(data.oxygen_saturation) : 120
             // console.log({bp, os})
-            cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
+            // cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
             cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'
             const resp = await History.findOne({user_id: req.session.user_id}).sort({created_at: -1})
             // console.log({resp})
@@ -452,6 +455,10 @@ const IndexController = {
             }
             old = await countOld(req.session.date_of_birth)
             broca = await countBroca(data.height, req.session.gender)
+            age_cat = await ageCategory(req.session.date_of_birth)
+            cat_bp = await catBloodPress(age_cat, bp)
+            con_normal_bp = await conNormalBloodPress(age_cat)
+            con_normal_temp = await conNormalTemperature(data.temperature)
         } else if (req.session.role == 'admin'){
             total_users = await Users.find({isDeleted: false}).countDocuments()
             total_devices = await Devices.find({isDeleted: false}).countDocuments()
@@ -479,8 +486,8 @@ const IndexController = {
             total_users = await Users.find({isDeleted: false, school_id: req.session.school_id}).countDocuments()
 
         }
-        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, old, broca, total_male, total_female})
-        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female});
+        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female})
+        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female});
     },
 
     history: async (req, res) => {

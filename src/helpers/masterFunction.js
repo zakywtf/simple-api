@@ -414,6 +414,92 @@ const percentageReveneue = async (newReveneu, lastRevenue) => {
     return { percentage, status }
 }
 
+const countAge = (tanggalLahir) => {
+    console.log({tanggalLahir})
+    if (tanggalLahir) {
+        let birthDate = new Date(tanggalLahir);
+        let today = new Date();
+
+        let usia = today.getFullYear() - birthDate.getFullYear();
+        let bulan = today.getMonth() - birthDate.getMonth();
+        let hari = today.getDate() - birthDate.getDate();
+
+        // Jika bulan atau hari negatif, kurangi usia
+        if (bulan < 0 || (bulan === 0 && hari < 0)) {
+            usia--;
+        }
+        console.log({usia})
+        return usia
+    } else {
+       return 0
+    }
+}
+
+const ageCategory = async (date_of_birth) => {
+    const age = await countAge(date_of_birth)
+    var age_cat = ''
+    if (age < 5) {
+        age_cat = 'Balita'
+    } else if (age >= 6 && age <= 13) {
+        age_cat = 'Anak'
+    } else if (age >= 14 && age <= 18) {
+        age_cat = 'Remaja'
+    } else if (age >= 19 && age <= 40) {
+        age_cat = 'Dewasa'
+    } else if (age >= 41 && age <= 60) {
+        age_cat = 'Sangat Dewasa'
+    } else if (age >= 61){
+        age_cat = 'Lansia'
+    }
+
+    return age_cat
+}
+
+const catBloodPress = async (ageCat, bp) => {
+    // const ageCat = await ageCategory(date_of_birth)
+    var cat_blood_press = null
+    if (ageCat == 'Balita') {
+        cat_blood_press = (bp < 80) ? 'rendah' : (bp >= 80 && bp <= 115) ? 'normal' : (bp > 115) ? 'tinggi' : 'normal'
+    } else if (ageCat == 'Anak') {
+        cat_blood_press = (bp < 80) ? 'rendah' : (bp >= 80 && bp <= 120) ? 'normal' : (bp > 120) ? 'tinggi' : 'normal'
+    } else if (ageCat == 'Remaja') {
+        cat_blood_press = (bp < 90) ? 'rendah' : (bp >= 90 && bp <= 120) ? 'normal' : (bp > 120) ? 'tinggi' : 'normal'
+    } else if (ageCat == 'Dewasa') {
+        cat_blood_press = (bp < 95) ? 'rendah' : (bp >= 95 && bp <= 135) ? 'normal' : (bp > 135) ? 'tinggi' : 'normal'
+    } else if (ageCat == 'Sangat Dewasa') {
+        cat_blood_press = (bp < 110) ? 'rendah' : (bp >= 110 && bp <= 145) ? 'normal' : (bp > 145) ? 'tinggi' : 'normal'
+    }  else if (ageCat == 'Lansia') {
+        cat_blood_press = (bp < 95) ? 'rendah' : (bp >= 95 && bp <= 145) ? 'normal' : (bp > 145) ? 'tinggi' : 'normal'
+    }
+
+    return cat_blood_press
+}
+
+const conNormalBloodPress = async (ageCat) => {
+    // const ageCat = await ageCategory(date_of_birth)
+    var con_normal = null
+    if (ageCat == 'Balita') {
+        con_normal = '80-115'
+    } else if (ageCat == 'Anak') {
+        con_normal = '80-120'
+    } else if (ageCat == 'Remaja') {
+        con_normal = '90-120'
+    } else if (ageCat == 'Dewasa') {
+        con_normal = '95-135'
+    } else if (ageCat == 'Sangat Dewasa') {
+        con_normal = '110-145'
+    }  else if (ageCat == 'Lansia') {
+        con_normal = '95-145'
+    }
+
+    return con_normal
+}
+
+const conNormalTemperature = async (temp) => {
+    const status = (temp < 35) ? 'Hipotermia' : (temp >= 35 && temp <= 37.5) ? 'Normal' : (temp > 37.5 && temp <= 40) ? 'Demam/hipertermia' : (temp > 40) ? 'Hiperpireksia' : 'Normal'
+    return status
+}
+
 module.exports = {
     createDefaultWellnessDetail,
     updateWellnessDetail,
@@ -428,5 +514,10 @@ module.exports = {
     monthlyRevenue,
     lastYearReveneu,
     lastMonthReveneu,
-    percentageReveneue
+    percentageReveneue,
+    countAge,
+    ageCategory,
+    catBloodPress,
+    conNormalBloodPress,
+    conNormalTemperature
 }
