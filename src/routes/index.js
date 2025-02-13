@@ -31,18 +31,25 @@ router.get('/dashboard', auth, IndexController.dashboard)
 router.get('/history', auth, IndexController.history)
 router.get('/recommendation', auth, IndexController.recommendation)
 router.get('/meals', auth, IndexController.meals)
+
 router.get('/users', auth, IndexController.users)
 router.get('/users/history', auth, IndexController.userHistory)
+router.get('/users/level', auth, IndexController.usersLevel)
 router.get('/users/majority/update/:majority_id/:user_id', auth, IndexController.userMajorityUpdate)
+
 router.get('/schools', auth, IndexController.schools)
 router.post('/schools/update/:_id', auth, IndexController.schoolUpdate)
 router.get('/schools/delete/:_id', auth, IndexController.schoolDelete)
+
 router.get('/devices', auth, IndexController.devices)
 router.post('/devices/update/:_id', auth, IndexController.deviceUpdate)
 router.get('/devices/delete/:_id', auth, IndexController.deviceDelete)
+
 router.get('/payments', auth, IndexController.payment)
 router.get('/payments/invoice', auth, IndexController.invoice)
+
 router.get('/profile', auth, IndexController.profile)
+
 router.get('/majority', auth, IndexController.majority)
 router.post('/majority/update/:_id', auth, IndexController.majorityUpdate)
 

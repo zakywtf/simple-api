@@ -514,8 +514,30 @@ const IndexController = {
     userHistory: async (req, res) => {
         const user = await Users.findOne({ _id: req.query._id })
         const datas = await History.find({isDeleted: false, user_id: req.query._id}).sort({created_at: -1})
-        
-        res.render('users/detail', { name: user.name, datas });
+        const level = user.level
+
+        res.render('users/detail', { name: user.name, level: level.toLowerCase(), datas });
+    },
+
+    usersLevel: async (req, res) => {
+        console.log({user: req.session})
+        const {cat} = req.query;
+        const regVal = new RegExp(cat, 'i');
+        const qry = {
+            $or : [{level: regVal}
+            ]
+        }
+        const datas = []
+        const users = await Users.find({...qry, isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({name: 1})
+        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: 1})
+        for (let i = 0; i < users.length; i++) {
+            const user = users[i];
+            var old = await countOld(user.date_of_birth)
+            const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
+            const user_detail = await WellnessDetail.findOne({user_id: user._id})
+            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, blood_pressure: user_detail.blood_pressure, temperature: user_detail.temperature, oxygen_saturation: user_detail.oxygen_saturation, old: old})
+        }
+        res.render('users/level', {datas, majorities, level: cat});
     },
 
     userMajorityUpdate: async (req, res, next) => {

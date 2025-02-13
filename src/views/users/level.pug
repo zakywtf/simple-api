@@ -6,8 +6,8 @@ block content
 		//- br
 		.card
 			.card-body
-				h5.card-title.fw-semibold.mb-4 List Pegawai
-				p.mb-0 Berikut daftar pegawai anda
+				h5.card-title.fw-semibold.mb-4 Daftar #{level}
+				p.mb-0 Berikut daftar pegawai sebagai level #{level}
 				br
 				.filter-container
 					label(for="categoryFilter") Filter Kategori:
@@ -30,7 +30,7 @@ block content
 								//- th Id Sistem
 								th Nama
 								th Posisi Pekerjaan
-								th Level
+								//- th Level
 								//- th Kelas & Jurusan
 								th Jenis Kelamin
 								th Tinggi Badan
@@ -55,7 +55,7 @@ block content
 									//- 	b #{data._id}
 									td #{data.name}
 									td #{data.position}
-									td #{data.level}
+									//- td #{data.level}
 									//- td #{data.majority}
 									td
 										if (data.gender == 'male')

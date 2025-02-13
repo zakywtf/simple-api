@@ -35,39 +35,3 @@ script.
 			});
 		});
 	});
-
-script.
-	$(document).ready(function() {
-		var table = $('#basic-datatables').DataTable({
-			"paging": true,
-			"searching": true,
-			"info": false,
-			"ordering": true,
-			"lengthMenu": [10, 25, 50, 100],
-			"deferRender": true,
-			"scroller": true,
-		});
-		$('#categoryFilter').on('change', function () {
-			var selectedCategory = $(this).val();
-			console.log({selectedCategory})
-			table.column(11).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
-		});
-		$('.dataTables_length').html(`
-			<label>Show
-				<select id="customEntries" class="custom-entries">
-					<option value="10" selected>10</option>
-					<option value="25">25</option>
-					<option value="50">50</option>
-					<option value="100">100</option>
-				</select> entries
-			</label>
-		`);
-
-		// Event listener untuk dropdown custom
-		$('#customEntries').on('change', function() {
-			var value = $(this).val();
-			table.page.len(value).draw();
-		});
-		//- $('.dataTables_length').clone().appendTo('.custom-footer').show();
-		
-	});

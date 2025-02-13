@@ -14,10 +14,10 @@ $(function () {
       window.location.protocol + "//" + window.location.host + "/",
       ""
     );
-    console.log({url, path})
+    // console.log({url, path})
     var fulluri = path.split("?")[0]
     var element = $("ul#sidebarnav a").filter(function () {
-      // console.log({split, uri: url.split("/")[0], path: path.split("/")[0]})
+      // console.log({fulluri, uri: url.split("/")[0], path: path.split("/")[0]})
       if (fulluri == 'users/history') {
         var split_uri = fulluri.split('/')[1]
         console.log({fulluri, split_uri, url:url.split('/'+split_uri)[0], path: path.split('/'+split_uri)[0]})
