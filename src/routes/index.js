@@ -35,6 +35,7 @@ router.get('/meals', auth, IndexController.meals)
 router.get('/users', auth, IndexController.users)
 router.get('/users/history', auth, IndexController.userHistory)
 router.get('/users/level', auth, IndexController.usersLevel)
+router.get('/users/bmi-category', auth, IndexController.usersCategoryBMI)
 router.get('/users/majority/update/:majority_id/:user_id', auth, IndexController.userMajorityUpdate)
 
 router.get('/schools', auth, IndexController.schools)

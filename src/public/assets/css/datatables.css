@@ -49,7 +49,7 @@
 .dataTables_filter {
     position: absolute;
     top: 50px;
-    right: 260px;
+    right: 50px;
 }
 
 /* Search box styling */
@@ -70,5 +70,5 @@
 .filter-container {
     position: absolute;
     top: 50px;
-    right: 50px;
+    right: 330px;
 }

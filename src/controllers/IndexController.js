@@ -540,6 +540,27 @@ const IndexController = {
         res.render('users/level', {datas, majorities, level: cat});
     },
 
+    usersCategoryBMI: async (req, res) => {
+        console.log({user: req.session})
+        const {cat} = req.query;
+        const regVal = new RegExp(cat, 'i');
+        const qry = {
+            $or : [{bmi_category: regVal}
+            ]
+        }
+        const datas = []
+        const user_details = await WellnessDetail.find({...qry, isDeleted: false, school_id: req.session.school_id}).sort({updated_at: -1})
+        // const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: 1})
+        for (let i = 0; i < user_details.length; i++) {
+            const ud = user_details[i];
+            const user = await Users.findOne({_id: ud.user_id})
+            var old = await countOld(user.date_of_birth)
+            const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
+            datas.push({ ...user._doc, majority: majority, bmi_score: ud.bmi_score, bmi_category: ud.bmi_category, height: ud.height, weight: ud.weight, blood_pressure: ud.blood_pressure, temperature: ud.temperature, oxygen_saturation: ud.oxygen_saturation, old: old})
+        }
+        res.render('users/bmi', {datas, bmi: cat});
+    },
+
     userMajorityUpdate: async (req, res, next) => {
         try {
             const user = await Users.findOne({isDeleted: false, _id: req.params.user_id})
