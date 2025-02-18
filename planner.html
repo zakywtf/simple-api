@@ -1,70 +1,87 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ApexCharts Grouping by Date</title>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <title>Filter Table with Dropdown</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
 </head>
 <body>
 
-    <div id="chart"></div>
+    <label for="filter">Filter by Category:</label>
+    <select id="filter" onchange="filterTable()">
+        <option value="all">Show All</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothing">Clothing</option>
+        <option value="Furniture">Furniture</option>
+    </select>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Laptop</td>
+                <td>Electronics</td>
+                <td>$1000</td>
+            </tr>
+            <tr>
+                <td>T-Shirt</td>
+                <td>Clothing</td>
+                <td>$20</td>
+            </tr>
+            <tr>
+                <td>Smartphone</td>
+                <td>Electronics</td>
+                <td>$500</td>
+            </tr>
+            <tr>
+                <td>Sofa</td>
+                <td>Furniture</td>
+                <td>$300</td>
+            </tr>
+            <tr>
+                <td>Jacket</td>
+                <td>Clothing</td>
+                <td>$50</td>
+            </tr>
+        </tbody>
+    </table>
 
     <script>
-        // Data awal
-        const rawData = [
-            { date: "2024-02-01", product: "A", amount: 10 },
-            { date: "2024-02-01", product: "B", amount: 15 },
-            { date: "2024-02-01", product: "D", amount: 11 },
-            { date: "2024-02-01", product: "A", amount: 5 },
-            { date: "2024-02-02", product: "A", amount: 8 },
-            { date: "2024-02-02", product: "B", amount: 12 },
-            { date: "2024-02-02", product: "A", amount: 7 },
-            { date: "2024-02-02", product: "B", amount: 10 },
-            { date: "2024-02-03", product: "C", amount: 20 },
-            { date: "2024-02-03", product: "D", amount: 11 }
-        ];
+        function filterTable() {
+            var dropdown = document.getElementById("filter");
+            var filter = dropdown.value;
+            var table = document.getElementById("dataTable");
+            var rows = table.getElementsByTagName("tr");
 
-        // Proses grouping dan penjumlahan data
-        const groupedData = rawData.reduce((acc, { date, product, amount }) => {
-            if (!acc[date]) acc[date] = {};
-            if (!acc[date][product]) acc[date][product] = 0;
-            acc[date][product] += amount; // Menjumlahkan nilai jika produk sama
-            return acc;
-        }, {});
-
-        // Ambil daftar produk unik
-        const uniqueProducts = [...new Set(rawData.map(item => item.product))];
-
-        // Ubah hasil grouping menjadi format untuk ApexCharts
-        const series = uniqueProducts.map(product => ({
-            name: product,
-            data: Object.keys(groupedData).map(date => ({
-                x: date,
-                y: groupedData[date][product] || 0 // Jika tidak ada produk pada tanggal itu, gunakan 0
-            }))
-        }));
-
-        // Konfigurasi Chart ApexCharts
-        const options = {
-            chart: {
-                type: "bar",
-                height: 400,
-                stacked: true // Menumpuk nilai di dalam batang
-            },
-            series: series,
-            xaxis: {
-                type: "category",
-                categories: Object.keys(groupedData) // Tanggal sebagai kategori
-            },
-            dataLabels: {
-                enabled: true
+            for (var i = 1; i < rows.length; i++) {
+                var categoryCell = rows[i].getElementsByTagName("td")[1];
+                if (categoryCell) {
+                    var category = categoryCell.textContent || categoryCell.innerText;
+                    rows[i].style.display = (filter === "all" || category === filter) ? "" : "none";
+                }
             }
-        };
-
-        // Render Chart
-        const chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+        }
     </script>
 
 </body>

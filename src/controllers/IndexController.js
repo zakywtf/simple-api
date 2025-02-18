@@ -15,7 +15,7 @@ import Majority from "../schemas/majority";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
-import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2, ageCategory, catBloodPress, conNormalBloodPress, conNormalTemperature } from "../helpers/masterFunction"
+import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2, ageCategory, catBloodPress, conNormalBloodPress, conNormalTemperature, getCategoryBMI } from "../helpers/masterFunction"
 
 const countOld = (tanggalLahir) => {
     console.log({tanggalLahir})
@@ -436,6 +436,8 @@ const IndexController = {
 
         const d = new Date();
         let dyear = d.getFullYear();
+        const startOfDay = moment().startOf("day").toDate(); // 00:00:00
+        const endOfDay = moment().endOf("day").toDate();
 
         if (req.session.role == 'user') {
             data = await WellnessDetail.findOne({user_id: req.session.user_id})
@@ -484,10 +486,27 @@ const IndexController = {
             total_male = await Users.find({isDeleted: false, school_id: req.session.school_id, gender: 'male'}).countDocuments()
             total_female = await Users.find({isDeleted: false, school_id: req.session.school_id, gender: 'female'}).countDocuments()
             total_users = await Users.find({isDeleted: false, school_id: req.session.school_id}).countDocuments()
+            var wd_null = []
+            const well_details = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id}).sort({created_at: -1})
+            for (let i = 0; i < well_details.length; i++) {
+                const wd = well_details[i];
+                if (wd.bmi_category == '') {
+                    const user = await Users.findOne({_id: wd.user_id})
+                    var age = await countOld(user.date_of_birth)
+                    wd_null.push({...user._doc, age: age})
+                }
+            }
+
+            var recent_histories = []
+            const histories = await History.find({isDeleted: false, school_id: req.session.school_id, created_at: { $gte: startOfDay, $lt: endOfDay }}).sort({created_at: -1})
+            for (let i = 0; i < histories.length; i++) {
+                const h = histories[i];
+                recent_histories.push({name: h.user_id.name, created_at: h.created_at, bmi_category: await getCategoryBMI(h.weight, h.height)})
+            }
 
         }
-        console.log({data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female})
-        res.render('dashboard/index', {data, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female});
+        console.log({data, d, wd_null, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female, recent_histories})
+        res.render('dashboard/index', {data, d, wd_null, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female, recent_histories});
     },
 
     history: async (req, res) => {

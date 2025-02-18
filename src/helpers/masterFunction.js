@@ -18,6 +18,26 @@ const createDefaultWellnessDetail = async (obj) => {
     return resp
 }
 
+const getCategoryBMI = async (objWeight, objHeight) => {
+    const height = parseInt(objHeight)
+    const weight = parseInt(objWeight)
+
+    const bmi_score = weight / ((height/100)*(height/100))
+    var bmi_category = null
+    if (bmi_score < 18.50) {
+        bmi_category = 'Kurang Berat Badan'
+    } else if (bmi_score >= 18.51 && bmi_score < 24.90) {
+        bmi_category = 'Normal'
+    } else if (bmi_score >= 24.91 && bmi_score < 29.90) {
+        bmi_category = 'Kelebihan Berat Badan'
+    } else if (bmi_score >= 29.91){
+        bmi_category = 'Obesitas'
+    }
+
+    return bmi_category
+
+}
+
 const updateWellnessDetail = async (obj, user_id) => {
     // console.log({obj, user_id})
     const height = parseInt(obj.height)
@@ -34,7 +54,7 @@ const updateWellnessDetail = async (obj, user_id) => {
     } else if (bmi_score >= 29.91){
         bmi_category = 'Obesitas'
     }
-
+    
     const body = { ...obj, updated_at: moment(), user_id: user_id, bmi_score: bmi_score.toFixed(2), bmi_category: bmi_category}
     console.log({body})
     const resp = await WellnessDetail.findOneAndUpdate({ user_id: user_id },  { $set: body }, { returnNewDocument: true })
@@ -519,5 +539,6 @@ module.exports = {
     ageCategory,
     catBloodPress,
     conNormalBloodPress,
-    conNormalTemperature
+    conNormalTemperature,
+    getCategoryBMI
 }

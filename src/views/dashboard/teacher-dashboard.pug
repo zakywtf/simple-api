@@ -5,6 +5,10 @@
 		.card
 			.card-body
 				.row.alig.n-items-start
+					.col-12 
+						h5.text-primary Kekurangan Berat Badan
+				br
+				.row.alig.n-items-start
 					.col-8
 						//- h5.card-title.mb-9.fw-semibold Jumlah Pegawai
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
@@ -17,14 +21,18 @@
 								i.ti.ti-weight.fs-6
 				.row.alig.n-items-start
 					.col-12 
-						h6.text-primary Kekurangan Berat Badan
+						//- h5.text-primary Kekurangan Berat Badan
 						p(style="font-size: 14px; text-decoration: underline;").text-normal
-							a(href='/users/bmi-category?cat=kekurangan berat badan') lihat daftar nama
+							a(href='/users/bmi-category?cat=kurang berat badan') lihat daftar nama
 
 
 	.col-lg-3
 		.card
 			.card-body
+				.row.alig.n-items-start
+					.col-12 
+						h5.text-success Normal
+				br
 				.row.alig.n-items-start
 					.col-8
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
@@ -37,12 +45,16 @@
 								i.ti.ti-weight.fs-6
 				.row.alig.n-items-start
 					.col-12 
-						h6.text-success Normal
+						//- h6.text-success Normal
 						p(style="font-size: 14px; text-decoration: underline;").text-normal
 							a(href='/users/bmi-category?cat=normal') lihat daftar nama
 	.col-lg-3
 		.card
 			.card-body
+				.row.alig.n-items-start
+					.col-12 
+						h5.text-warning Kelebihan Berat Badan
+				br
 				.row.alig.n-items-start
 					.col-8
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
@@ -55,13 +67,17 @@
 								i.ti.ti-weight.fs-6
 				.row.alig.n-items-start
 					.col-12 
-						h6.text-warning Kelebihan Berat Badan
+						//- h6.text-warning Kelebihan Berat Badan
 						p(style="font-size: 14px; text-decoration: underline;").text-normal
 							a(href='/users/bmi-category?cat=kelebihan berat badan') lihat daftar nama
 
 	.col-lg-3
 		.card
 			.card-body
+				.row.alig.n-items-start
+					.col-12 
+						h5.text-danger Obesitas
+				br
 				.row.alig.n-items-start
 					.col-8
 						p.fw-semibold.mb-3(style="font-size: 1.3rem; color: black;")
@@ -74,7 +90,7 @@
 								i.ti.ti-weight.fs-6
 				.row.alig.n-items-start
 					.col-12 
-						h6.text-danger Obesitas
+						//- h6.text-danger Obesitas
 						p(style="font-size: 14px; text-decoration: underline;").text-normal
 							a(href='/users/bmi-category?cat=obesitas') lihat daftar nama
 
@@ -143,10 +159,96 @@
 											.d-flex.justify-content-end
 												.text-white.bg-success.rounded-circle.p-6.d-flex.align-items-center.justify-content-center
 													i.ti.ti-gender-female.fs-6
+.row
+	.col-lg-4.d-flex.align-items-stretch
+		.card.w-100
+			.card-body.p-4
+				.mb-4
+					h5.card-title.fw-semibold Pengecekan Hari Ini
+					p.mb-0 Berikut daftar pegawai yang sudah melakukan pengecekan di hari ini: #{prettyDate(d)}
+					br
+				ul.timeline-widget.mb-0.position-relative.mb-n5(style="max-height: 450px; overflow-x: auto; overflow-y: visible; overflow: scroll; ")
+					each data in recent_histories
+						li.timeline-item.d-flex.position-relative.overflow-hidden
+							.timeline-time.text-dark.flex-shrink-0.text-end #{prettyTime(data.created_at)}
+							.timeline-badge-wrap.d-flex.flex-column.align-items-center
+								span.timeline-badge.border-2.border.border-info.flex-shrink-0.my-8
+								span.timeline-badge-border.d-block.flex-shrink-0
+							.timeline-desc.fs-3.text-dark.mt-n1.fw-semibold #{data.name}
+								span.text-dark.d-block.fw-normal #{prettyDate(data.created_at)}
+								if (data.bmi_category == 'Kurang Berat Badan')
+									span.d-block.fw-normal.text-primary #{data.bmi_category}
+								else if (data.bmi_category == 'Normal')
+									span.d-block.fw-normal.text-success #{data.bmi_category}
+								else if (data.bmi_category == 'Kelebihan Berat Badan')
+									span.d-block.fw-normal.text-warning #{data.bmi_category}
+								else if (data.bmi_category == 'Obesitas')
+									span.d-block.fw-normal.text-danger #{data.bmi_category}
+								//- span.text-success.d-block.fw-normal #{data.bmi_category}
+	.col-lg-8.d-flex.align-items-stretch
+		.card.w-100.overflow-hidden
+			.card-body.p-4
+				.row 
+					.col-md-8 
+						h5.card-title.fw-semibold.mb-4 Daftar Pegawai
+						p.mb-0 Berikut daftar pegawai yang belum melakukan pengecekan
+						br
+					.col-md-4
+						select#levelFilter.form-select(onchange="filterLevel()")
+							option(value="All") Semua
+							option(value="Direktur") Direktur
+							option(value="Direktur Utama") Direktur Utama
+							option(value="Foreman") Foreman
+							option(value="Manager") Manager
+							option(value="Operator") Operator
+							option(value="Staff") Staff
+							option(value="Supervisor") Supervisor
+				.table-responsive(style="max-height: 480px; overflow-x: auto; overflow-y: visible; overflow: scroll; ")
+					table#cutomDataTable.table.table-bordered.table-hover
+						thead.thead-light
+							//- th No 
+							th Id Pegawai 
+							th Nama
+							th Posisi Pekerjaan
+							th Level
+							th Jenis Kelamin
+							th Usia 
+						tbody
+							-var no = 1;
+							each data in wd_null
+								tr
+									//- td #{no++}
+									td.border-bottom-0
+										h6.fw-semibold.mb-1 #{data.nisn}
+									td #{data.name}
+									td #{data.position}
+									td #{data.level}
+									td
+										if (data.gender == 'male')
+											| Laki-laki
+										else 
+											| Perempuan
+									td #{data.age}
+
 
 script(src="https://code.jquery.com/jquery-3.5.1.min.js")
 script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
 script(src="https://cdn.jsdelivr.net/npm/apexcharts")
+script.
+	function filterLevel() {
+		var dropdown = document.getElementById("levelFilter");
+		var filter = dropdown.value;
+		var table = document.getElementById("cutomDataTable");
+		var rows = table.getElementsByTagName("tr");
+
+		for (var i = 1; i < rows.length; i++) {
+			var categoryCell = rows[i].getElementsByTagName("td")[3];
+			if (categoryCell) {
+				var category = categoryCell.textContent || categoryCell.innerText;
+				rows[i].style.display = (filter === "All" || category === filter) ? "" : "none";
+			}
+		}
+	}
 script.
 	const host = window.location.origin;
 	const token = localStorage.getItem('token');
@@ -211,6 +313,7 @@ script.
 
 					// Ubah hasil grouping menjadi format untuk ApexCharts
 					const series = uniquenames.map(name => ({
+						//- console.log({name})
 						name: name,
 						data: Object.keys(groupedData).map(date => ({
 							x: date,
@@ -232,7 +335,14 @@ script.
 						},
 						dataLabels: {
 							enabled: true
-						}
+						},
+						colors: ['#13deb9', '#ffae1f', '#fa896b', '#18b1c6'], // Bar colors matching series order
+						legend: {
+							markers: {
+								fillColors: ['#13deb9', '#ffae1f', '#fa896b', '#18b1c6'], // Custom legend marker colors
+								radius: 12 // Makes the markers circular
+							}
+						},
 					};
 
 					
