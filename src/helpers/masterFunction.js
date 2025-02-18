@@ -102,7 +102,7 @@ const schemaGemini = async () => {
                             type: SchemaType.STRING,
                         },
                         repetisi: {
-                            description: "berapa repetisi per set",
+                            description: "berapa repetisi per set dengan satuan waktu atau kali",
                             type: SchemaType.STRING,
                         },
                         keterangan: {

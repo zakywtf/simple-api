@@ -54,18 +54,18 @@ block content
 			function loadContent(dayIndex) {
 				if (dayIndex == 0){
 					//- console.log({day_plan: dataPlanner[7]})
-					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Latihan</th><th>Set</th><th>Repetisi</th><th>Keterangan</th></tr></thead><tbody>';
+					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Latihan</th><th>Set</th><th>Repetisi</th><th>Keterangan</th><th>Tutorial</th></tr></thead><tbody>';
 					dataPlanner[6].practices.forEach(function(item) {
-						html += '<tr><td>' + item.name + '</td><td>' + item.set + '</td><td>' + item.repetitions + '</td><td>' + item.information + '</td></tr>';
+						html += '<tr><td>' + item.name + '</td><td>' + item.set + '</td><td>' + item.repetitions + '</td><td>' + item.information + '</td><td><a href="https://www.youtube.com/results?search_query='+item.name+' tutorial" target="_blank">Lihat Tutorial</a></td></tr>';
 					});
 					html += '</tbody></table>';
 
 					$('#content').html(html);
 				} else {
 					//- console.log({day_plan: dataPlanner[dayIndex-1]})
-					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Latihan</th><th>Set</th><th>Repetisi</th><th>Keterangan</th></tr></thead><tbody>';
+					var html = '<table class="table table-bordered"><thead class="thead-light"><tr><th>Latihan</th><th>Set</th><th>Repetisi</th><th>Keterangan</th><th>Tutorial</th></tr></thead><tbody>';
 					dataPlanner[dayIndex-1].practices.forEach(function(item) {
-						html += '<tr><td>' + item.name + '</td><td>' + item.set + '</td><td>' + item.repetitions + '</td><td>' + item.information + '</td></tr>';
+						html += '<tr><td>' + item.name + '</td><td>' + item.set + '</td><td>' + item.repetitions + '</td><td>' + item.information + '</td><td><a href="https://www.youtube.com/results?search_query='+item.name+' tutorial" target="_blank">Lihat Tutorial</a></td></tr>';
 					});
 					html += '</tbody></table>';
 
