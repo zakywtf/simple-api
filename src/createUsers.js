@@ -5623,8 +5623,8 @@ const datas = [
 
 const createUsers = async () => {
     let pinHash = await bcrypt.hash('123456' + salt, 10);
-    const school_id = "671881ff935ac0941251cb48"
-    // const school_id = "67a036933e87747a0a5ffb7a"
+    // const school_id = "671881ff935ac0941251cb48"
+    const school_id = "67a036933e87747a0a5ffb7a"
 
     for (let i = 0; i < datas.length; i++) {
         const e = datas[i];

@@ -34,14 +34,14 @@ class usersModel extends Models{
             datas.push({date: date, name: category, amount: 1, user_id: h.user_id._id})
         }
         // console.log({datas})
-        const filtered = await this._filtered(datas)
+        // const filtered = await this._filtered(datas)
         // console.log({filtered})
         // const groupingByDates = await this._grouping(datas)
         // console.log(groupingByDates)
         // const groupingByCategory = await this._groupingName(datas)
         // console.log(groupingByCategory)
 
-        return { msg: 'Data revenue succesfully.', data: filtered }
+        return { msg: 'Data revenue succesfully.', data: datas }
 
     }
 

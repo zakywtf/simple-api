@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
-import moment from 'moment'
+const moment = require('moment-timezone');
+// import moment from 'moment'
 
 import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
 import OpenAI from 'openai';
@@ -501,7 +502,8 @@ const IndexController = {
             const histories = await History.find({isDeleted: false, school_id: req.session.school_id, created_at: { $gte: startOfDay, $lt: endOfDay }}).sort({created_at: -1})
             for (let i = 0; i < histories.length; i++) {
                 const h = histories[i];
-                recent_histories.push({name: h.user_id.name, created_at: h.created_at, bmi_category: await getCategoryBMI(h.weight, h.height)})
+                const date = moment(h.created_at).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
+                recent_histories.push({name: h.user_id.name, created_at: date, bmi_category: await getCategoryBMI(h.weight, h.height)})
             }
 
         }
