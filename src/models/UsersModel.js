@@ -31,15 +31,17 @@ class usersModel extends Models{
             const h = histories[i];
             const date = moment(h.created_at).format('DD-MM-YYYY')
             const category = await this._bmiCategory(h.height, h.weight)
-            datas.push({date: date, name: category, amount: 1})
+            datas.push({date: date, name: category, amount: 1, user_id: h.user_id._id})
         }
         console.log({datas})
+        const filtered = await this._filtered(datas)
+        console.log({filtered})
         // const groupingByDates = await this._grouping(datas)
         // console.log(groupingByDates)
         // const groupingByCategory = await this._groupingName(datas)
         // console.log(groupingByCategory)
 
-        return { msg: 'Data revenue succesfully.', data: datas }
+        return { msg: 'Data revenue succesfully.', data: filtered }
 
     }
 
@@ -60,6 +62,16 @@ class usersModel extends Models{
         }
 
         return bmi_category
+    }
+
+    async _filtered (datas){
+        return Object.values(
+            datas.reduce((acc, obj) => {
+                const key = `${obj.user_id}-${obj.date}`;
+                acc[key] = obj; // Always overwrite to keep the last occurrence
+                return acc;
+            }, {})
+          );
     }
 
     async _groupingDates(array){
