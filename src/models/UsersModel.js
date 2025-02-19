@@ -33,9 +33,9 @@ class usersModel extends Models{
             const category = await this._bmiCategory(h.height, h.weight)
             datas.push({date: date, name: category, amount: 1, user_id: h.user_id._id})
         }
-        console.log({datas})
+        // console.log({datas})
         const filtered = await this._filtered(datas)
-        console.log({filtered})
+        // console.log({filtered})
         // const groupingByDates = await this._grouping(datas)
         // console.log(groupingByDates)
         // const groupingByCategory = await this._groupingName(datas)

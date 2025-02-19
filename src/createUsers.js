@@ -3856,1743 +3856,1775 @@ mongoose.connect(mongoURI, { useNewUrlParser: true });
 //     }
 //    ]
 
+// const datas = [
+//     {
+//         "no": 1,
+//         "id": "2412012",
+//         "name": "DIMAS SATRIAWAN PUTRA",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-11-17",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 2,
+//         "id": " 2412013",
+//         "name": "TRI WIYADI",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1989-04-19",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 3,
+//         "id": "1812008",
+//         "name": "SARWY AGUS FERDIAN",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1992-08-17",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 4,
+//         "id": "2405001",
+//         "name": "SUTRIANTI",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-08-06",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 5,
+//         "id": "2101001",
+//         "name": "ADITYA DICKY SETIAWAN",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "2000-01-05",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 6,
+//         "id": "2101006",
+//         "name": "ANOM MARGIANTO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1995-09-15",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 7,
+//         "id": "2111009",
+//         "name": "DENY KURNIAWAN",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-11-14",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 8,
+//         "id": "2308009",
+//         "name": "ALVENIUS ERVAN WIJAYA",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2005-06-22",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 9,
+//         "id": "2308020",
+//         "name": "LORENTIUS DIAN SADEWA",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2005-07-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 10,
+//         "id": "1901004",
+//         "name": "NUR KARTIKA",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1990-11-01",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 11,
+//         "id": "1911044",
+//         "name": "SRI MULYADI",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1992-07-07",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 12,
+//         "id": "1911045",
+//         "name": "TAUFIK SUSILO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2000-11-29",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 13,
+//         "id": "1912015",
+//         "name": "ZAINURROHMAN HIDAYAT WIJAYANTO",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1997-12-07",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 14,
+//         "id": "2001020",
+//         "name": "YAHYA HENDY RIZALDY",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2000-07-10",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 15,
+//         "id": "2012016",
+//         "name": "FEBRI SOLEKAH",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-02-25",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 16,
+//         "id": "2012013",
+//         "name": "PRAYOGI SAPUTRA",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2001-06-05",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 17,
+//         "id": "2104017",
+//         "name": "VEBRIAN YUDIANTO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-02-01",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 18,
+//         "id": "2110025",
+//         "name": "ARDITYA RIFANGGA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1994-04-15",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 19,
+//         "id": "2110022",
+//         "name": "DERRI RUSDIYANTO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-09-18",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 20,
+//         "id": "2110018",
+//         "name": "DESI ANGJARWATI",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1997-12-24",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 21,
+//         "id": "2111006",
+//         "name": "AGUS WIDODO",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1992-02-07",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 22,
+//         "id": "2210020",
+//         "name": "KHOIRUL BEKTI SAPUTRO",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-04-04",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 23,
+//         "id": "2210023",
+//         "name": "WILLY DAFFA HILLMI ZAIN",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-07-16",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 24,
+//         "id": "2310029",
+//         "name": "MUHAMAD FIRMAN NURHADI",
+//         "position": "Manual & EDM Group Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-06-02",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 25,
+//         "id": "2311002",
+//         "name": "MUNAWIR NURUDIN",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1998-04-24",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 26,
+//         "id": "2311006",
+//         "name": "PUNGKY HENDRAWAN",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-12-29",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 27,
+//         "id": "2308037",
+//         "name": "RIDHO WORO LARASATI",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2001-03-30",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 28,
+//         "id": 2405009,
+//         "name": "BAYU NUR ROMADHON",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-11-06",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 29,
+//         "id": "1907001",
+//         "name": "AGUS PRASETYO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-08-26",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 30,
+//         "id": "2205002",
+//         "name": "DANANG RIYANTO",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1993-12-22",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 31,
+//         "id": "2008009",
+//         "name": "VIVIAN NURUL FATIMAH",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1999-03-18",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 32,
+//         "id": "2111019",
+//         "name": "TUGIMIN",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1990-08-11",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 33,
+//         "id": "2311008",
+//         "name": "SITI FATIMAH",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2001-02-06",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 34,
+//         "id": "2311010",
+//         "name": "MUHAMAD MUHAIMIN",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2004-01-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 35,
+//         "id": "2312002",
+//         "name": "HESTI",
+//         "position": "Assembling & Printing Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-10-25",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 36,
+//         "id": "2412001",
+//         "name": "INDRA DWI PURNAMA JATI",
+//         "position": "Assembling & Printing Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2004-05-26",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 37,
+//         "id": "2209024",
+//         "name": "DINTA ADETYA",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-02-27",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 38,
+//         "id": "2107008",
+//         "name": "FEBRIYANTO NUGROHO",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1997-02-23",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 39,
+//         "id": "2401001",
+//         "name": "DWIKI ERVAN SUSANTO",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "1997-11-19",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 40,
+//         "id": "1812011",
+//         "name": "HERU HARTANTO",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "1989-02-03",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 41,
+//         "id": "2010012",
+//         "name": "NUR ARIFIN",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1993-12-28",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 42,
+//         "id": "2010016",
+//         "name": "ROHMAT AGUNG SAPUTRO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-03-21",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 43,
+//         "id": "2010013",
+//         "name": "YOGA PRASETIYA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1997-11-23",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 44,
+//         "id": "2010017",
+//         "name": "ANWAR ZAINAL ABIDIN",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-04-02",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 45,
+//         "id": "2301001",
+//         "name": "BENEDICTO YOGA DUTA NIRWANA",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-06-16",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 46,
+//         "id": "2307010",
+//         "name": "BAYU PRASETIYANTO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1997-12-12",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 47,
+//         "id": "2410005",
+//         "name": "VIKI NURHIDAYAT",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-02-07",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 48,
+//         "id": "2410006",
+//         "name": "ANTONIUS ANDI PRASETYO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-10-03",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 49,
+//         "id": "2410007",
+//         "name": "ARBI ATMOKO",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-07-26",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 50,
+//         "id": "2104018",
+//         "name": "AFRIZAL SIAMTAMA",
+//         "position": "Assembling & Printing Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-11-11",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 51,
+//         "id": "2307021",
+//         "name": "TEGAR SETIA BUDI",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-09-26",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 52,
+//         "id": "2401010",
+//         "name": "RESTU ADI WIJAYA",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-02-11",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 53,
+//         "id": "2310030",
+//         "name": "FERRY ADE WIDIYATMOKO",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-06-14",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 54,
+//         "id": "1911029",
+//         "name": "IKA DERMIPARWANTI",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1996-12-16",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 55,
+//         "id": "1911034",
+//         "name": "YENNI FITRI APRILIAWATI",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1999-04-15",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 56,
+//         "id": "2010023",
+//         "name": "IQBAL RIZQI",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-02-21",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 57,
+//         "id": "2101021",
+//         "name": "WAWAN SUSETYA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-05-05",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 58,
+//         "id": "2310037",
+//         "name": "KURNIAWATI ZAHRO",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-11-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 59,
+//         "id": "2402007",
+//         "name": "FUAD DWI SANTOSO",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1997-12-12",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 60,
+//         "id": "2101012",
+//         "name": "JULANG JATI KISWORO",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2000-01-20",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 61,
+//         "id": "2308032",
+//         "name": "ERWIN WIJAYANTO",
+//         "position": "Logistik Jogja Staff - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-09-27",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 62,
+//         "id": "2403029",
+//         "name": "YOGA EKA SAPUTRA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-10-14",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 63,
+//         "id": "2103003",
+//         "name": "ANGGI PUTRA CAHYA PRATAMA",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-05-24",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 64,
+//         "id": "2101037",
+//         "name": "JANGKUNG SUYONO",
+//         "position": "CNC Mold  Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-08-26",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 65,
+//         "id": "2302006",
+//         "name": "YOKI WIHATMOKO",
+//         "position": "CNC Mold  Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-03-24",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 66,
+//         "id": "2401004",
+//         "name": "DENDI AGUSTIA PRATAMA",
+//         "position": "Tool Room 3 Staff - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-08-10",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 67,
+//         "id": "2401005",
+//         "name": "FERDIANSYAH",
+//         "position": "Polish Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-09-13",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 68,
+//         "id": "2401008",
+//         "name": "PURWANTORO",
+//         "position": "Polish Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-07-11",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 69,
+//         "id": "2209008",
+//         "name": "ALIFA NUR HIDAYAH",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-11-27",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 70,
+//         "id": "2209009",
+//         "name": "INFANTRI ZAINAL ARIFIN",
+//         "position": "Group Production 5 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1996-05-25",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 71,
+//         "id": "2309003",
+//         "name": "IFA TIARANINGRUM",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2005-03-12",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 72,
+//         "id": "2106019",
+//         "name": "BAGAS SETYAWAN",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "2001-08-16",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 73,
+//         "id": "2307009",
+//         "name": "KOMARI RIFAT BASA",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1993-06-28",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 74,
+//         "id": "2309015",
+//         "name": "TRI HARTANTO",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "1997-03-20",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 75,
+//         "id": "2103022",
+//         "name": "BENI GUNAWAN PRASETIYO",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "1996-01-18",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 76,
+//         "id": "2104009",
+//         "name": "THOYIB SUKRON FADHLULLOH",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-11-08",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 77,
+//         "id": "2012036",
+//         "name": "MUHAMAD RISQI NURACHSIN",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-04-06",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 78,
+//         "id": "2002004",
+//         "name": "AVRIAN NUGROHO PRASETYO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-04-21",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 79,
+//         "id": "2101014",
+//         "name": "IKANG RAYNARDHI FERDIAN",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1992-04-24",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 80,
+//         "id": "2012019",
+//         "name": "FEBRIYANTO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1994-11-01",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 81,
+//         "id": "2104025",
+//         "name": "TRI YULIANTA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-07-12",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 82,
+//         "id": "1809009",
+//         "name": "IKHSAN ARIF USMANTO",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-05-20",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 83,
+//         "id": "2111001",
+//         "name": "DIDIK SUGIYANTO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1995-06-11",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 84,
+//         "id": "2111005",
+//         "name": "AGUS SURYONO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-08-06",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 85,
+//         "id": "2210009",
+//         "name": "MUHAMMAD RAIHAN RIFAI",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-07-04",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 86,
+//         "id": "2111007",
+//         "name": "ANDHIKA BAGAS SETIAWAN",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1995-06-15",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 87,
+//         "id": "2111008",
+//         "name": "CYRILLUS EDWIN NUGROHO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-03-19",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 88,
+//         "id": "2101052",
+//         "name": "ADITYA NUGROHO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1999-07-16",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 89,
+//         "id": "2210022",
+//         "name": "MARTINUS NOVIAN HARTADI",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1997-11-11",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 90,
+//         "id": "2304003",
+//         "name": "RIZAL ADI ANGGARA",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-03-06",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 91,
+//         "id": "2303010",
+//         "name": "MUADZ HAMAMI",
+//         "position": "Manual & EDM Group Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-07-18",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 92,
+//         "id": "2410002",
+//         "name": "ISMAIL NUR ADZAN",
+//         "position": "CNC Mold Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2005-01-20",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 93,
+//         "id": "2008014",
+//         "name": "AGUS RIANTO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1992-08-01",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 94,
+//         "id": "2008013",
+//         "name": "KRISDIYANTO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-09-27",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 95,
+//         "id": "2106005",
+//         "name": "VICKY OKTAVIANTO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-10-27",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 96,
+//         "id": "2105009",
+//         "name": "THOFIK ARDI NUGROHO",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-02-13",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 97,
+//         "id": "2205010",
+//         "name": "ENDRI VASTRIO",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1996-09-16",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 98,
+//         "id": "2205011",
+//         "name": "OKI AYIS SAPUTRA",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-11-10",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 99,
+//         "id": "2212001",
+//         "name": "ISTOFA ANNAS",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-05-30",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 100,
+//         "id": "2404004",
+//         "name": "FELINDA ISNAINI NUR AISYAH",
+//         "position": "Polish Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-10-12",
+//         "plant": "MOLD",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 101,
+//         "id": "2308038",
+//         "name": "ALFIAN RAHMADHAN WAHYU P",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2004-10-16",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 102,
+//         "id": "2403038",
+//         "name": "ALFIN ZANITRA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1995-01-13",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 103,
+//         "id": "2106001",
+//         "name": "BAMA SUROSO HADI KUSUMA",
+//         "position": "Tool Room 3 Staff - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-09-06",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 104,
+//         "id": "2306002",
+//         "name": "FARIS ROMANDA",
+//         "position": "Polish Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2005-06-20",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 105,
+//         "id": "2306003",
+//         "name": "HARYADI TRI SAPUTRA",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-01-30",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 106,
+//         "id": "2106018",
+//         "name": "ARIEF YULIANTO",
+//         "position": "Production Material Operator",
+//         "level": "Operator",
+//         "date_of_birth": "1997-07-09",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 107,
+//         "id": "2107003",
+//         "name": "ARI SULISTIYO",
+//         "position": "Assembling & Printing Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-05-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 108,
+//         "id": "2107005",
+//         "name": "RIZKY EKO BUDIANTO",
+//         "position": "Assembling & Printing Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-03-24",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 109,
+//         "id": "2107010",
+//         "name": "FEBRI FARHA WIJAYANTO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-02-02",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 110,
+//         "id": "2107011",
+//         "name": "ADI FEBRIYANTO",
+//         "position": "Assembling & Printing Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-02-10",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 111,
+//         "id": "2112009",
+//         "name": "FEBRY KURNIAWAN",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1997-02-27",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 112,
+//         "id": "2208018",
+//         "name": "TRI YULIANTO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-07-31",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 113,
+//         "id": "2307020",
+//         "name": "SUPRIHATIN",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1991-12-07",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 114,
+//         "id": "2308006",
+//         "name": "AHNAF RIZKY PRATAMA",
+//         "position": "Group Production 3 Operator - YPTS ",
+//         "level": "Operator",
+//         "date_of_birth": "2005-06-11",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 115,
+//         "id": "2308005",
+//         "name": "ADIT SETYAWAN",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-07-06",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 116,
+//         "id": "2308008",
+//         "name": "ALDO USMANSYAH",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-11-12",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 117,
+//         "id": "2308015",
+//         "name": "DUTA CANDRA DINATA",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-09-23",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 118,
+//         "id": "2209004",
+//         "name": "IGNATIUS ANGGA PUTRA ADI WIBOWO",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-07-06",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 119,
+//         "id": "2308016",
+//         "name": "FATKA FAUZI FATURAHMAN",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-11-21",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 120,
+//         "id": "2308019",
+//         "name": "HENDRA TRI PRASETYA",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-12-08",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 121,
+//         "id": "2308021",
+//         "name": "MUHAMAD ANDI SAPUTRA",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1999-09-30",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 122,
+//         "id": "2308022",
+//         "name": "MUHAMMAD APRILIAN TRI PAMUNGKAS",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-04-16",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 123,
+//         "id": "2308024",
+//         "name": "RIFAN SETYAWAN",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2004-09-14",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 124,
+//         "id": "2308025",
+//         "name": "TEGUH AMIN PRANNATA",
+//         "position": "Production Group 2 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-12-09",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 125,
+//         "id": "2308035",
+//         "name": "EDI SAPUTRO",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1993-09-18",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 126,
+//         "id": "2407005",
+//         "name": "ADITIYA NUR WIDIANTO",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1998-03-08",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 127,
+//         "id": "2209015",
+//         "name": "FAJAR AGUS PRAYOGO",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-08-27",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 128,
+//         "id": "2411005",
+//         "name": "SUPRIHATIN",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1988-01-01",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 129,
+//         "id": "2411004",
+//         "name": "YOGY ANDIKA APRIANTO",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-04-27",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 130,
+//         "id": "2402012",
+//         "name": "AKBAR APRIYANTO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1998-03-24",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 131,
+//         "id": "2011016",
+//         "name": "Firda Yulita",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2000-07-11",
+//         "plant": "YPTS",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 132,
+//         "id": "2209016",
+//         "name": "RIGEN PRASETYO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2001-01-14",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 133,
+//         "id": "2103006",
+//         "name": "MUH NUR YAMAN",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1998-01-06",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 134,
+//         "id": "2301004",
+//         "name": "MUHAMAD SAIFUL TABAH",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1997-03-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 135,
+//         "id": "2307007",
+//         "name": "MUHAMMAD FATHUR RAHMAN",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1999-08-14",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 136,
+//         "id": "2307011",
+//         "name": "DONI ARI NUGROHO",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1996-09-20",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 137,
+//         "id": "2103013",
+//         "name": "NUR SAHID",
+//         "position": "Production Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1992-11-05",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 138,
+//         "id": "2104008",
+//         "name": "MUHAMMAD ENDAR BUDIARTO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-01-28",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 139,
+//         "id": "2110003",
+//         "name": "MUHAMMAD ADITYA FEBRI NUGROHO",
+//         "position": "Group Production 3 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2001-02-04",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 140,
+//         "id": "2110004",
+//         "name": "ISKAK WIDARTO",
+//         "position": "Production Group 4 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1991-12-12",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 141,
+//         "id": "2209021",
+//         "name": "AAN BAGUS SAPUTRO",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2004-06-07",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 142,
+//         "id": "2210011",
+//         "name": "NANANG ARJUNA",
+//         "position": "Group Production 6 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1999-05-24",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 143,
+//         "id": "2210003",
+//         "name": "LILIK SETIAWAN",
+//         "position": "Group Production 1 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "1993-09-16",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 144,
+//         "id": "2210008",
+//         "name": "MAULANA AHMAD FAUDZAN",
+//         "position": "Quality Control Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-04-04",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 145,
+//         "id": "2309008",
+//         "name": "RISKA WAHYU SAPUTRO",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-04-17",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 146,
+//         "id": "2309018",
+//         "name": "ISMA NUR ASROFI",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2005-03-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 147,
+//         "id": "0807001",
+//         "name": "INDAH JUMIYATI",
+//         "position": "Polish Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1980-09-22",
+//         "plant": "MOLD",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 148,
+//         "id": "1010001",
+//         "name": "DIDIK PRASETYO",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1982-06-29",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 149,
+//         "id": "1211001",
+//         "name": "ANDI FEBRIANTORO",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1993-02-07",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 150,
+//         "id": "1306001",
+//         "name": "SURATMAN",
+//         "position": "Quality Control Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1994-07-18",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 151,
+//         "id": "1504004",
+//         "name": "FRANSISCUS FENDI YUDHA KURNIAWAN",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1995-01-27",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 152,
+//         "id": "1702003",
+//         "name": "RINI",
+//         "position": "Production Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1983-11-10",
+//         "plant": "INJECT",
+//         "gender": "female"
+//        },
+//        {
+//         "no": 153,
+//         "id": "1802003",
+//         "name": "DISKA KURNIAWAN",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1997-12-15",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 154,
+//         "id": "1807009",
+//         "name": "KEFIN HADIWIJAYA",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-12-21",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 155,
+//         "id": "1910020",
+//         "name": "BRITO KUSUMA",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-05-13",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 156,
+//         "id": "2001021",
+//         "name": "ABDUL AZIS SAIFUDIN",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2000-04-20",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 157,
+//         "id": "2001022",
+//         "name": "DWI DARMAWAN",
+//         "position": "CNC Mold  Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-12-11",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 158,
+//         "id": "2004003",
+//         "name": "CHOIRUL ANWAR SIDIK",
+//         "position": "CNC Mold  Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-06-14",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 159,
+//         "id": "2004005",
+//         "name": "KRISNA SUKMA DEWA",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-01-08",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 160,
+//         "id": "2101035",
+//         "name": "GUNAWAN DWIANTORO",
+//         "position": "Tool Room 3 Staff - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-06-11",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 161,
+//         "id": "2101039",
+//         "name": "WAHYU HARTANTA",
+//         "position": "Manual & EDM Group Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1996-12-17",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 162,
+//         "id": "2107012",
+//         "name": "MEKY HAJID PRIHATIN",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1999-03-05",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 163,
+//         "id": "2109008",
+//         "name": "FAJAR HIRLAN TRI SEPTYAN",
+//         "position": "Assembling Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-09-09",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 164,
+//         "id": "2109005",
+//         "name": "MOHAMMAD RASYID",
+//         "position": "CNC Mold  Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-09-06",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 165,
+//         "id": "2109012",
+//         "name": "RAHMAT DWI NUGROHO",
+//         "position": "CNC Mold  Group 1 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2002-12-03",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 166,
+//         "id": "2111033",
+//         "name": "MUHAMMAD DIMAS NUGROHO",
+//         "position": "Manual & EDM Group Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2003-06-09",
+//         "plant": "MOLD"
+//        },
+//        {
+//         "no": 167,
+//         "id": "2201004",
+//         "name": "LUTFI INDRI ASTUTI",
+//         "position": "Polish Mold Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "2001-05-13",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 168,
+//         "id": "2501005",
+//         "name": "M FATHONI HENDRA GUNAWAN",
+//         "position": "Production Group 3 Operator - YPTI\t",
+//         "level": "Operator",
+//         "date_of_birth": "2003-02-24",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 169,
+//         "id": "2501007",
+//         "name": "ILYAS AZIS NUROHMAN",
+//         "position": "Production Group 3 Operator - YPTI\t",
+//         "level": "Operator",
+//         "date_of_birth": "2003-05-14",
+//         "plant": "INJECT",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 170,
+//         "id": "2501006",
+//         "name": "HABIEB KHAIRUTSANI SURURI",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2002-09-04",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 171,
+//         "id": "2412010",
+//         "name": "RIDHO ARDIYANTO",
+//         "position": "Group Production 2 Operator - YPTS",
+//         "level": "Operator",
+//         "date_of_birth": "2003-04-01",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 172,
+//         "id": "2412011",
+//         "name": "RYAN DIO YUNANTA ",
+//         "position": "Group Production 3 Operator - YPTS ",
+//         "level": "Operator",
+//         "date_of_birth": "2000-05-05",
+//         "plant": "YPTS",
+//         "gender": "male"
+//        },
+//        {
+//         "no": 173,
+//         "id": "2109006",
+//         "name": "RULI ANAN TASYA",
+//         "position": "CNC Mold  Group 3 Operator - YPTI",
+//         "level": "Operator",
+//         "date_of_birth": "1998-08-25",
+//         "plant": "MOLD",
+//         "gender": "male"
+//        }
+// ]
+
 const datas = [
     {
         "no": 1,
-        "id": "2412012",
-        "name": "DIMAS SATRIAWAN PUTRA",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-11-17",
-        "plant": "INJECT",
+        "id": "55555",
+        "name": "HARYO",
+        "position": "Creative Team",
+        "level": "Vendor",
+        "date_of_birth": "1968-12-21",
+        "plant": "MFG",
         "gender": "male"
-       },
-       {
+    },
+    {
         "no": 2,
-        "id": " 2412013",
-        "name": "TRI WIYADI",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1989-04-19",
-        "plant": "INJECT",
+        "id": "44444",
+        "name": "YOHANES",
+        "position": "IT Team",
+        "level": "Vendor",
+        "date_of_birth": "1969-09-09",
+        "plant": "MFG",
         "gender": "male"
-       },
-       {
+    },
+    {
         "no": 3,
-        "id": "1812008",
+        "id": "2412014",
         "name": "SARWY AGUS FERDIAN",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
+        "position": "Creative",
+        "level": "Staff",
         "date_of_birth": "1992-08-17",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 4,
-        "id": "2405001",
-        "name": "SUTRIANTI",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-08-06",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 5,
-        "id": "2101001",
-        "name": "ADITYA DICKY SETIAWAN",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "2000-01-05",
-        "plant": "INJECT",
+        "plant": "MFG",
         "gender": "male"
-       },
-       {
-        "no": 6,
-        "id": "2101006",
-        "name": "ANOM MARGIANTO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1995-09-15",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 7,
-        "id": "2111009",
-        "name": "DENY KURNIAWAN",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-11-14",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 8,
-        "id": "2308009",
-        "name": "ALVENIUS ERVAN WIJAYA",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2005-06-22",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 9,
-        "id": "2308020",
-        "name": "LORENTIUS DIAN SADEWA",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2005-07-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 10,
-        "id": "1901004",
-        "name": "NUR KARTIKA",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1990-11-01",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 11,
-        "id": "1911044",
-        "name": "SRI MULYADI",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1992-07-07",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 12,
-        "id": "1911045",
-        "name": "TAUFIK SUSILO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2000-11-29",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 13,
-        "id": "1912015",
-        "name": "ZAINURROHMAN HIDAYAT WIJAYANTO",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1997-12-07",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 14,
-        "id": "2001020",
-        "name": "YAHYA HENDY RIZALDY",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2000-07-10",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 15,
-        "id": "2012016",
-        "name": "FEBRI SOLEKAH",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-02-25",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 16,
-        "id": "2012013",
-        "name": "PRAYOGI SAPUTRA",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2001-06-05",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 17,
-        "id": "2104017",
-        "name": "VEBRIAN YUDIANTO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-02-01",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 18,
-        "id": "2110025",
-        "name": "ARDITYA RIFANGGA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1994-04-15",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 19,
-        "id": "2110022",
-        "name": "DERRI RUSDIYANTO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-09-18",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 20,
-        "id": "2110018",
-        "name": "DESI ANGJARWATI",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1997-12-24",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 21,
-        "id": "2111006",
-        "name": "AGUS WIDODO",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1992-02-07",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 22,
-        "id": "2210020",
-        "name": "KHOIRUL BEKTI SAPUTRO",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-04-04",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 23,
-        "id": "2210023",
-        "name": "WILLY DAFFA HILLMI ZAIN",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-07-16",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 24,
-        "id": "2310029",
-        "name": "MUHAMAD FIRMAN NURHADI",
-        "position": "Manual & EDM Group Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-06-02",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 25,
-        "id": "2311002",
-        "name": "MUNAWIR NURUDIN",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1998-04-24",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 26,
-        "id": "2311006",
-        "name": "PUNGKY HENDRAWAN",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-12-29",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 27,
-        "id": "2308037",
-        "name": "RIDHO WORO LARASATI",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2001-03-30",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 28,
-        "id": 2405009,
-        "name": "BAYU NUR ROMADHON",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-11-06",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 29,
-        "id": "1907001",
-        "name": "AGUS PRASETYO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-08-26",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 30,
-        "id": "2205002",
-        "name": "DANANG RIYANTO",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1993-12-22",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 31,
-        "id": "2008009",
-        "name": "VIVIAN NURUL FATIMAH",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1999-03-18",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 32,
-        "id": "2111019",
-        "name": "TUGIMIN",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1990-08-11",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 33,
-        "id": "2311008",
-        "name": "SITI FATIMAH",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2001-02-06",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 34,
-        "id": "2311010",
-        "name": "MUHAMAD MUHAIMIN",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2004-01-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 35,
-        "id": "2312002",
-        "name": "HESTI",
-        "position": "Assembling & Printing Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-10-25",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 36,
-        "id": "2412001",
-        "name": "INDRA DWI PURNAMA JATI",
-        "position": "Assembling & Printing Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2004-05-26",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 37,
-        "id": "2209024",
-        "name": "DINTA ADETYA",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-02-27",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 38,
-        "id": "2107008",
-        "name": "FEBRIYANTO NUGROHO",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1997-02-23",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 39,
-        "id": "2401001",
-        "name": "DWIKI ERVAN SUSANTO",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "1997-11-19",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 40,
-        "id": "1812011",
-        "name": "HERU HARTANTO",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "1989-02-03",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 41,
-        "id": "2010012",
-        "name": "NUR ARIFIN",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1993-12-28",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 42,
-        "id": "2010016",
-        "name": "ROHMAT AGUNG SAPUTRO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-03-21",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 43,
-        "id": "2010013",
-        "name": "YOGA PRASETIYA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1997-11-23",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 44,
-        "id": "2010017",
-        "name": "ANWAR ZAINAL ABIDIN",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-04-02",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 45,
-        "id": "2301001",
-        "name": "BENEDICTO YOGA DUTA NIRWANA",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-06-16",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 46,
-        "id": "2307010",
-        "name": "BAYU PRASETIYANTO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1997-12-12",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 47,
-        "id": "2410005",
-        "name": "VIKI NURHIDAYAT",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-02-07",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 48,
-        "id": "2410006",
-        "name": "ANTONIUS ANDI PRASETYO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-10-03",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 49,
-        "id": "2410007",
-        "name": "ARBI ATMOKO",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-07-26",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 50,
-        "id": "2104018",
-        "name": "AFRIZAL SIAMTAMA",
-        "position": "Assembling & Printing Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-11-11",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 51,
-        "id": "2307021",
-        "name": "TEGAR SETIA BUDI",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-09-26",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 52,
-        "id": "2401010",
-        "name": "RESTU ADI WIJAYA",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-02-11",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 53,
-        "id": "2310030",
-        "name": "FERRY ADE WIDIYATMOKO",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-06-14",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 54,
-        "id": "1911029",
-        "name": "IKA DERMIPARWANTI",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1996-12-16",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 55,
-        "id": "1911034",
-        "name": "YENNI FITRI APRILIAWATI",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1999-04-15",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 56,
-        "id": "2010023",
-        "name": "IQBAL RIZQI",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-02-21",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 57,
-        "id": "2101021",
-        "name": "WAWAN SUSETYA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-05-05",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 58,
-        "id": "2310037",
-        "name": "KURNIAWATI ZAHRO",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-11-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 59,
-        "id": "2402007",
-        "name": "FUAD DWI SANTOSO",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1997-12-12",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 60,
-        "id": "2101012",
-        "name": "JULANG JATI KISWORO",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2000-01-20",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 61,
-        "id": "2308032",
-        "name": "ERWIN WIJAYANTO",
-        "position": "Logistik Jogja Staff - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-09-27",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 62,
-        "id": "2403029",
-        "name": "YOGA EKA SAPUTRA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-10-14",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 63,
-        "id": "2103003",
-        "name": "ANGGI PUTRA CAHYA PRATAMA",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-05-24",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 64,
-        "id": "2101037",
-        "name": "JANGKUNG SUYONO",
-        "position": "CNC Mold  Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-08-26",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 65,
-        "id": "2302006",
-        "name": "YOKI WIHATMOKO",
-        "position": "CNC Mold  Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-03-24",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 66,
-        "id": "2401004",
-        "name": "DENDI AGUSTIA PRATAMA",
-        "position": "Tool Room 3 Staff - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-08-10",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 67,
-        "id": "2401005",
-        "name": "FERDIANSYAH",
-        "position": "Polish Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-09-13",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 68,
-        "id": "2401008",
-        "name": "PURWANTORO",
-        "position": "Polish Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-07-11",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 69,
-        "id": "2209008",
-        "name": "ALIFA NUR HIDAYAH",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-11-27",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 70,
-        "id": "2209009",
-        "name": "INFANTRI ZAINAL ARIFIN",
-        "position": "Group Production 5 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1996-05-25",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 71,
-        "id": "2309003",
-        "name": "IFA TIARANINGRUM",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2005-03-12",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 72,
-        "id": "2106019",
-        "name": "BAGAS SETYAWAN",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "2001-08-16",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 73,
-        "id": "2307009",
-        "name": "KOMARI RIFAT BASA",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1993-06-28",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 74,
-        "id": "2309015",
-        "name": "TRI HARTANTO",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "1997-03-20",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 75,
-        "id": "2103022",
-        "name": "BENI GUNAWAN PRASETIYO",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "1996-01-18",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 76,
-        "id": "2104009",
-        "name": "THOYIB SUKRON FADHLULLOH",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-11-08",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 77,
-        "id": "2012036",
-        "name": "MUHAMAD RISQI NURACHSIN",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-04-06",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 78,
-        "id": "2002004",
-        "name": "AVRIAN NUGROHO PRASETYO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-04-21",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 79,
-        "id": "2101014",
-        "name": "IKANG RAYNARDHI FERDIAN",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1992-04-24",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 80,
-        "id": "2012019",
-        "name": "FEBRIYANTO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1994-11-01",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 81,
-        "id": "2104025",
-        "name": "TRI YULIANTA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-07-12",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 82,
-        "id": "1809009",
-        "name": "IKHSAN ARIF USMANTO",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-05-20",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 83,
-        "id": "2111001",
-        "name": "DIDIK SUGIYANTO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1995-06-11",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 84,
-        "id": "2111005",
-        "name": "AGUS SURYONO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-08-06",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 85,
-        "id": "2210009",
-        "name": "MUHAMMAD RAIHAN RIFAI",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-07-04",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 86,
-        "id": "2111007",
-        "name": "ANDHIKA BAGAS SETIAWAN",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1995-06-15",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 87,
-        "id": "2111008",
-        "name": "CYRILLUS EDWIN NUGROHO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-03-19",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 88,
-        "id": "2101052",
-        "name": "ADITYA NUGROHO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1999-07-16",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 89,
-        "id": "2210022",
-        "name": "MARTINUS NOVIAN HARTADI",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1997-11-11",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 90,
-        "id": "2304003",
-        "name": "RIZAL ADI ANGGARA",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-03-06",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 91,
-        "id": "2303010",
-        "name": "MUADZ HAMAMI",
-        "position": "Manual & EDM Group Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-07-18",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 92,
-        "id": "2410002",
-        "name": "ISMAIL NUR ADZAN",
-        "position": "CNC Mold Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2005-01-20",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 93,
-        "id": "2008014",
-        "name": "AGUS RIANTO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1992-08-01",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 94,
-        "id": "2008013",
-        "name": "KRISDIYANTO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-09-27",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 95,
-        "id": "2106005",
-        "name": "VICKY OKTAVIANTO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-10-27",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 96,
-        "id": "2105009",
-        "name": "THOFIK ARDI NUGROHO",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-02-13",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 97,
-        "id": "2205010",
-        "name": "ENDRI VASTRIO",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1996-09-16",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 98,
-        "id": "2205011",
-        "name": "OKI AYIS SAPUTRA",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-11-10",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 99,
-        "id": "2212001",
-        "name": "ISTOFA ANNAS",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-05-30",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 100,
-        "id": "2404004",
-        "name": "FELINDA ISNAINI NUR AISYAH",
-        "position": "Polish Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-10-12",
-        "plant": "MOLD",
-        "gender": "female"
-       },
-       {
-        "no": 101,
-        "id": "2308038",
-        "name": "ALFIAN RAHMADHAN WAHYU P",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2004-10-16",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 102,
-        "id": "2403038",
-        "name": "ALFIN ZANITRA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1995-01-13",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 103,
-        "id": "2106001",
-        "name": "BAMA SUROSO HADI KUSUMA",
-        "position": "Tool Room 3 Staff - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-09-06",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 104,
-        "id": "2306002",
-        "name": "FARIS ROMANDA",
-        "position": "Polish Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2005-06-20",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 105,
-        "id": "2306003",
-        "name": "HARYADI TRI SAPUTRA",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-01-30",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 106,
-        "id": "2106018",
-        "name": "ARIEF YULIANTO",
-        "position": "Production Material Operator",
-        "level": "Operator",
-        "date_of_birth": "1997-07-09",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 107,
-        "id": "2107003",
-        "name": "ARI SULISTIYO",
-        "position": "Assembling & Printing Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-05-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 108,
-        "id": "2107005",
-        "name": "RIZKY EKO BUDIANTO",
-        "position": "Assembling & Printing Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-03-24",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 109,
-        "id": "2107010",
-        "name": "FEBRI FARHA WIJAYANTO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-02-02",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 110,
-        "id": "2107011",
-        "name": "ADI FEBRIYANTO",
-        "position": "Assembling & Printing Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-02-10",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 111,
-        "id": "2112009",
-        "name": "FEBRY KURNIAWAN",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1997-02-27",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 112,
-        "id": "2208018",
-        "name": "TRI YULIANTO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-07-31",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 113,
-        "id": "2307020",
-        "name": "SUPRIHATIN",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1991-12-07",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 114,
-        "id": "2308006",
-        "name": "AHNAF RIZKY PRATAMA",
-        "position": "Group Production 3 Operator - YPTS ",
-        "level": "Operator",
-        "date_of_birth": "2005-06-11",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 115,
-        "id": "2308005",
-        "name": "ADIT SETYAWAN",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-07-06",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 116,
-        "id": "2308008",
-        "name": "ALDO USMANSYAH",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-11-12",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 117,
-        "id": "2308015",
-        "name": "DUTA CANDRA DINATA",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-09-23",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 118,
-        "id": "2209004",
-        "name": "IGNATIUS ANGGA PUTRA ADI WIBOWO",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-07-06",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 119,
-        "id": "2308016",
-        "name": "FATKA FAUZI FATURAHMAN",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-11-21",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 120,
-        "id": "2308019",
-        "name": "HENDRA TRI PRASETYA",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-12-08",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 121,
-        "id": "2308021",
-        "name": "MUHAMAD ANDI SAPUTRA",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1999-09-30",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 122,
-        "id": "2308022",
-        "name": "MUHAMMAD APRILIAN TRI PAMUNGKAS",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-04-16",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 123,
-        "id": "2308024",
-        "name": "RIFAN SETYAWAN",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2004-09-14",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 124,
-        "id": "2308025",
-        "name": "TEGUH AMIN PRANNATA",
-        "position": "Production Group 2 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-12-09",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 125,
-        "id": "2308035",
-        "name": "EDI SAPUTRO",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1993-09-18",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 126,
-        "id": "2407005",
-        "name": "ADITIYA NUR WIDIANTO",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1998-03-08",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 127,
-        "id": "2209015",
-        "name": "FAJAR AGUS PRAYOGO",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-08-27",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 128,
-        "id": "2411005",
-        "name": "SUPRIHATIN",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1988-01-01",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 129,
-        "id": "2411004",
-        "name": "YOGY ANDIKA APRIANTO",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-04-27",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 130,
-        "id": "2402012",
-        "name": "AKBAR APRIYANTO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1998-03-24",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 131,
-        "id": "2011016",
-        "name": "Firda Yulita",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2000-07-11",
-        "plant": "YPTS",
-        "gender": "female"
-       },
-       {
-        "no": 132,
-        "id": "2209016",
-        "name": "RIGEN PRASETYO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2001-01-14",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 133,
-        "id": "2103006",
-        "name": "MUH NUR YAMAN",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1998-01-06",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 134,
-        "id": "2301004",
-        "name": "MUHAMAD SAIFUL TABAH",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1997-03-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 135,
-        "id": "2307007",
-        "name": "MUHAMMAD FATHUR RAHMAN",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1999-08-14",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 136,
-        "id": "2307011",
-        "name": "DONI ARI NUGROHO",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1996-09-20",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 137,
-        "id": "2103013",
-        "name": "NUR SAHID",
-        "position": "Production Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1992-11-05",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 138,
-        "id": "2104008",
-        "name": "MUHAMMAD ENDAR BUDIARTO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-01-28",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 139,
-        "id": "2110003",
-        "name": "MUHAMMAD ADITYA FEBRI NUGROHO",
-        "position": "Group Production 3 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2001-02-04",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 140,
-        "id": "2110004",
-        "name": "ISKAK WIDARTO",
-        "position": "Production Group 4 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1991-12-12",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 141,
-        "id": "2209021",
-        "name": "AAN BAGUS SAPUTRO",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2004-06-07",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 142,
-        "id": "2210011",
-        "name": "NANANG ARJUNA",
-        "position": "Group Production 6 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1999-05-24",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 143,
-        "id": "2210003",
-        "name": "LILIK SETIAWAN",
-        "position": "Group Production 1 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "1993-09-16",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 144,
-        "id": "2210008",
-        "name": "MAULANA AHMAD FAUDZAN",
-        "position": "Quality Control Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-04-04",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 145,
-        "id": "2309008",
-        "name": "RISKA WAHYU SAPUTRO",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-04-17",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 146,
-        "id": "2309018",
-        "name": "ISMA NUR ASROFI",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2005-03-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 147,
-        "id": "0807001",
-        "name": "INDAH JUMIYATI",
-        "position": "Polish Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1980-09-22",
-        "plant": "MOLD",
-        "gender": "female"
-       },
-       {
-        "no": 148,
-        "id": "1010001",
-        "name": "DIDIK PRASETYO",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1982-06-29",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 149,
-        "id": "1211001",
-        "name": "ANDI FEBRIANTORO",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1993-02-07",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 150,
-        "id": "1306001",
-        "name": "SURATMAN",
-        "position": "Quality Control Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1994-07-18",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 151,
-        "id": "1504004",
-        "name": "FRANSISCUS FENDI YUDHA KURNIAWAN",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1995-01-27",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 152,
-        "id": "1702003",
-        "name": "RINI",
-        "position": "Production Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1983-11-10",
-        "plant": "INJECT",
-        "gender": "female"
-       },
-       {
-        "no": 153,
-        "id": "1802003",
-        "name": "DISKA KURNIAWAN",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1997-12-15",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 154,
-        "id": "1807009",
-        "name": "KEFIN HADIWIJAYA",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-12-21",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 155,
-        "id": "1910020",
-        "name": "BRITO KUSUMA",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-05-13",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 156,
-        "id": "2001021",
-        "name": "ABDUL AZIS SAIFUDIN",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2000-04-20",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 157,
-        "id": "2001022",
-        "name": "DWI DARMAWAN",
-        "position": "CNC Mold  Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-12-11",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 158,
-        "id": "2004003",
-        "name": "CHOIRUL ANWAR SIDIK",
-        "position": "CNC Mold  Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-06-14",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 159,
-        "id": "2004005",
-        "name": "KRISNA SUKMA DEWA",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-01-08",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 160,
-        "id": "2101035",
-        "name": "GUNAWAN DWIANTORO",
-        "position": "Tool Room 3 Staff - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-06-11",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 161,
-        "id": "2101039",
-        "name": "WAHYU HARTANTA",
-        "position": "Manual & EDM Group Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1996-12-17",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 162,
-        "id": "2107012",
-        "name": "MEKY HAJID PRIHATIN",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1999-03-05",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 163,
-        "id": "2109008",
-        "name": "FAJAR HIRLAN TRI SEPTYAN",
-        "position": "Assembling Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-09-09",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 164,
-        "id": "2109005",
-        "name": "MOHAMMAD RASYID",
-        "position": "CNC Mold  Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-09-06",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 165,
-        "id": "2109012",
-        "name": "RAHMAT DWI NUGROHO",
-        "position": "CNC Mold  Group 1 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2002-12-03",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 166,
-        "id": "2111033",
-        "name": "MUHAMMAD DIMAS NUGROHO",
-        "position": "Manual & EDM Group Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2003-06-09",
-        "plant": "MOLD"
-       },
-       {
-        "no": 167,
-        "id": "2201004",
-        "name": "LUTFI INDRI ASTUTI",
-        "position": "Polish Mold Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "2001-05-13",
-        "plant": "MOLD",
-        "gender": "male"
-       },
-       {
-        "no": 168,
-        "id": "2501005",
-        "name": "M FATHONI HENDRA GUNAWAN",
-        "position": "Production Group 3 Operator - YPTI\t",
-        "level": "Operator",
-        "date_of_birth": "2003-02-24",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 169,
-        "id": "2501007",
-        "name": "ILYAS AZIS NUROHMAN",
-        "position": "Production Group 3 Operator - YPTI\t",
-        "level": "Operator",
-        "date_of_birth": "2003-05-14",
-        "plant": "INJECT",
-        "gender": "male"
-       },
-       {
-        "no": 170,
-        "id": "2501006",
-        "name": "HABIEB KHAIRUTSANI SURURI",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2002-09-04",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 171,
-        "id": "2412010",
-        "name": "RIDHO ARDIYANTO",
-        "position": "Group Production 2 Operator - YPTS",
-        "level": "Operator",
-        "date_of_birth": "2003-04-01",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 172,
-        "id": "2412011",
-        "name": "RYAN DIO YUNANTA ",
-        "position": "Group Production 3 Operator - YPTS ",
-        "level": "Operator",
-        "date_of_birth": "2000-05-05",
-        "plant": "YPTS",
-        "gender": "male"
-       },
-       {
-        "no": 173,
-        "id": "2109006",
-        "name": "RULI ANAN TASYA",
-        "position": "CNC Mold  Group 3 Operator - YPTI",
-        "level": "Operator",
-        "date_of_birth": "1998-08-25",
-        "plant": "MOLD",
-        "gender": "male"
-       }
+    }
 ]
-
 
 const createUsers = async () => {
     let pinHash = await bcrypt.hash('123456' + salt, 10);
-    // const school_id = "671881ff935ac0941251cb48"
-    const school_id = "67a036933e87747a0a5ffb7a"
+    const school_id = "671881ff935ac0941251cb48"
+    // const school_id = "67a036933e87747a0a5ffb7a"
 
     for (let i = 0; i < datas.length; i++) {
         const e = datas[i];
