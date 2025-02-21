@@ -5591,32 +5591,92 @@ mongoose.connect(mongoURI, { useNewUrlParser: true });
 const datas = [
     {
         "no": 1,
-        "id": "55555",
-        "name": "HARYO",
-        "position": "Creative Team",
-        "level": "Vendor",
-        "date_of_birth": "1968-12-21",
-        "plant": "MFG",
+        "id": "2402002",
+        "name": "HENRIKUS YULI KRISTANTO",
+        "position": "Teknik Mekanik - YCS",
+        "level": "Operator",
+        "date_of_birth": "2000-07-15",
+        "plant": "YCS",
         "gender": "male"
     },
     {
         "no": 2,
-        "id": "44444",
-        "name": "YOHANES",
-        "position": "IT Team",
-        "level": "Vendor",
-        "date_of_birth": "1969-09-09",
-        "plant": "MFG",
+        "id": "2402003",
+        "name": "VINCENTIUS DHIMAS RANGGA PAKSI",
+        "position": "Teknik Elektrik - YCS",
+        "level": "Operator",
+        "date_of_birth": "1999-01-14",
+        "plant": "YCS",
         "gender": "male"
     },
     {
         "no": 3,
-        "id": "2412014",
-        "name": "SARWY AGUS FERDIAN",
-        "position": "Creative",
-        "level": "Staff",
-        "date_of_birth": "1992-08-17",
-        "plant": "MFG",
+        "id": "2308028",
+        "name": "MUHAMMAD DWI WIBISONO",
+        "position": "Teknik Mekanik - YCS",
+        "level": "Operator",
+        "date_of_birth": "2003-08-03",
+        "plant": "YCS",
+        "gender": "male"
+    },
+    {
+        "no": 4,
+        "id": "1707004",
+        "name": "NURTAUFIQ",
+        "position": "Teknik Mekanik - YCS",
+        "level": "Operator",
+        "date_of_birth": "1998-10-02",
+        "plant": "YCS",
+        "gender": "male"
+    },
+    {
+        "no": 5,
+        "id": "1907003",
+        "name": "EDY SETIYAWAN",
+        "position": "Teknik Mekanik - YCS",
+        "level": "Operator",
+        "date_of_birth": "2001-09-02",
+        "plant": "YCS",
+        "gender": "male"
+    },
+    {
+        "no": 6,
+        "id": "1912008",
+        "name": "BAYU ARDIYANTO",
+        "position": "Teknik Elektrik - YCS",
+        "level": "Operator",
+        "date_of_birth": "1998-04-10",
+        "plant": "YCS",
+        "gender": "male"
+    },
+    {
+        "no": 7,
+        "id": "2009021",
+        "name": "F.X HERIN SETIA HERMAWAN",
+        "position": "Teknik Elektrik - YCS",
+        "level": "Operator",
+        "date_of_birth": "1998-11-25",
+        "plant": "YCS",
+        "gender": "male"
+    },
+    {
+        "no": 8,
+        "id": "2106010",
+        "name": "ANDRE CAHYA PRAMANA",
+        "position": "Teknik Elektrik - YCS",
+        "level": "Operator",
+        "date_of_birth": "1997-12-22",
+        "plant": "YCS",
+        "gender": "male"
+    },
+    {
+        "no": 9,
+        "id": "2111002",
+        "name": "DIMAS FARID NUR SYARIFFUDIN",
+        "position": "Teknik Mekanik - YCS",
+        "level": "Operator",
+        "date_of_birth": "2000-06-12",
+        "plant": "YCS",
         "gender": "male"
     }
 ]
