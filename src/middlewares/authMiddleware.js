@@ -45,7 +45,6 @@ const verify = async (req, res, next) => {
                 status: user.status,
                 last_login: user.last_login,
                 total_login: user.total_login,
-                date_of_birth: (user.date_of_birth != null) ? user.date_of_birth : null,
             };
             req.token = await signer(payload)
             const isExpired = await checkExpired(user._id)

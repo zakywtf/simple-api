@@ -1,9 +1,10 @@
 aside.left-sidebar
 	// Sidebar scroll
 	div
+		br
 		.brand-logo.d-flex.align-items-center.justify-content-between
 			a.text-nowrap.logo-img(href="#")
-				img(src="../assets/images/logos/logo2.png", width="180", alt=)
+				img(src="../assets/images/logos/logo4.png", width="90%", alt=)
 				//- h2 Logo
 			#sidebarCollapse.close-btn.d-xl-none.d-block.sidebartoggler.cursor-pointer
 				i.ti.ti-x.fs-8
@@ -22,5 +23,5 @@ aside.left-sidebar
 				- var role = session.role
 				case role!==undefined
 					when role == 'user' : include ./menubar/user-menu.pug
-					when role == 'admin' : include ./menubar/admin-menu.pug
-					when role == 'teacher' : include ./menubar/teacher-menu.pug
+					when role == 'developer' : include ./menubar/developer-menu.pug
+					when role == 'owner' : include ./menubar/owner-menu.pug

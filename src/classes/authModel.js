@@ -42,9 +42,9 @@ class authModel extends Models{
 
     async login(body) {
         // console.log({body})
-        let user = await this.model.findOne({nisn: body.nisn})
+        let user = await this.model.findOne({username: body.username})
         // console.log({user})
-        if (!user) throw new NotFoundError('NISN tidak ditemukan!')
+        if (!user) throw new NotFoundError('Username tidak ditemukan!')
         if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
         if (user.status == 'suspend') throw new NotFoundError('Akun anda dibekukan! Silahkan hubungi admin.')
         user.isOnline = true
@@ -52,19 +52,18 @@ class authModel extends Models{
         
         var payload = {
             _id: user._id,
-            nisn: user.nisn,
+            username: user.username,
             name: user.name,
             role: user.role,
             status: user.status,
             gender: user.gender,
-            school_id: (user.school_id != null) ? user.school_id._id : null,
-            date_of_birth: (user.date_of_birth != null) ? user.date_of_birth : null,
+            store_id: (user.store_id != null) ? user.store_id._id : null,
             last_login: user.last_login,
             total_login: user.total_login,
 
         }
-        // console.log({payload})
-        const isMatch = await bcrypt.compare(body.pin + process.env.SALT, user.pin)
+        console.log({payload})
+        const isMatch = await bcrypt.compare(body.password + process.env.SALT, user.password)
         if (!isMatch) throw new ValidationError('PIN salah!')
 
         const token = await signer(payload)

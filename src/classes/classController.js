@@ -78,8 +78,7 @@ function authController(aModel=false) {
             req.session.role = user.data.role;
             req.session.photo = user.data.photo;
             req.session.gender = user.data.gender;
-            req.session.school_id = user.data.school_id;
-            req.session.date_of_birth = user.data.date_of_birth;
+            req.session.store_id = user.data.store_id;
             req.session.online = true;
             return user
         });

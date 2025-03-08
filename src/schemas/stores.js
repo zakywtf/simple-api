@@ -3,34 +3,33 @@ const Schema = mongoose.Schema;
 const timestamp = require('./plugins/timestamps');
 
 let sch = new Schema({
-    invoice: {
+    code: {
+        type: String,
+    },
+    name: {
+        type: String,
+    },
+    address: {
+        type: String,
+    },
+    latitude: {
         type: String,
         default: null
     },
-    total_price: {
-        type: Number,
-        default: 0
-    },
-    notes: {
+    longitude: {
         type: String,
         default: null
     },
-    proof_of_payment: {
-        type: String,
-        default: null
-    },
-    store_id : {
-        type: Schema.Types.ObjectId, 
-        autopopulate: { select: 'npsn name address category status school_status'}, 
-        ref:'schools',
-        default: null
-    },
-    status: {
+    status:{
         type:String, 
-        enum:['paid', 'paid', 'expired'], 
-        default:'paid'
+        enum:['registered', 'active', 'inactive', 'unpaid', 'suspend'], 
+        default:'active'
     },
     expired_date: {
+        type: Date,
+        default: null
+    },
+    suspend_date: {
         type: Date,
         default: null
     },
@@ -46,4 +45,4 @@ let sch = new Schema({
 sch.plugin(timestamp);
 sch.plugin(require('mongoose-autopopulate'))
 
-module.exports = mongoose.model("payments", sch);
+module.exports = mongoose.model("stores", sch);

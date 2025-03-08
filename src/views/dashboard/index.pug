@@ -30,6 +30,6 @@ block content
 		br
 		- var role = session.role
 		case role!==undefined
-			when role == 'user' : include user-dashboard.pug
-			when role == 'admin' : include admin-dashboard.pug
-			when role == 'teacher' : include teacher-dashboard.pug
+			when role == 'cashier' : include user-dashboard.pug
+			when role == 'developer' : include developer-dashboard.pug
+			when role == 'owner' : include teacher-dashboard.pug

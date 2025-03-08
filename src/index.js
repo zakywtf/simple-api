@@ -53,6 +53,7 @@ mongoose
     });
 
 mongoose.set('debug', process.env.NODE_ENV == 'development' ? true : false);
+console.log({models: mongoose.models});
 
 // SESSION
 app.use(session({ secret: 'zakywtf', resave: true, saveUninitialized: true, cookie: { maxAge: process.env.SESSION_DURATION * 60 * 60 * 1000 } }));

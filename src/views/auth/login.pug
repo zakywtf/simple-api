@@ -3,8 +3,8 @@ html(lang="en")
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
-		title Wellness Point
-		link(rel="shortcut icon", type="image/png", href="../assets/images/logos/icon.png")
+		title Seblak Ummi
+		link(rel="shortcut icon", type="image/png", href="../assets/images/logos/logo4.png")
 		link(rel="stylesheet", href="../assets/css/styles.min.css")
 	body
 		// Body Wrapper
@@ -16,18 +16,19 @@ html(lang="en")
 							.card.mb-0
 								.card-body
 									a.text-nowrap.logo-img.text-center.d-block.py-3.w-100(href="#")
-										img(src="../assets/images/logos/logo1.png", width="150", alt=)
+										img(src="../assets/images/logos/logo4.png", width="90%", alt=)
 										//- h2 Logo
 									//- p.text-center Wellness Monitoring
+									br
 									br
 									#response-container.alert.alert-danger(role="alert", style="display:none;")
 									form#data-form
 										.mb-3
-											label.form-label(for="exampleInputEmail1") ID PEGAWAI
-											input#nisn.form-control(type="text", name='nisn')
+											label.form-label(for="exampleInputEmail1") Username
+											input#username.form-control(type="text", name='username', placeholder="username")
 										.mb-4
-											label.form-label(for="exampleInputPassword1") PIN
-											input#pin.form-control(type="password", name='pin')
+											label.form-label(for="exampleInputPassword1") Password
+											input#password.form-control(type="password", name='password', placeholder="password")
 										//
 											<div class="d-flex align-items-center justify-content-between mb-4">
 											<div class="form-check">
@@ -40,9 +41,9 @@ html(lang="en")
 											</div>
 										br
 										button.btn.btn-primary.w-100.py-8.fs-4.mb-4.rounded-2(type="submit") Masuk
-										.d-flex.align-items-center.justify-content-center
-											//- p.fs-4.mb-0.fw-bold New to Modernize?
-											a.text-primary.fw-bold.ms-2(href="/register") Buat Akun Baru
+										//- .d-flex.align-items-center.justify-content-center
+										//- 	//- p.fs-4.mb-0.fw-bold New to Modernize?
+										//- 	a.text-primary.fw-bold.ms-2(href="/register") Buat Akun Baru
 		
 		script(src="https://code.jquery.com/jquery-3.5.1.min.js")
 		script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
@@ -52,10 +53,10 @@ html(lang="en")
 					event.preventDefault(); // Prevent the default form submission
 					var host = window.location.origin;
 
-					const nisn = $('#nisn').val();
-					const pin = $('#pin').val();
+					const username = $('#username').val();
+					const password = $('#password').val();
 
-					const obj = { nisn: nisn, pin: pin }
+					const obj = { username: username, password: password }
 					//- console.log({obj})
 
 					$.ajax({
