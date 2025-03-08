@@ -13,4 +13,12 @@ rtr.get('/bmi/charts/:month', async (req, res, next) => {
     });
 })
 
+rtr.post('/owners', async (req, res, next) => {
+    console.log({user: req.user})
+    handleRequest(req, res, async(body)=>{
+        model.setUdata(req.user)
+        return await model.owners(body);
+    });
+})
+
 module.exports = rtr

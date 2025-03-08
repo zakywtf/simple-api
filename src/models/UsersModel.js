@@ -2,10 +2,20 @@ import Models from "../classes/classModel";
 import sch from "../schemas/users";
 import History from "../schemas/history";
 import moment from 'moment'
+import bcrypt from "bcryptjs";
 
 class usersModel extends Models{
     constructor(){
         super(sch)
+    }
+
+    async owners(obj){
+        let passHash = await bcrypt.hash('12345678' + process.env.SALT, 10);
+        obj.password = passHash
+        obj.role = 'owner'
+        let resp = await this.model.create(this.convertParam(obj, false))
+
+        return this.insert_result(resp)
     }
 
     async charts(month, school_id){

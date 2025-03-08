@@ -233,26 +233,26 @@ const IndexController = {
     },
 
 
-    devices: async (req, res) => {
-        const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
-        const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
-        // console.log({school: schools[0], datas: datas[0]})
-        res.render('devices/index', {datas, schools});
+    owners: async (req, res) => {
+        const datas = await Users.find({isDeleted: false, role: 'owner'}).sort({created_at: -1})
+        const stores = await Stores.find({isDeleted: false}).sort({created_at: -1})
+        // console.log({school: stores[0], datas: datas[0]})
+        res.render('owners/index', {datas, stores});
     },
 
-    deviceUpdate: async (req, res, next) => {
+    ownerUpdate: async (req, res, next) => {
         try {
-            await Devices.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
-            res.redirect('/devices');
+            await Users.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
+            res.redirect('/owners');
         } catch (error) {
             console.log('error ', error);
         }
     },
 
-    deviceDelete: async (req, res, next) => {
+    ownerDelete: async (req, res, next) => {
         try {
-            await Devices.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
-            res.redirect('/devices');
+            await Users.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
+            res.redirect('/owners');
         } catch (error) {
             console.log('error ', error);
         }

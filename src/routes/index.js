@@ -34,9 +34,9 @@ router.get('/stores', auth, IndexController.stores)
 router.post('/stores/update/:_id', auth, IndexController.storeUpdate)
 router.get('/stores/delete/:_id', auth, IndexController.storeDelete)
 
-// router.get('/devices', auth, IndexController.devices)
-// router.post('/devices/update/:_id', auth, IndexController.deviceUpdate)
-// router.get('/devices/delete/:_id', auth, IndexController.deviceDelete)
+router.get('/owners', auth, IndexController.owners)
+router.post('/owners/update/:_id', auth, IndexController.ownerUpdate)
+router.get('/owners/delete/:_id', auth, IndexController.ownerDelete)
 
 // router.get('/payments', auth, IndexController.payment)
 // router.get('/payments/invoice', auth, IndexController.invoice)
