@@ -1,6 +1,6 @@
-# wellness-point-v1
+# pos-platform-v1
 
-Dashboard Wellness Point
+Dashboard Point Of Sales
 
 # Requiments:
 
@@ -11,7 +11,7 @@ Dashboard Wellness Point
 Dev Enviroments:
 
 ```cmd
-$ cd wellness-point-v1
+$ cd pos-platform-v1
 $ npm install
 $ npm run dev
 ```
@@ -19,7 +19,7 @@ $ npm run dev
 Production Enviroments:
 
 ```cmd
-$ cd wellness-point-v1
+$ cd pos-platform-v1
 $ npm install
 $ npm start
 ```
@@ -27,7 +27,7 @@ $ npm start
 Run on
 
 ```cmd
-localhost:3500
+localhost:7500
 ```
 
 # API documentation:
@@ -60,4 +60,4 @@ localhost:3500
 Coming soon
 ```
 
-# wellness-point-v1
+# pos-platform-v1
