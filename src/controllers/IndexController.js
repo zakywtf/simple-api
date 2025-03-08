@@ -8,6 +8,7 @@ import apiResponse from "../helpers/apiResponse";
 import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
 import Schools from "../schemas/schools";
+import Stores from "../schemas/stores";
 import Devices from "../schemas/devices";
 import History from "../schemas/history";
 import WellnessDetail from "../schemas/wellness_details";
@@ -17,35 +18,6 @@ import Majority from "../schemas/majority";
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
 import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2, ageCategory, catBloodPress, conNormalBloodPress, conNormalTemperature, getCategoryBMI } from "../helpers/masterFunction"
-
-const countOld = (tanggalLahir) => {
-    console.log({tanggalLahir})
-    if (tanggalLahir) {
-        let birthDate = new Date(tanggalLahir);
-        let today = new Date();
-
-        let usia = today.getFullYear() - birthDate.getFullYear();
-        let bulan = today.getMonth() - birthDate.getMonth();
-        let hari = today.getDate() - birthDate.getDate();
-
-        // Jika bulan atau hari negatif, kurangi usia
-        if (bulan < 0 || (bulan === 0 && hari < 0)) {
-            usia--;
-        }
-        console.log({usia})
-        return usia + ' Tahun';
-    } else {
-       return '-'
-    }
-}
-
-const countBroca = (tb, gender) => {
-    if (tb != 0) {
-        const rumus1 = (tb-100)
-        const rumus2 = (gender == 'male') ? ((tb-100)/10) : (((tb-100)/10)*2)
-        return rumus1-rumus2 + ' kg'
-    }
-}
 
 const IndexController = {
 
@@ -59,103 +31,6 @@ const IndexController = {
 
     },
 
-    deleteDuplicateUsers: async (req, res) => {
-        const datas = [
-            '67a21c895411d5eee698d078',
-            '67a21c8a5411d5eee698d1c8',
-            '67a21c895411d5eee698d040',
-            '67a21c8a5411d5eee698d0b8',
-            '67a21c8a5411d5eee698d210',
-            '67a21c8a5411d5eee698d2cc',
-            '67a21c8a5411d5eee698d1d8',
-            '67a21c8a5411d5eee698d1a0',
-            '67a21c895411d5eee698d034',
-            '67a21c895411d5eee698d07c',
-            '67a21c8a5411d5eee698d0a8',
-            '67a21c8a5411d5eee698d0d4',
-            '67a21c895411d5eee698d080',
-            '67a21c8a5411d5eee698d1c4',
-            '67a21c8a5411d5eee698d224',
-            '67a21c895411d5eee698d094',
-            '67a21c8a5411d5eee698d154',
-            '67a21c8a5411d5eee698d318',
-            '67a21c8a5411d5eee698d1e4',
-            '67a21c8a5411d5eee698d104',
-            '67a21c895411d5eee698d070',
-            '67a21c8a5411d5eee698d114',
-            '67a21c895411d5eee698d06c',
-            '67a21c8a5411d5eee698d1cc',
-            '67a21c8a5411d5eee698d1e8',
-            '67a21c8a5411d5eee698d0d8',
-            '67a21c8a5411d5eee698d128',
-            '67a21c895411d5eee698d008',
-            '67a21c8a5411d5eee698d130',
-            '67a21c8a5411d5eee698d284',
-            '67a21c895411d5eee698d088',
-            '67a21c8a5411d5eee698d2e0',
-            '67a21c8b5411d5eee698d37c',
-            '67a21c8a5411d5eee698d304',
-            '67a21c895411d5eee698cf98',
-            '67a21c8a5411d5eee698d350',
-            '67a21c8a5411d5eee698d2e8',
-            '67a21c8a5411d5eee698d19c',
-            '67a21c8a5411d5eee698d134',
-            '67a21c895411d5eee698cf10',
-            '67a21c8a5411d5eee698d29c',
-            '67a21c8a5411d5eee698d0f8',
-            '67a21c8a5411d5eee698d298',
-            '67a21c8a5411d5eee698d294',
-            '67a21c895411d5eee698d0a0',
-            '67a21c8a5411d5eee698d138',
-            '67a21c895411d5eee698ceb8',
-            '67a21c895411d5eee698cf84',
-            '67a21c895411d5eee698cfb8',
-            '67a21c8a5411d5eee698d358',
-            '67a21c8a5411d5eee698d1d4',
-            '67a21c8a5411d5eee698d190',
-            '67a21c8a5411d5eee698d1b8',
-            '67a21c8a5411d5eee698d10c',
-            '67a21c8a5411d5eee698d288',
-            '67a21c8a5411d5eee698d2dc',
-            '67a21c8a5411d5eee698d18c',
-            '67a21c8a5411d5eee698d1bc',
-            '67a21c8a5411d5eee698d240',
-            '67a21c8a5411d5eee698d150',
-            '67a21c8a5411d5eee698d278',
-            '67a21c895411d5eee698cec0',
-            '67a21c8a5411d5eee698d334',
-            '67a21c895411d5eee698d00c',
-            '67a21c8a5411d5eee698d1ec',
-            '67a21c8a5411d5eee698d320',
-            '67a21c8a5411d5eee698d274',
-            '67a21c8a5411d5eee698d158',
-            '67a21c8a5411d5eee698d2e4',
-            '67a21c8a5411d5eee698d1ac',
-            '67a21c8a5411d5eee698d2d8',
-            '67a21c8a5411d5eee698d290',
-            '67a21c8a5411d5eee698d1f0',
-            '67a21c8a5411d5eee698d33c',
-            '67a21c8a5411d5eee698d280',
-            '67a21c8a5411d5eee698d0ac',
-            '67a21c8a5411d5eee698d32c',
-            '67a21c895411d5eee698d014',
-            '67a21c8a5411d5eee698d100',
-            '67a21c8a5411d5eee698d0f4'
-        ]
-    
-        for (let i = 0; i < datas.length; i++) {
-            const e = datas[i];
-            const user = await Users.findOne({ _id: e })
-            // console.log({user})
-            user.isDeleted = true
-            await user.save()
-
-            const detail = await WellnessDetail.findOne({ user_id: e })
-            // console.log({detail})
-            detail.isDeleted = true
-            await detail.save()
-        }
-    },
 
     scanner: (req, res) => {
         res.render('scanner/index');
@@ -220,189 +95,6 @@ const IndexController = {
 
     },
 
-    testPlanner: async (req, res) => {
-        const url = 'https://ai-workout-planner-exercise-fitness-nutrition-guide.p.rapidapi.com/nutritionAdvice?noqueue=1';
-        const options = {
-        method: 'POST',
-        headers: {
-            'x-rapidapi-key': 'd582f685e8msh7ecda2e52eb8d08p10038djsndf5589ddcc01',
-            'x-rapidapi-host': 'ai-workout-planner-exercise-fitness-nutrition-guide.p.rapidapi.com',
-            'Content-Type': 'application/json'
-        },
-        body: {
-            goal: 'Lose weight',
-            dietary_restrictions: ['Vegetarian'],
-            current_weight: 80,
-            target_weight: 70,
-            daily_activity_level: 'Moderate',
-            lang: 'en'
-        }
-        };
-
-        try {
-            const response = await fetch(url, options);
-            const result = await response.text();
-            console.log(result);
-        } catch (error) {
-            console.error(error);
-        }
-    },
-
-    testOpenAi: async (req, res) => {
-        const client = new OpenAI({
-            apiKey: process.env.OPENAI_KEY,
-            organization:'org-YrUIkWNv0KnRIWi8k4yDsXjt',
-            project:'proj_DiUhYrQdOLtW6bhhMrr5WAyK',
-        });
-
-        const response = await client.chat.completions.create({
-            messages: [{ role: 'user', content: 'Say this is a test' }],
-            model: 'gpt-4o-mini'
-        })
-
-        // access the underlying Response object
-        // console.log(response.headers.get('x-ratelimit-limit-tokens'));
-        console.log(response._request_id);
-        return apiResponse.successResponseWithData(res, "great!", response)
-
-    },  
-
-    textToJson: async (req, res) => {
-        const text = '[{"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Jumping Jack", "repetisi": "10 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Push up", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Squat", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Pull up", "repetisi": "5-8 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Plank", "repetisi": "30 detik", "set": "3 set"}, {"keterangan": "Lakukan pendinginan setelah berolahraga", "latihan": "Stretching", "repetisi": "5 menit", "set": "1 set"}], "hari": "Senin"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Jogging ringan", "repetisi": "15 menit", "set": "1 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Burpees", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Lunges", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Dips", "repetisi": "5-8 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Bicycle crunch", "repetisi": "15 kali", "set": "3 set"}, {"keterangan": "Lakukan pendinginan setelah berolahraga", "latihan": "Stretching", "repetisi": "5 menit", "set": "1 set"}], "hari": "Rabu"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Lompat tali", "repetisi": "100 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Push up incline", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Bulgarian split squat", "repetisi": "8-12 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Chin up", "repetisi": "5-8 kali", "set": "3 set"}, {"keterangan": "Istirahat antar set 30 detik", "latihan": "Reverse crunch", "repetisi": "15 kali", "set": "3 set"}, {"keterangan": "Lakukan pendinginan setelah berolahraga", "latihan": "Stretching", "repetisi": "5 menit", "set": "1 set"}], "hari": "Jumat"}, {"aktivitas": [{"keterangan": "Lakukan pemanasan sebelum mulai", "latihan": "Bersepeda", "repetisi": "30 menit", "set": "1 set"}, {"keterangan": "", "latihan": "Bebas", "repetisi": "", "set": ""}], "hari": "Minggu"}]\n'
-        const json = JSON.parse(text)
-        const planner = await saveDataRecommendation(text)
-        // console.log({planner})
-        return apiResponse.successResponseWithData(res, "great!", json)
-
-    },
-
-    testGemini: async (req, res) => {
-        const schema = {
-            description: "Workout Planner",
-            type: SchemaType.ARRAY,
-            items: {
-              type: SchemaType.OBJECT,
-              properties: {
-                hari: {
-                  type: SchemaType.STRING,
-                  description: "hari",
-                  nullable: false,
-                },
-                aktivitas: {
-                    description: "latihan yang harus di lakukan setiap harinya",
-                    type: SchemaType.ARRAY,
-                    items: {
-                        type: SchemaType.OBJECT,
-                        properties: {
-                            latihan: {
-                                description: "latihan yang harus di lakukan setiap harinya menggunakan istilah bahasa indonesia",
-                                type: SchemaType.STRING,
-                            },
-                            set: {
-                                description: "berapa set per latihan",
-                                type: SchemaType.STRING,
-                            },
-                            repetisi: {
-                                description: "berapa repetisi per set",
-                                type: SchemaType.STRING,
-                            },
-                            keterangan: {
-                                description: "keterangan dari latihan",
-                                type: SchemaType.STRING,
-                            },
-                        },
-                        required: ["latihan", "set", "repetisi", "keterangan"]
-                    },
-              },
-            },
-          }
-        }
-          
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash-001",
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: schema,
-            },
-        });
-
-        const prompt = `workout planner di rumah untuk tinggi badan ${req.params.height}cm dan berat badan ${req.params.weight}kg dari senin sampai minggu`;
-        // const prompt = "nutrisi advice untuk badan 173cm, berat badan 79kg, tekanan darah 120/80 mmHg";
-
-        const result = await model.generateContent(prompt);
-        console.log({result})
-        // return apiResponse.successResponseWithData(res, "great!", result.response.text()
-
-        return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
-    },
-
-    mealPlanner: async (req, res) => {
-        const schema = {
-            description: "Meal Planner",
-            type: SchemaType.ARRAY,
-            items: {
-              type: SchemaType.OBJECT,
-              properties: {
-                hari: {
-                  type: SchemaType.STRING,
-                  description: "hari",
-                  nullable: false,
-                },
-                makanan: {
-                    description: "makanan sehat setiap harinya",
-                    type: SchemaType.ARRAY,
-                    items: {
-                        type: SchemaType.OBJECT,
-                        properties: {
-                            jenis: {
-                                description: "jenis makanan untuk setiap harinya",
-                                type: SchemaType.STRING,
-                            },
-                            keterangan: {
-                                description: "keterangan dari jenis makanan",
-                                type: SchemaType.STRING,
-                            },
-                        },
-                        required: ["jenis",  "keterangan"]
-                    },
-              },
-            },
-          }
-        }
-          
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-        const model = genAI.getGenerativeModel({ 
-            model: "gemini-1.5-flash-001",
-            generationConfig: {
-                responseMimeType: "application/json",
-                responseSchema: schema,
-            },
-        });
-
-        const prompt = `planner makanan per minggu untuk tinggi badan ${req.params.height}kg, berat badan ${req.params.weight}cm dan tekanan darah 143 /81mmHg dengan makanan yang umum di indonesia`;
-        // const prompt = "nutrisi advice untuk badan 173cm, berat badan 79kg, tekanan darah 120/80 mmHg";
-
-        const result = await model.generateContent(prompt);
-        console.log({result})
-        // return apiResponse.successResponseWithData(res, "great!", result.response.text()
-
-        return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
-    },
-
-    testingGemini: async (req, res) => {
-
-        const genAI = new GoogleGenerativeAI(process.env.GEMINI_KEY);
-        const model = genAI.getGenerativeModel({ model: "models/gemini-1.5" });
-        
-        const prompt = "Explain how AI works";
-        
-        const result = await model.generateContent(prompt);
-        console.log(result.response.text());
-        return apiResponse.successResponseWithData(res, "great!", {result, text: result.response.text()})
-
-    },
-
     loginPage: async (req, res) => {
         res.render('auth/login');
     },
@@ -413,9 +105,9 @@ const IndexController = {
 
     dashboard: async (req, res) => {
         let data
-        let total_users = 0
-        let total_devices = 0
-        let total_schools = 0
+        let total_cashier = 0
+        let total_owner = 0
+        let total_stores = 0
         let schools_unpaid = []
         let total_kurus = 0
         let total_normal = 0
@@ -462,14 +154,14 @@ const IndexController = {
             cat_bp = await catBloodPress(age_cat, bp)
             con_normal_bp = await conNormalBloodPress(age_cat)
             con_normal_temp = await conNormalTemperature(data.temperature)
-        } else if (req.session.role == 'admin'){
-            total_users = await Users.find({isDeleted: false}).countDocuments()
-            total_devices = await Devices.find({isDeleted: false}).countDocuments()
-            total_schools = await Schools.find({isDeleted: false}).countDocuments()
-            const schools = await Schools.find({isDeleted: false, status: "unpaid"})
-            for (let i = 0; i < schools.length; i++) {
-                const sch = schools[i];
-                schools_unpaid.push({npsn: sch.npsn, name: sch.name, status: sch.status})
+        } else if (req.session.role == 'developer'){
+            total_cashier = await Users.find({isDeleted: false, role: 'cashier'}).countDocuments()
+            total_owner = await Users.find({isDeleted: false, role: 'owner'}).countDocuments()
+            total_stores = await Stores.find({isDeleted: false}).countDocuments()
+            const stores = await Stores.find({isDeleted: false, status: "unpaid"})
+            for (let i = 0; i < stores.length; i++) {
+                const sch = stores[i];
+                stores_unpaid.push({code: sch.code, name: sch.name, status: sch.status})
             }
             revenue_yearly = await yearlyRevenue()
             revenue_monthly = await monthlyRevenue()
@@ -507,8 +199,8 @@ const IndexController = {
             }
 
         }
-        // console.log({data, d, wd_null, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female, recent_histories})
-        res.render('dashboard/index', {data, d, wd_null, total_users, total_devices, total_schools, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female, recent_histories});
+        // console.log({data, d, wd_null, total_users, total_devices, total_stores, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female, recent_histories})
+        res.render('dashboard/index', {data, d, wd_null, total_cashier, total_owner, total_stores, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female, recent_histories});
     },
 
     history: async (req, res) => {
@@ -540,59 +232,6 @@ const IndexController = {
         res.render('users/detail', { name: user.name, level: level.toLowerCase(), datas });
     },
 
-    usersLevel: async (req, res) => {
-        console.log({user: req.session})
-        const {cat} = req.query;
-        const regVal = new RegExp(cat, 'i');
-        const qry = {
-            $or : [{level: regVal}
-            ]
-        }
-        const datas = []
-        const users = await Users.find({...qry, isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({name: 1})
-        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: 1})
-        for (let i = 0; i < users.length; i++) {
-            const user = users[i];
-            var old = await countOld(user.date_of_birth)
-            const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
-            const user_detail = await WellnessDetail.findOne({user_id: user._id})
-            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, blood_pressure: user_detail.blood_pressure, temperature: user_detail.temperature, oxygen_saturation: user_detail.oxygen_saturation, old: old})
-        }
-        res.render('users/level', {datas, majorities, level: cat});
-    },
-
-    usersCategoryBMI: async (req, res) => {
-        console.log({user: req.session})
-        const {cat} = req.query;
-        const regVal = new RegExp(cat, 'i');
-        const qry = {
-            $or : [{bmi_category: regVal}
-            ]
-        }
-        const datas = []
-        const user_details = await WellnessDetail.find({...qry, isDeleted: false, school_id: req.session.school_id}).sort({updated_at: -1})
-        // const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: 1})
-        for (let i = 0; i < user_details.length; i++) {
-            const ud = user_details[i];
-            const user = await Users.findOne({_id: ud.user_id})
-            var old = await countOld(user.date_of_birth)
-            const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
-            datas.push({ ...user._doc, majority: majority, bmi_score: ud.bmi_score, bmi_category: ud.bmi_category, height: ud.height, weight: ud.weight, blood_pressure: ud.blood_pressure, temperature: ud.temperature, oxygen_saturation: ud.oxygen_saturation, old: old})
-        }
-        res.render('users/bmi', {datas, bmi: cat});
-    },
-
-    userMajorityUpdate: async (req, res, next) => {
-        try {
-            const user = await Users.findOne({isDeleted: false, _id: req.params.user_id})
-            user.majority_id = req.params.majority_id
-            await user.save()
-            
-            res.redirect('/users');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
 
     devices: async (req, res) => {
         const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
@@ -619,25 +258,25 @@ const IndexController = {
         }
     },
 
-    schools: async (req, res) => {
-        const datas = await Schools.find({isDeleted: false}).sort({ created_at: -1 })
+    stores: async (req, res) => {
+        const datas = await Stores.find({isDeleted: false}).sort({ created_at: -1 })
         
-        res.render('schools/index', {datas});
+        res.render('stores/index', {datas});
     },
 
-    schoolUpdate: async (req, res, next) => {
+    storeUpdate: async (req, res, next) => {
         try {
-            await Schools.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
-            res.redirect('/schools');
+            await Stores.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
+            res.redirect('/stores');
         } catch (error) {
             console.log('error ', error);
         }
     },
 
-    schoolDelete: async (req, res, next) => {
+    storeDelete: async (req, res, next) => {
         try {
-            await Schools.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
-            res.redirect('/schools');
+            await Stores.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
+            res.redirect('/stores');
         } catch (error) {
             console.log('error ', error);
         }

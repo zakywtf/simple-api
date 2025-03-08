@@ -1,5 +1,5 @@
 import { controller } from "../classes/classController"
-import m from "../models/SchoolsModel"
+import m from "../models/StoresModel"
 import handleRequest from "../helpers/handleRequest"
 
 let model = new m()
