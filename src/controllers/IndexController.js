@@ -258,6 +258,31 @@ const IndexController = {
         }
     },
 
+    cashiers: async (req, res) => {
+        const datas = await Users.find({isDeleted: false, role: 'cashier'}).sort({created_at: -1})
+        const stores = await Stores.find({isDeleted: false}).sort({created_at: -1})
+        // console.log({school: stores[0], datas: datas[0]})
+        res.render('cashiers/index', {datas, stores});
+    },
+
+    cashierUpdate: async (req, res, next) => {
+        try {
+            await Users.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
+            res.redirect('/cashiers');
+        } catch (error) {
+            console.log('error ', error);
+        }
+    },
+
+    cashierDelete: async (req, res, next) => {
+        try {
+            await Users.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
+            res.redirect('/cashiers');
+        } catch (error) {
+            console.log('error ', error);
+        }
+    },
+
     stores: async (req, res) => {
         const datas = await Stores.find({isDeleted: false}).sort({ created_at: -1 })
         

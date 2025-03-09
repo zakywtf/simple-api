@@ -38,6 +38,10 @@ router.get('/owners', auth, IndexController.owners)
 router.post('/owners/update/:_id', auth, IndexController.ownerUpdate)
 router.get('/owners/delete/:_id', auth, IndexController.ownerDelete)
 
+router.get('/cashiers', auth, IndexController.cashiers)
+router.post('/cashiers/update/:_id', auth, IndexController.cashierUpdate)
+router.get('/cashiers/delete/:_id', auth, IndexController.cashierDelete)
+
 // router.get('/payments', auth, IndexController.payment)
 // router.get('/payments/invoice', auth, IndexController.invoice)
 

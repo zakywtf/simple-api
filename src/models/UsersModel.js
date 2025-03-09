@@ -18,6 +18,16 @@ class usersModel extends Models{
         return this.insert_result(resp)
     }
 
+    async cashiers(obj){
+        let passHash = await bcrypt.hash('12345678' + process.env.SALT, 10);
+        obj.password = passHash
+        obj.role = 'cashier'
+        obj.store_id = udata.store_id
+        let resp = await this.model.create(this.convertParam(obj, false))
+
+        return this.insert_result(resp)
+    }
+
     async charts(month, school_id){
         const datas = []
         
