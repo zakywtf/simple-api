@@ -22,9 +22,10 @@ block content
 						thead.thead-light
 							tr
 								th No
-								th Username
+								//- th Username
 								th Nama
 								th No. Telepon
+								th Jenis Kelamin
 								th Nama Toko
 								th Status
 								th Tanggal Input
@@ -35,10 +36,16 @@ block content
 							each data in datas
 								tr
 									td #{no++}
+									//- td 
+									//- 	b #{data.username}
 									td 
-										b #{data.username}
-									td #{data.name}
+										b #{data.name}
 									td #{data.phone}
+									td
+										if (data.gender == 'male')
+											| Laki-laki
+										else 
+											| Perempuan
 									td #{data.store_id.name}
 									//- td #{data.longitude}
 									td.border-bottom-0
@@ -72,19 +79,19 @@ block content
 			.modal-content
 				.modal-header
 					h2
-						b Tambah Owner Toko
+						b Tambah Kasir Toko
 					//- button.close(type="button", data-dismiss="modal")
 					//- 	span(aria-hidden="true")
 					//- 		i.ti.ti-square-x
 					//- 	span.sr-only close
 				.modal-body
 					form#data-form.form-validation
-						.form-group.row
-							label.col-sm-4.form-control-label(for="name") Username
-								span.text-danger *
-							.col-sm-8
-								input#username.form-control(type="text", placeholder="Username", required, name="username")
-						br
+						//- .form-group.row
+						//- 	label.col-sm-4.form-control-label(for="name") Username
+						//- 		span.text-danger *
+						//- 	.col-sm-8
+						//- 		input#username.form-control(type="text", placeholder="Username", required, name="username")
+						//- br
 						.form-group.row
 							label.col-sm-4.form-control-label(for="name") Nama
 								span.text-danger *
@@ -96,6 +103,15 @@ block content
 								span.text-danger *
 							.col-sm-8
 								input#phone.form-control(type="text", placeholder="No. Telepon", required, name="phone")
+						br
+						.form-group.row
+							label.col-sm-4.form-control-label(for="hori-pass1") Jenis Kelamin
+								span.text-danger *
+							.col-sm-8
+								select#gender.form-control(name="gender", required="required")
+									option(value="") - Pilih Jenis Kelamin -
+									option(value="male") Laki-laki
+									option(value="female") Perempuan
 						//- br
 						//- .form-group.row
 						//- 	label.col-sm-4.form-control-label(for="hori-pass1") Toko

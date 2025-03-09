@@ -25,7 +25,8 @@ rtr.post('/cashiers', async (req, res, next) => {
     console.log({user: req.user})
     handleRequest(req, res, async(body)=>{
         model.setUdata(req.user)
-        return await model.cashiers(body);
+        // console.log({body})
+        return await model.createCashier(body);
     });
 })
 

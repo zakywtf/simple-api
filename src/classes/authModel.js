@@ -42,7 +42,8 @@ class authModel extends Models{
 
     async login(body) {
         // console.log({body})
-        let user = await this.model.findOne({username: body.username})
+        const identifier = body.username
+        let user = await this.model.findOne({$or: [{ username: identifier }, { phone: identifier }]})
         // console.log({user})
         if (!user) throw new NotFoundError('Username tidak ditemukan!')
         if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
@@ -64,7 +65,7 @@ class authModel extends Models{
         }
         console.log({payload})
         const isMatch = await bcrypt.compare(body.password + process.env.SALT, user.password)
-        if (!isMatch) throw new ValidationError('PIN salah!')
+        if (!isMatch) throw new ValidationError('Password salah!')
 
         const token = await signer(payload)
         // console.log({token})

@@ -13,16 +13,19 @@ class usersModel extends Models{
         let passHash = await bcrypt.hash('12345678' + process.env.SALT, 10);
         obj.password = passHash
         obj.role = 'owner'
+        obj.username = obj.phone
         let resp = await this.model.create(this.convertParam(obj, false))
 
         return this.insert_result(resp)
     }
 
-    async cashiers(obj){
+    async createCashier(obj){
+        // console.log({udata: this.udata})
         let passHash = await bcrypt.hash('12345678' + process.env.SALT, 10);
         obj.password = passHash
         obj.role = 'cashier'
-        obj.store_id = udata.store_id
+        obj.store_id = this.udata.store_id
+        obj.username = obj.phone
         let resp = await this.model.create(this.convertParam(obj, false))
 
         return this.insert_result(resp)

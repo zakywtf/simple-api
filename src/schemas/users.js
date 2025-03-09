@@ -20,7 +20,7 @@ let sch = new Schema({
     },
     phone: {
         type: String,
-        default: null
+        unique: true,
     },
     address: {
         type: String,
