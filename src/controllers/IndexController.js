@@ -10,6 +10,7 @@ import Users from "../schemas/users";
 import Schools from "../schemas/schools";
 import Stores from "../schemas/stores";
 import Materials from "../schemas/materials";
+import Stocks from "../schemas/stocks";
 import History from "../schemas/history";
 import WellnessDetail from "../schemas/wellness_details";
 import Payments from "../schemas/payments";
@@ -329,6 +330,13 @@ const IndexController = {
         } catch (error) {
             console.log('error ', error);
         }
+    },
+
+    stocks: async (req, res) => {
+        const datas = await Stocks.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
+        const materials = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
+        
+        res.render('stocks/index', {datas, materials});
     },
 
     payment: async (req, res) => {

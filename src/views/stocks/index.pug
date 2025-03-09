@@ -1,0 +1,237 @@
+extends ../layouts/base
+
+block content
+	.container
+		br
+		//- br
+		.card
+			.card-body
+				h5.card-title.fw-semibold.mb-4 Daftar Stok Bahan Dasar
+				p.mb-0 Berikut daftar stok bahan dasar yang sudah terdaftar
+				br
+				.filter-container
+					//- label(for="categoryFilter") Filter Kategori:
+					br
+					a.button.btn.btn-primary.btn-round.ml-auto(title='', data-original-title="Tambah Sekolah", data-toggle='modal', href='', data-target='#create')
+						i.fa.fa-plus
+						| 
+						| Tambah Stok Bahan Dasar
+				//- input#search.search-input(type="text", placeholder="Search...", oninput="filterTable()")
+				.table-responsive
+					table#basic-datatables.display.table.table-bordered.table-hover
+						thead.thead-light
+							tr
+								th No
+								//- th Username
+								th Nama Bahan Dasar
+								th Jumlah
+								th Satuan
+								th Terakhir Diperbaharui
+								th Aksi
+
+						tbody
+							-var no = 1;
+							each data in datas
+								tr
+									td #{no++}
+									td 
+										b #{data.material_id.name}
+									td #{data.amount}
+									td #{data.material_id.unit}
+									td #{prettyDate(data.updated_at)}
+									td
+										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
+											| Aksi
+										ul.dropdown-menu
+											li
+												a.dropdown-item(title='', data-original-title="Edit Sekolah", data-toggle='modal', href='', data-target='#edit'+data._id) Edit
+											li 
+												a.dropdown-item(title='', data-original-title="Delete Mesin", data-toggle='modal', href='', data-target='#delete'+data._id) Delete
+							
+					.custom-footer
+					//- nav
+					//- 	ul(style="justify-content: center;")#pagination.pagination
+
+	.modal.fade(id='create',tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+		.modal-dialog(style="width: 800px;")
+			.modal-content
+				.modal-header
+					h2
+						b Tambah Bahan Dasar
+					//- button.close(type="button", data-dismiss="modal")
+					//- 	span(aria-hidden="true")
+					//- 		i.ti.ti-square-x
+					//- 	span.sr-only close
+				.modal-body
+					form#data-form.form-validation
+						//- .form-group.row
+						//- 	label.col-sm-4.form-control-label(for="name") Username
+						//- 		span.text-danger *
+						//- 	.col-sm-8
+						//- 		input#username.form-control(type="text", placeholder="Username", required, name="username")
+						//- br
+						.form-group.row
+							label.col-sm-4.form-control-label(for="name") Nama Bahan Dasar
+								span.text-danger *
+							.col-sm-8
+								input#name.form-control(type="text", placeholder="Nama Bahan Dasar", required, name="name")
+						br
+						.form-group.row
+							label.col-sm-4.form-control-label(for="hori-pass1") Satuan
+								span.text-danger *
+							.col-sm-8
+								select#unit.form-control(name="unit", required="required")
+									option(value="") - Pilih Satuan -
+									option(value="Buah") Buah
+									option(value="Butir") Butir
+									option(value="Gram") Gram
+									//- option(value="Kilogram") Kilogram
+									//- option(value="Liter") Liter
+									option(value="Mililiter") Mililiter
+						br
+						.form-group.row
+							label.col-sm-4.form-control-label(for="name") Catatan
+								//- span.text-danger *
+							.col-sm-8
+								textarea#notes.form-control(row="3", placeholder="Catatan", name="notes")
+						br
+						.form-group.row
+							.col-sm-12.col-sm-offset-4
+								button.btn.btn-primary.waves-effect.waves-light(type="submit", style="float: right;")
+									| Submit
+
+	each data in datas 
+		.modal.fade(id='edit'+data._id, tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog(style="width: 800px;")
+				.modal-content
+					.modal-header
+						h2
+							b Edit Bahan Dasar
+						//- button.close(type="button", data-dismiss="modal")
+						//- 	span(aria-hidden="true")
+						//- 		i.ti.ti-square-x
+						//- 	span.sr-only close
+					.modal-body
+						form#edit-form.form-validation(action='/materials/update/'+data._id, method='post')
+							.form-group.row
+								label.col-sm-4.form-control-label(for="name") Nama Bahan Dasar
+									span.text-danger *
+								.col-sm-8
+									input#name.form-control(type="text", placeholder="Nama Bahan Dasar", required, name="name", value=data.name)
+							br
+							.form-group.row
+								label.col-sm-4.form-control-label(for="hori-pass1") Satuan
+									span.text-danger *
+								.col-sm-8
+									select#unit.form-control(name="unit", required="required")
+										option(value="") - Pilih Satuan -
+										option(value="Buah", selected=(data.unit==='Buah')?'yes':undefined) Buah
+										option(value="Butir", selected=(data.unit==='Butir')?'yes':undefined) Butir
+										option(value="Gram", selected=(data.unit==='Gram')?'yes':undefined) Gram
+										//- option(value="Kilogram", selected=(data.unit==='Kilogram')?'yes':undefined) Kilogram
+										//- option(value="Liter", selected=(data.unit==='Liter')?'yes':undefined) Liter
+										option(value="Mililiter", selected=(data.unit==='Mililiter')?'yes':undefined) Mililiter
+							br
+							.form-group.row
+								label.col-sm-4.form-control-label(for="name") Catatan
+									//- span.text-danger *
+								.col-sm-8
+									textarea#notes.form-control(row="3", placeholder="Catatan", name="notes") #{data.notes}
+							br
+							.form-group.row
+								.col-sm-12.col-sm-offset-4
+									button.btn.btn-primary.waves-effect.waves-light(type="submit", style="float: right;")
+										| Submit
+
+	// pop up delete data
+	each data in datas
+		.modal.fade(id='delete'+data._id ,tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+			.modal-dialog
+				.modal-content
+					.modal-header
+						h4#myModalLabel.modal-title Peringatan!
+					.modal-body
+						h5 Apakah anda yakin untuk menghapus data #{data.name} ?
+					.modal-footer
+						a.btn.btn-danger#tambah(type='button', href='stores/delete/'+data._id) Ya
+						button.btn.btn-primary(type='button', data-dismiss='modal') Tidak
+				// /.modal-content
+			// /.modal-dialog
+		// /.modal
+
+	script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
+	//- script(src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js")
+
+	script.
+		$(document).ready(function() {
+			var table = $('#basic-datatables').DataTable({
+				"paging": true,
+				"searching": true,
+				"info": false,
+				"ordering": true,
+				"lengthMenu": [10, 25, 50, 100],
+				"deferRender": true,
+				"scroller": true,
+			});
+			$('#categoryFilter').on('change', function () {
+				var selectedCategory = $(this).val();
+				console.log({selectedCategory})
+				table.column(11).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
+			});
+			$('.dataTables_length').html(`
+				<label>Show
+					<select id="customEntries" class="custom-entries">
+						<option value="10" selected>10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select> entries
+				</label>
+			`);
+
+			// Event listener untuk dropdown custom
+			$('#customEntries').on('change', function() {
+				var value = $(this).val();
+				table.page.len(value).draw();
+			});
+			//- $('.dataTables_length').clone().appendTo('.custom-footer').show();
+			
+		});
+
+
+	script.
+		document.getElementById('data-form').addEventListener('submit', function(event) {
+			event.preventDefault();
+			var host = window.location.origin;
+			const token = localStorage.getItem('token');
+			const formData = new FormData(this);
+			const data = Object.fromEntries(formData);
+
+			// Option 1: Using fetch API
+			fetch(host + '/api/v1/materials', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${token}`
+				},
+				body: JSON.stringify(data)
+			})
+			.then(response => {
+				console.log({response})
+				if (!response.ok) {
+					throw new Error('Network response was not ok');
+				}
+				//- return response.json(); 
+				window.location.href = host+'/materials'
+
+			})
+			.then(data => {
+				console.log('Success:', data);
+			})
+			.catch(error => {
+				console.error('Error:', error);
+			});
+		});
+
+		

@@ -45,6 +45,9 @@ router.get('/cashiers/delete/:_id', auth, IndexController.cashierDelete)
 router.get('/materials', auth, IndexController.materials)
 router.post('/materials/update/:_id', auth, IndexController.materialUpdate)
 router.get('/materials/delete/:_id', auth, IndexController.materialDelete)
+
+router.get('/stocks', auth, IndexController.stocks)
+
 // router.get('/payments', auth, IndexController.payment)
 // router.get('/payments/invoice', auth, IndexController.invoice)
 
