@@ -3,22 +3,18 @@ const Schema = mongoose.Schema;
 const timestamp = require('./plugins/timestamps');
 
 let sch = new Schema({
-    device_number: {
-        type: String,
-    },
     name: {
         type: String,
     },
-    school_id : {
+    store_id : {
         type: Schema.Types.ObjectId, 
-        autopopulate: { select: 'npsn name address category status latitude longitude'}, 
-        ref:'schools',
+        autopopulate: { select: 'name address status latitude longitude'}, 
+        ref:'stores',
         default: null
     },
-    condition : {
+    unit: {
         type:String, 
-        enum:['good', 'broken'], 
-        default:'good'
+        default:null
     },
     notes: {
         type: String,
@@ -36,4 +32,4 @@ let sch = new Schema({
 sch.plugin(timestamp);
 sch.plugin(require('mongoose-autopopulate'))
 
-module.exports = mongoose.model("devices", sch);
+module.exports = mongoose.model("materials", sch);
