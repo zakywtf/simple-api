@@ -80,6 +80,7 @@ app.use(useragent.express());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('proof_of_payment'))
+app.use(express.static('menus'))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -25,6 +25,7 @@ block content
 								//- th Username
 								th Nama Bahan Dasar
 								th Jumlah
+								th Opname
 								th Satuan
 								th Terakhir Diperbaharui
 								th Aksi
@@ -37,6 +38,7 @@ block content
 									td 
 										b #{data.material_id.name}
 									td #{data.amount}
+									td #{data.opname}
 									td #{data.material_id.unit}
 									td #{prettyDate(data.updated_at)}
 									td

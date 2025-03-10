@@ -11,6 +11,7 @@ import Schools from "../schemas/schools";
 import Stores from "../schemas/stores";
 import Materials from "../schemas/materials";
 import Stocks from "../schemas/stocks";
+import Menus from "../schemas/menus";
 import History from "../schemas/history";
 import WellnessDetail from "../schemas/wellness_details";
 import Payments from "../schemas/payments";
@@ -337,6 +338,13 @@ const IndexController = {
         const materials = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
         
         res.render('stocks/index', {datas, materials});
+    },
+
+    menus: async (req, res) => {
+        const datas = await Menus.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
+        const materials = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
+        
+        res.render('menus/index', {datas, materials});
     },
 
     payment: async (req, res) => {

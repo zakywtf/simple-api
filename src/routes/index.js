@@ -48,6 +48,8 @@ router.get('/materials/delete/:_id', auth, IndexController.materialDelete)
 
 router.get('/stocks', auth, IndexController.stocks)
 
+router.get('/menus', auth, IndexController.menus)
+
 // router.get('/payments', auth, IndexController.payment)
 // router.get('/payments/invoice', auth, IndexController.invoice)
 
