@@ -13,7 +13,7 @@ body.bg-light
 				.row
 					each data in foods
 						.col-4.mb-3.d-flex
-							.card.p-2.text-center(onclick="addToCart('"+data.name+"', "+data.selling_price+", 'burger.jpg')")
+							.card.p-2.text-center(onclick="addToCart('"+data.name+"', "+data.selling_price+", '"+data._id+"')")
 								img.item-image(src=data.picture, alt=data.name, width="100%", height="70")
 								h6 #{data.name}
 								p #{formatRupiah(data.selling_price)}
@@ -21,7 +21,7 @@ body.bg-light
 				.row
 					each data in drinks
 						.col-4.mb-3.d-flex
-							.card.p-2.text-center(onclick="addToCart('"+data.name+"', "+data.selling_price+", 'burger.jpg')")
+							.card.p-2.text-center(onclick="addToCart('"+data.name+"', "+data.selling_price+", '"+data._id+"')")
 								img.item-image(src=data.picture, alt=data.name, width="100%", height="70")
 								h6 #{data.name}
 								p #{formatRupiah(data.selling_price)}
@@ -29,7 +29,7 @@ body.bg-light
 				.row
 					each data in toppings
 						.col-4.mb-3.d-flex
-							.card.p-2.text-center(onclick="addToCart('"+data.name+"', "+data.selling_price+", 'burger.jpg')")
+							.card.p-2.text-center(onclick="addToCart('"+data.name+"', "+data.selling_price+", '"+data._id+"')")
 								img.item-image(src=data.picture, alt=data.name, width="100%", height="70")
 								h6 #{data.name}
 								p #{formatRupiah(data.selling_price)}
@@ -49,17 +49,29 @@ body.bg-light
 				|
 				|
 				|
-				button.btn.btn-success.mt-3(onclick="checkout()") Bayar
-
+				button.btn.btn-success.mt-3(onclick="toggleCart2()") Lanjut
+			br
+		#cart-container2.cart-container2
+			.container
+				h4 Metode Pembayaran
+				button.btn.btn-danger.mt-3(onclick="checkout()") Non-unai
+				|
+				|
+				|
+				button.btn.btn-success.mt-3(onclick="togglcheckouteCart2()") Tunai
+			br
+				
+				
 script.
 	let cart = [];
+	let totalPrice = 0
 
-	function addToCart(name, price, image) {
+	function addToCart(name, price, _id) {
 		let item = cart.find(i => i.name === name);
 		if (item) {
 			item.quantity++;
 		} else {
-			cart.push({ name, price, image, quantity: 1 });
+			cart.push({ name, price, _id, quantity: 1 });
 		}
 		updateCart();
 	}
@@ -100,6 +112,7 @@ script.
 				</li>`;
 		});
 
+		totalPrice = total
 		cartCount.innerText = count;
 		cartTotal.innerText = new Intl.NumberFormat('id-ID', {style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0}).format(total);
 	}
@@ -158,6 +171,15 @@ script.
 
 	function toggleCart() {
 		$("#cart-container").slideToggle();
+	}
+
+	function toggleCart2() {
+		console.log({cart, totalPrice})
+		$("#cart-container2").slideToggle();
+		let container = document.getElementById("cart-container");
+		if (container.style.display === "block") {
+			container.style.display = "none";
+		} 
 	}
 
 	function checkout() {
