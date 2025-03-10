@@ -110,52 +110,20 @@ const IndexController = {
         let total_cashier = 0
         let total_owner = 0
         let total_stores = 0
-        let schools_unpaid = []
-        let total_kurus = 0
-        let total_normal = 0
-        let total_gemuk = 0
-        let total_obesitas = 0
-        let cat_bp = 'normal'
-        let cat_os = 'normal'
         let revenue_yearly = 0
         let revenue_monthly = 0
         let percentage_yearly_revenue = {}
         let percentage_monthly_revenue = {}
-        let old = ''
-        let broca = '-'
-        let total_male = 0
-        let total_female = 0
-        let age_cat = 'Dewasa'
-        let con_normal_bp = '-'
-        let con_normal_temp  = '-'
 
         const d = new Date();
         let dyear = d.getFullYear();
         const startOfDay = moment().startOf("day").toDate(); // 00:00:00
         const endOfDay = moment().endOf("day").toDate();
 
-        if (req.session.role == 'user') {
-            data = await WellnessDetail.findOne({user_id: req.session.user_id})
-            const blood_pressure = (data) ? data.blood_pressure : null
-            const split_bp = (blood_pressure) ? blood_pressure.split("/") : '0'
-            const bp = parseInt(split_bp[0])
-            const os = (data) ? parseInt(data.oxygen_saturation) : 120
-            // console.log({bp, os})
-            // cat_bp = (bp <= 120 && bp > 90) ? 'normal' : (bp > 120) ? 'tinggi' : (bp <= 90) ? 'rendah' : 'normal'
-            cat_os = (os >= 95) ? 'normal' : (os < 95 && os >= 80) ? 'rendah' : (os < 80) ? 'sangat_rendah' : 'normal'
-            const resp = await History.findOne({user_id: req.session.user_id}).sort({created_at: -1})
-            // console.log({resp})
-            // console.log({session: req.session})
-            if (resp != null) {
-                await getGeminiAI(resp.height, resp.weight, req.session.user_id)
-                await getGeminiAI2(resp.height, resp.weight, resp.blood_pressure, req.session.user_id)
-            }
-            old = await countOld(req.session.date_of_birth)
-            broca = await countBroca(data.height, req.session.gender)
-            age_cat = await ageCategory(req.session.date_of_birth)
-            cat_bp = await catBloodPress(age_cat, bp)
-            con_normal_bp = await conNormalBloodPress(age_cat)
-            con_normal_temp = await conNormalTemperature(data.temperature)
+        if (req.session.role == 'cashier') {
+            var foods = await Menus.find({isDeleted: false, category: 'food'})
+            var drinks = await Menus.find({isDeleted: false, category: 'drink'})
+            var toppings = await Menus.find({isDeleted: false, category: 'toping'})
         } else if (req.session.role == 'developer'){
             total_cashier = await Users.find({isDeleted: false, role: 'cashier'}).countDocuments()
             total_owner = await Users.find({isDeleted: false, role: 'owner'}).countDocuments()
@@ -174,35 +142,9 @@ const IndexController = {
             percentage_monthly_revenue =  await percentageReveneue(revenue_monthly, last_month_reveneu)
             // console.log({percentage_yearly_revenue, percentage_monthly_revenue})
         } else if (req.session.role == 'teacher'){
-            total_kurus = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kurang Berat Badan'}).countDocuments()
-            total_normal = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Normal'}).countDocuments()
-            total_gemuk = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Kelebihan Berat Badan'}).countDocuments()
-            total_obesitas = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id, bmi_category: 'Obesitas'}).countDocuments()
-            total_male = await Users.find({isDeleted: false, school_id: req.session.school_id, gender: 'male'}).countDocuments()
-            total_female = await Users.find({isDeleted: false, school_id: req.session.school_id, gender: 'female'}).countDocuments()
-            total_users = await Users.find({isDeleted: false, school_id: req.session.school_id}).countDocuments()
-            var wd_null = []
-            const well_details = await WellnessDetail.find({isDeleted: false, school_id: req.session.school_id}).sort({created_at: -1})
-            for (let i = 0; i < well_details.length; i++) {
-                const wd = well_details[i];
-                if (wd.bmi_category == '') {
-                    const user = await Users.findOne({_id: wd.user_id})
-                    var age = await countOld(user.date_of_birth)
-                    wd_null.push({...user._doc, age: age})
-                }
-            }
-
-            var recent_histories = []
-            const histories = await History.find({isDeleted: false, school_id: req.session.school_id, created_at: { $gte: startOfDay, $lt: endOfDay }}).sort({created_at: -1})
-            for (let i = 0; i < histories.length; i++) {
-                const h = histories[i];
-                const date = moment(h.created_at).tz("Asia/Jakarta").format("YYYY-MM-DD HH:mm:ss");
-                recent_histories.push({name: h.user_id.name, created_at: date, bmi_category: await getCategoryBMI(h.weight, h.height)})
-            }
-
         }
         // console.log({data, d, wd_null, total_users, total_devices, total_stores, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female, recent_histories})
-        res.render('dashboard/index', {data, d, wd_null, total_cashier, total_owner, total_stores, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, year: dyear, revenue_yearly, revenue_monthly, percentage_yearly_revenue, percentage_monthly_revenue, old, broca, total_male, total_female, recent_histories});
+        res.render('dashboard/index', {data, d, total_cashier, total_owner, total_stores, foods, drinks, toppings});
     },
 
     history: async (req, res) => {
@@ -344,7 +286,7 @@ const IndexController = {
         const datas = await Menus.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
         const materials = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
         
-        res.render('menus/index', {datas, materials});
+        res.render('menu/index', {datas, materials});
     },
 
     payment: async (req, res) => {

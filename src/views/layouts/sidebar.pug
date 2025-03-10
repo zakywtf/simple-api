@@ -22,6 +22,6 @@ aside.left-sidebar
 						span.hide-menu Dashboard
 				- var role = session.role
 				case role!==undefined
-					when role == 'user' : include ./menubar/user-menu.pug
+					when role == 'cashier' : include ./menubar/cashier-menu.pug
 					when role == 'developer' : include ./menubar/developer-menu.pug
 					when role == 'owner' : include ./menubar/owner-menu.pug
