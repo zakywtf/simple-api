@@ -3,26 +3,35 @@ const Schema = mongoose.Schema;
 const timestamp = require('./plugins/timestamps');
 
 let sch = new Schema({
-    class: {
-        type: String,
-        default: null
-    },
     name: {
         type: String,
-        default: null
     },
-    capacity: {
-        type: Number,
-        default: 0
+    address: {
+        type: String,
     },
-    notes: {
+    latitude: {
         type: String,
         default: null
     },
-    school_id : {
-        type: Schema.Types.ObjectId, 
-        autopopulate: { select: 'npsn name address category status school_status'}, 
-        ref:'schools',
+    longitude: {
+        type: String,
+        default: null
+    },
+    industry : {
+        type:String, 
+        default:null
+    },
+    status:{
+        type:String, 
+        enum:['registered', 'active', 'inactive', 'unpaid', 'suspend'], 
+        default:'active'
+    },
+    expired_date: {
+        type: Date,
+        default: null
+    },
+    suspend_date: {
+        type: Date,
         default: null
     },
     isDeleted: {
@@ -37,4 +46,4 @@ let sch = new Schema({
 sch.plugin(timestamp);
 sch.plugin(require('mongoose-autopopulate'))
 
-module.exports = mongoose.model("majority", sch);
+module.exports = mongoose.model("partners", sch);

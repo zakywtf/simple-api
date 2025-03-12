@@ -7,19 +7,10 @@ import OpenAI from 'openai';
 import apiResponse from "../helpers/apiResponse";
 import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
-import Schools from "../schemas/schools";
-import Stores from "../schemas/stores";
-import Materials from "../schemas/materials";
-import Stocks from "../schemas/stocks";
-import Menus from "../schemas/menus";
-import History from "../schemas/history";
-import WellnessDetail from "../schemas/wellness_details";
-import Payments from "../schemas/payments";
-import Majority from "../schemas/majority";
+import Partners from "../schemas/partners";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
-import { saveDataRecommendation, yearlyRevenue, monthlyRevenue, lastYearReveneu, lastMonthReveneu, percentageReveneue, getGeminiAI, getGeminiAI2, ageCategory, catBloodPress, conNormalBloodPress, conNormalTemperature, getCategoryBMI } from "../helpers/masterFunction"
 
 const IndexController = {
 
@@ -177,135 +168,16 @@ const IndexController = {
     },
 
 
-    owners: async (req, res) => {
-        const datas = await Users.find({isDeleted: false, role: 'owner'}).sort({created_at: -1})
-        const stores = await Stores.find({isDeleted: false}).sort({created_at: -1})
-        // console.log({school: stores[0], datas: datas[0]})
-        res.render('owners/index', {datas, stores});
-    },
-
-    ownerUpdate: async (req, res, next) => {
-        try {
-            await Users.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
-            res.redirect('/owners');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    ownerDelete: async (req, res, next) => {
-        try {
-            await Users.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
-            res.redirect('/owners');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    cashiers: async (req, res) => {
-        const datas = await Users.find({isDeleted: false, role: 'cashier', store_id: req.session.store_id}).sort({created_at: -1})
-        const stores = await Stores.find({isDeleted: false}).sort({created_at: -1})
-        // console.log({school: stores[0], datas: datas[0]})
-        res.render('cashiers/index', {datas, stores});
-    },
-
-    cashierUpdate: async (req, res, next) => {
-        try {
-            await Users.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
-            res.redirect('/cashiers');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    cashierDelete: async (req, res, next) => {
-        try {
-            await Users.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
-            res.redirect('/cashiers');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    stores: async (req, res) => {
-        const datas = await Stores.find({isDeleted: false}).sort({ created_at: -1 })
-        
-        res.render('stores/index', {datas});
-    },
-
-    storeUpdate: async (req, res, next) => {
-        try {
-            await Stores.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
-            res.redirect('/stores');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    storeDelete: async (req, res, next) => {
-        try {
-            await Stores.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
-            res.redirect('/stores');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    materials: async (req, res) => {
-        const datas = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
-        
-        res.render('materials/index', {datas});
-    },
-
-    materialUpdate: async (req, res, next) => {
-        try {
-            await Materials.findOneAndUpdate({ _id: req.params._id }, { ...req.body, updated_at: moment() })
-            res.redirect('/materials');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    materialDelete: async (req, res, next) => {
-        try {
-            await Materials.findOneAndUpdate({ _id: req.params._id }, { isDeleted: true, updated_at: moment() })
-            res.redirect('/materials');
-        } catch (error) {
-            console.log('error ', error);
-        }
-    },
-
-    stocks: async (req, res) => {
-        const datas = await Stocks.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
-        const materials = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
-        
-        res.render('stocks/index', {datas, materials});
-    },
-
-    menus: async (req, res) => {
-        const datas = await Menus.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
-        const materials = await Materials.find({isDeleted: false, store_id: req.session.store_id}).sort({ created_at: -1 })
-        
-        res.render('menu/index', {datas, materials});
-    },
-
-    payment: async (req, res) => {
-        const datas = await Payments.find({isDeleted: false}).sort({ created_at: -1 })
-        const schools = await Schools.find({isDeleted: false}).sort({created_at: -1})
-        
-        res.render('payment/index', {datas, schools});
-    },
-
-    invoice: async (req, res) => {
-        const data = await Payments.findOne({isDeleted: false, _id: req.query._id}).sort({ created_at: -1 })
-
-        res.render('payment/invoice', {data});
-    },
-
     profile: async (req, res) => {
         const data = await Users.findOne({isDeleted: false, _id: req.session.user_id}).sort({ created_at: -1 })
 
         res.render('auth/profile', {data});
+    },
+
+    partners: async (req, res) => {
+        const datas = await Partners.find({isDeleted: false}).sort({ created_at: -1 })
+
+        res.render('partners/index', {datas});
     },
     
     

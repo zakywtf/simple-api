@@ -1,6 +1,6 @@
-# pos-platform-v1
+# pyrocycles-v1
 
-Dashboard Point Of Sales
+Dashboard Pyrocycles
 
 # Requiments:
 
@@ -11,7 +11,7 @@ Dashboard Point Of Sales
 Dev Enviroments:
 
 ```cmd
-$ cd pos-platform-v1
+$ cd pyrocycle
 $ npm install
 $ npm run dev
 ```
@@ -19,7 +19,7 @@ $ npm run dev
 Production Enviroments:
 
 ```cmd
-$ cd pos-platform-v1
+$ cd pyrocycle
 $ npm install
 $ npm start
 ```

@@ -3,8 +3,8 @@ html(lang="en")
 	head
 		meta(charset="utf-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1")
-		title Seblak Ummi
-		link(rel="shortcut icon", type="image/png", href="../assets/images/logos/logo4.png")
+		title Pyrocycle
+		link(rel="shortcut icon", type="image/png", href="../assets/images/logos/logo.png")
 		link(rel="stylesheet", href="../assets/css/styles.min.css")
 	body
 		// Body Wrapper
@@ -16,16 +16,16 @@ html(lang="en")
 							.card.mb-0
 								.card-body
 									a.text-nowrap.logo-img.text-center.d-block.py-3.w-100(href="#")
-										img(src="../assets/images/logos/logo4.png", width="90%", alt=)
-										//- h2 Logo
+										//- img(src="../assets/images/logos/logo4.png", width="90%", alt=)
+										h2 PYROCYCLE
 									//- p.text-center Wellness Monitoring
 									br
 									br
 									#response-container.alert.alert-danger(role="alert", style="display:none;")
 									form#data-form
 										.mb-3
-											label.form-label(for="exampleInputEmail1") Username
-											input#username.form-control(type="text", name='username', placeholder="username atau no. telepon")
+											label.form-label(for="exampleInputEmail1") Email
+											input#email.form-control(type="text", name='email', placeholder="Email")
 										.mb-4
 											label.form-label(for="exampleInputPassword1") Password
 											input#password.form-control(type="password", name='password', placeholder="password")
@@ -53,10 +53,10 @@ html(lang="en")
 					event.preventDefault(); // Prevent the default form submission
 					var host = window.location.origin;
 
-					const username = $('#username').val();
+					const email = $('#email').val();
 					const password = $('#password').val();
 
-					const obj = { username: username, password: password }
+					const obj = { email: email, password: password }
 					//- console.log({obj})
 
 					$.ajax({

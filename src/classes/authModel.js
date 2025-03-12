@@ -1,7 +1,6 @@
 import Models from "./classModel";
 import { ValidationError, NotFoundError, ServerError, UnauthorizedError } from "./classRespons"
 import sch from "../schemas/users";
-import Schools from "../schemas/schools"
 import { signer } from "../middlewares/authMiddleware";
 import { deserializeUser } from "passport";
 import bcrypt from "bcryptjs";
@@ -20,8 +19,8 @@ class authModel extends Models{
         const user = await this.model.findOne({ nisn: body.nisn })
         if(user) throw new NotFoundError('NISN sudah terdaftar!')
 
-        const school = await Schools.findOne({ npsn: body.school_npsn })
-        if(!school) throw new NotFoundError('NPSN sekolah tidak ditemukan!')
+        // const school = await Schools.findOne({ npsn: body.school_npsn })
+        // if(!school) throw new NotFoundError('NPSN sekolah tidak ditemukan!')
 
         let pinHash = await bcrypt.hash(body.pin + process.env.SALT, 10);
         
@@ -42,10 +41,10 @@ class authModel extends Models{
 
     async login(body) {
         // console.log({body})
-        const identifier = body.username
-        let user = await this.model.findOne({$or: [{ username: identifier }, { phone: identifier }]})
+        const identifier = body.email
+        let user = await this.model.findOne({$or: [{ email: identifier }, { phone: identifier }]})
         // console.log({user})
-        if (!user) throw new NotFoundError('Username tidak ditemukan!')
+        if (!user) throw new NotFoundError('Email tidak ditemukan!')
         if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
         if (user.status == 'suspend') throw new NotFoundError('Akun anda dibekukan! Silahkan hubungi admin.')
         user.isOnline = true
@@ -53,12 +52,12 @@ class authModel extends Models{
         
         var payload = {
             _id: user._id,
-            username: user.username,
             name: user.name,
             role: user.role,
+            email: user.email,
             status: user.status,
             gender: user.gender,
-            store_id: (user.store_id != null) ? user.store_id._id : null,
+            partner_id: (user.partner_id != null) ? user.partner_id._id : null,
             last_login: user.last_login,
             total_login: user.total_login,
 

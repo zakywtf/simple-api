@@ -4,8 +4,8 @@ aside.left-sidebar
 		br
 		.brand-logo.d-flex.align-items-center.justify-content-between
 			a.text-nowrap.logo-img(href="#")
-				img(src="../assets/images/logos/logo4.png", width="90%", alt=)
-				//- h2 Logo
+				//- img(src="../assets/images/logos/logo4.png", width="90%", alt=)
+				h2 Pyrocycle
 			#sidebarCollapse.close-btn.d-xl-none.d-block.sidebartoggler.cursor-pointer
 				i.ti.ti-x.fs-8
 		// Sidebar navigation
@@ -23,5 +23,5 @@ aside.left-sidebar
 				- var role = session.role
 				case role!==undefined
 					when role == 'cashier' : include ./menubar/cashier-menu.pug
-					when role == 'developer' : include ./menubar/developer-menu.pug
+					when role == 'admin' : include ./menubar/admin-menu.pug
 					when role == 'owner' : include ./menubar/owner-menu.pug

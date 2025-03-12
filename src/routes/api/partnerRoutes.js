@@ -1,5 +1,5 @@
 import express from 'express'
-import controller from '../../controllers/HistoryController'
+import controller from '../../controllers/PartnersController'
 import {verify} from "../../middlewares/authMiddleware"
 
 const router = express.Router();

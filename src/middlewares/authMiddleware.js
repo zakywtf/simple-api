@@ -40,8 +40,8 @@ const verify = async (req, res, next) => {
             req.user = user
             let payload = {
                 _id: user._id,
-                username: user.username,
                 name: user.name,
+                email: user.email,
                 status: user.status,
                 last_login: user.last_login,
                 total_login: user.total_login,

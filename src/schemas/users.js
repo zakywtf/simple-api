@@ -1,13 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const timestamp = require('./plugins/timestamps');
-const store_id = require('./stores');
+const partner_id = require('./partners');
 
 let sch = new Schema({
-    username: {
-        type: String,
-        unique: true,
-    },
     password: {
         type: String,
     },
@@ -16,7 +12,8 @@ let sch = new Schema({
     },
     email: {
         type: String,
-        default: null
+        default: null,
+        unique: true
     },
     phone: {
         type: String,
@@ -32,23 +29,23 @@ let sch = new Schema({
     },
     role : {
         type:String, 
-        enum:['cashier', 'developer', 'owner'], 
-        default:'cashier'
+        enum:['admin', 'partner'], 
+        default:'partner'
     },
     gender : {
         type:String, 
         enum:['male', 'female'], 
-        default:'female'
+        default:'male'
     },
     status:{
         type:String, 
         enum:['registered', 'active', 'inactive', 'unpaid', 'suspend'], 
         default:'active'
     },
-    store_id : {
+    partner_id : {
         type: Schema.Types.ObjectId, 
-        autopopulate: { select: 'name address status latitude longitude'}, 
-        ref:'stores',
+        autopopulate: { select: 'name address industry status latitude longitude'}, 
+        ref:'partners',
         default: null
     },
     isOnline: {
