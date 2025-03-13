@@ -8,6 +8,7 @@ import apiResponse from "../helpers/apiResponse";
 import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
 import Partners from "../schemas/partners";
+import Devices from "../schemas/devices";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
@@ -180,7 +181,12 @@ const IndexController = {
         res.render('partners/index', {datas});
     },
     
-    
+    devices: async (req, res) => {
+        const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
+        const partners = await Partners.find({isDeleted: false}).sort({created_at: -1})
+        // console.log({school: partners[0], datas: datas[0]})
+        res.render('devices/index', {datas, partners});
+    },
 }
 
 module.exports = IndexController;

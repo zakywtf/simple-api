@@ -28,14 +28,14 @@
 
 /* Hover Effect */
 .custom-entries:hover {
-    background-color: #18b1c6;
+    background-color: #474c4c;
     color: white;
 }
 
 /* Dropdown Focus Effect */
 .custom-entries:focus {
-    border-color: #18b1c6;
-    box-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
+    border-color: #474c4c;
+    box-shadow: 0 0 5px rgba(17, 18, 18, 0.5);
 }
 
 /* Pindahkan Show Entries ke footer */

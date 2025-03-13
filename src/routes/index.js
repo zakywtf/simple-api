@@ -21,6 +21,7 @@ router.get('/', IndexController.loginPage);
 router.get('/register', IndexController.registerPage);
 router.get('/dashboard', auth, IndexController.dashboard)
 router.get('/partners', auth, IndexController.partners)
+router.get('/devices', auth, IndexController.devices)
 // router.get('/recommendation', auth, IndexController.recommendation)
 // router.get('/meals', auth, IndexController.meals)
 

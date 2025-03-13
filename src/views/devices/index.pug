@@ -6,22 +6,23 @@ block content
 		//- br
 		.card
 			.card-body
-				.row 
-					.col-lg-10 
-						h5.card-title.fw-semibold.mb-4 List Mesin Kesehatan
-						p.mb-0 Berikut list mesin kesehatan anda
-					.col-lg-2
-						a.button.btn.btn-primary.btn-round.ml-auto(title='', data-original-title="Tambah Mesin", data-toggle='modal', href='', data-target='#create')
-							i.fa.fa-plus
-							| 
-							| Tambah Mesin
+				h5.card-title.fw-semibold.mb-4 Daftar Mesin Pirolisis
+				p.mb-0 Berikut daftar mesin pirolisis yang sudah terdaftar
+				br
+				.filter-container
+					//- label(for="categoryFilter") Filter Kategori:
+					br
+					a.button.btn.btn-primary.btn-round.ml-auto(title='', data-original-title="Tambah Sekolah", data-toggle='modal', href='', data-target='#create')
+						i.fa.fa-plus
+						| 
+						| Tambah Mesin Pirolisis
 				br
 				.table-responsive
-					table#dataTable.table.table-bordered
+					table#basic-datatables.display.table.table-bordered.table-hover
 						thead.thead-light
 							tr
 								th No
-								th Nomor Mesin
+								th ID Mesin
 								th Nama Mesin
 								th Penempatan
 								th Kondisi
@@ -34,15 +35,17 @@ block content
 								tr
 									td #{no++}
 									td 
-										b #{data.device_number}
+										b ##{data.device_id}
 									td #{data.name}
-									td #{data.school_id.npsn} - #{data.school_id.name}
+									td #{data.partner_id.npsn} - #{data.partner_id.name}
 									td.border-bottom-0
 										.d-flex.align-items-center.gap-2
 										if (data.condition == 'good')
 											span.badge.bg-success.rounded-3.fw-semibold Baik
-										else 
+										else if (data.condition == 'broken')
 											span.badge.bg-danger.rounded-3.fw-semibold Rusak
+										else 
+											span.badge.bg-warning.rounded-3.fw-semibold Perbaikan
 									td #{data.notes}
 									td
 										button.btn.btn-outline-primary.dropdown-toggle(data-toggle="dropdown", href="#", aria-expanded="false")
@@ -71,10 +74,10 @@ block content
 				.modal-body
 					form#data-form.form-validation
 						.form-group.row
-							label.col-sm-4.form-control-label(for="device_number") Nomor Mesin
+							label.col-sm-4.form-control-label(for="device_id") ID Mesin
 								span.text-danger *
 							.col-sm-8
-								input#device_number.form-control(type="text", required, placeholder="Nomor Mesin", name="device_number")
+								input#device_id.form-control(type="text", required, placeholder="ID Mesin", name="device_id")
 						br
 						.form-group.row
 							label.col-sm-4.form-control-label(for="name") Nama Mesin
@@ -86,9 +89,9 @@ block content
 							label.col-sm-4.form-control-label(for="hori-pass1") Penempatan
 								span.text-danger *
 							.col-sm-8
-								select#school_id.form-control(name="school_id", required="required")
-									each school in schools
-										option(value=school._id) #{school.npsn} - #{school.name}
+								select#partner_id.form-control(name="partner_id", required="required")
+									each partner in partners
+										option(value=partner._id) #{partner.npsn} - #{partner.name}
 						br
 						.form-group.row
 							label.col-sm-4.form-control-label(for="name") Keterangan
@@ -115,11 +118,11 @@ block content
 					.modal-body
 						form#edit-form.form-validation(action='/devices/update/'+data._id, method='post')
 							.form-group.row
-								label.col-sm-4.form-control-label(for="device_number") Nomor Mesin
+								label.col-sm-4.form-control-label(for="device_id") ID Mesin
 									span.text-danger *
 								.col-sm-8
 									input#_id.form-control(type="hidden", name="_id", value=data._id)
-									input#device_number.form-control(type="text", required, placeholder="Nomor Mesin", name="device_number", value=data.device_number)
+									input#device_id.form-control(type="text", required, placeholder="ID Mesin", name="device_id", value=data.device_id)
 							br
 							.form-group.row
 								label.col-sm-4.form-control-label(for="name") Nama Mesin
@@ -131,9 +134,9 @@ block content
 								label.col-sm-4.form-control-label(for="hori-pass1") Penempatan
 									span.text-danger *
 								.col-sm-8
-									select#school_id.form-control(name="school_id", required="required")
-										each school in schools
-											option(value=school._id, selected=(data.school_id.name==school.name)?'yes':undefined) #{school.npsn} - #{school.name}
+									select#partner_id.form-control(name="partner_id", required="required")
+										each partner in partners
+											option(value=partner._id, selected=(data.partner_id.name==partner.name)?'yes':undefined) #{partner.npsn} - #{partner.name}
 							br
 							.form-group.row
 								label.col-sm-4.form-control-label(for="condition") Kondisi
@@ -143,6 +146,7 @@ block content
 										option(value='') -- Pilih Kondisi --
 										option(value="good", selected=(data.condition=='good')?'yes':undefined) Baik
 										option(value="broken", selected=(data.condition=='broken')?'yes':undefined ) Rusak
+										option(value="maintenance", selected=(data.condition=='maintenance')?'yes':undefined ) Perbaikan
 							br
 							.form-group.row
 								label.col-sm-4.form-control-label(for="name") Keterangan
@@ -172,73 +176,44 @@ block content
 		// /.modal
 
 
-	script(src="https://code.jquery.com/jquery-3.5.1.min.js")
-	script(src="../assets/libs/jquery/dist/jquery.min.js")
+	script(src="https://code.jquery.com/jquery-3.6.0.min.js")
 	script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js")
+	//- script(src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js")
+
 	script.
-		let currentPage = 1;
-		const rowsPerPage = 10;
-
-		function displayTable(page) {
-			const rows = $('#dataTable tbody tr');
-			const totalRows = rows.length;
-			const totalPages = Math.ceil(totalRows / rowsPerPage);
-			const start = (page - 1) * rowsPerPage;
-			const end = start + rowsPerPage;
-
-			rows.hide().slice(start, end).show();
-			updatePagination(totalPages);
-		}
-
-		function updatePagination(totalPages) {
-			const pagination = $('#pagination');
-			pagination.empty();
-
-			const prevButton = $('<li class="page-item"><a class="page-link" href="#">Previous</a></li>');
-			if (currentPage === 1) prevButton.addClass('disabled');
-			prevButton.click(function () {
-				if (currentPage > 1) {
-					currentPage--;
-					displayTable(currentPage);
-				}
+		$(document).ready(function() {
+			var table = $('#basic-datatables').DataTable({
+				"paging": true,
+				"searching": true,
+				"info": false,
+				"ordering": true,
+				"lengthMenu": [10, 25, 50, 100],
+				"deferRender": true,
+				"scroller": true,
 			});
-			pagination.append(prevButton);
-
-			for (let i = 1; i <= totalPages; i++) {
-				const pageButton = $('<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>');
-				if (currentPage === i) pageButton.addClass('active');
-				pageButton.click(function () {
-					currentPage = i;
-					displayTable(currentPage);
-				});
-				pagination.append(pageButton);
-			}
-
-			const nextButton = $('<li class="page-item"><a class="page-link" href="#">Next</a></li>');
-			if (currentPage === totalPages) nextButton.addClass('disabled');
-			nextButton.click(function () {
-				if (currentPage < totalPages) {
-					currentPage++;
-					displayTable(currentPage);
-				}
+			$('#categoryFilter').on('change', function () {
+				var selectedCategory = $(this).val();
+				console.log({selectedCategory})
+				table.column(11).search(selectedCategory).draw(); // Filter berdasarkan kolom kategori (index ke-2)
 			});
-			pagination.append(nextButton);
-		}
+			$('.dataTables_length').html(`
+				<label>Show
+					<select id="customEntries" class="custom-entries">
+						<option value="10" selected>10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+					</select> entries
+				</label>
+			`);
 
-		function filterTable() {
-			const filter = $('#search').val().toLowerCase();
-			const filteredRows = $('#dataTable tbody tr').filter(function () {
-				return $(this).text().toLowerCase().includes(filter);
+			// Event listener untuk dropdown custom
+			$('#customEntries').on('change', function() {
+				var value = $(this).val();
+				table.page.len(value).draw();
 			});
-
-			$('#dataTable tbody').empty().append(filteredRows);
-
-			currentPage = 1; // Reset to first page
-			displayTable(currentPage);
-		}
-
-		$(document).ready(function () {
-			displayTable(currentPage);
+			//- $('.dataTables_length').clone().appendTo('.custom-footer').show();
+			
 		});
 
 	script.

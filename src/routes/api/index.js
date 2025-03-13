@@ -7,5 +7,6 @@ router.use('/auth', require('./authRoutes'));
 router.use('/users', require('./usersRoutes'));
 router.use('/dashboard', require('./indexRoutes'))
 router.use('/partners', require('./partnerRoutes'))
+router.use('/devices', require('./devicesRoutes'))
 
 module.exports = router;
