@@ -43,8 +43,6 @@ const verify = async (req, res, next) => {
                 name: user.name,
                 email: user.email,
                 status: user.status,
-                last_login: user.last_login,
-                total_login: user.total_login,
             };
             req.token = await signer(payload)
             const isExpired = await checkExpired(user._id)

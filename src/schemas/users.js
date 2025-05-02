@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const timestamp = require('./plugins/timestamps');
-const partner_id = require('./partners');
+const partner_id = require('./authors');
 
 let sch = new Schema({
     password: {
@@ -15,50 +15,15 @@ let sch = new Schema({
         default: null,
         unique: true
     },
-    phone: {
-        type: String,
-        unique: true,
-    },
-    address: {
-        type: String,
-        default: null
-    },
-    profile_picture: {
-        type: String,
-        default: null
-    },
     role : {
         type:String, 
-        enum:['admin', 'partner'], 
-        default:'partner'
-    },
-    gender : {
-        type:String, 
-        enum:['male', 'female'], 
-        default:'male'
+        enum:['admin'], 
+        default:'admin'
     },
     status:{
         type:String, 
         enum:['registered', 'active', 'inactive', 'unpaid', 'suspend'], 
         default:'active'
-    },
-    partner_id : {
-        type: Schema.Types.ObjectId, 
-        autopopulate: { select: 'name address industry status latitude longitude'}, 
-        ref:'partners',
-        default: null
-    },
-    isOnline: {
-        type: Boolean,
-        default: false
-    },
-    last_login: {
-        type: Date,
-        default: null
-    },
-    total_login: {
-        type: Number,
-        default: 0
     },
     user_agent:{
         browser: {
@@ -81,10 +46,6 @@ let sch = new Schema({
             type: String,
             default: null
         }
-    },
-    isExpired: {
-        type: Boolean,
-        default: false
     },
     isDeleted: {
         type: Boolean,

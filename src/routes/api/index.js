@@ -5,8 +5,7 @@ const router = express.Router();
 
 router.use('/auth', require('./authRoutes'));
 router.use('/users', require('./usersRoutes'));
-router.use('/dashboard', require('./indexRoutes'))
-router.use('/partners', require('./partnerRoutes'))
-router.use('/devices', require('./devicesRoutes'))
+router.use('/authors', require('./authorRoutes'))
+router.use('/books', require('./bookRoutes'))
 
 module.exports = router;

@@ -1,14 +1,9 @@
 const fetch = require('node-fetch');
 const moment = require('moment-timezone');
 // import moment from 'moment'
-
-import { GoogleGenerativeAI, SchemaType } from "@google/generative-ai";
-import OpenAI from 'openai';
 import apiResponse from "../helpers/apiResponse";
 import mailer from "../helpers/nodeMailer";
 import Users from "../schemas/users";
-import Partners from "../schemas/partners";
-import Devices from "../schemas/devices";
 
 import { generate } from "../helpers/randGen";
 import { detailEmail } from "../helpers/sendEmail"
@@ -88,105 +83,7 @@ const IndexController = {
         return apiResponse.successResponseWithData(res, 'IMT', imt);
 
     },
-
-    loginPage: async (req, res) => {
-        res.render('auth/login');
-    },
-
-    registerPage: async (req, res) => {
-        res.render('auth/register');
-    },
-
-    dashboard: async (req, res) => {
-        let data
-        let total_cashier = 0
-        let total_owner = 0
-        let total_stores = 0
-        let revenue_yearly = 0
-        let revenue_monthly = 0
-        let percentage_yearly_revenue = {}
-        let percentage_monthly_revenue = {}
-
-        const d = new Date();
-        let dyear = d.getFullYear();
-        const startOfDay = moment().startOf("day").toDate(); // 00:00:00
-        const endOfDay = moment().endOf("day").toDate();
-
-        if (req.session.role == 'cashier') {
-            var foods = await Menus.find({isDeleted: false, category: 'food'})
-            var drinks = await Menus.find({isDeleted: false, category: 'drink'})
-            var toppings = await Menus.find({isDeleted: false, category: 'toping'})
-        } else if (req.session.role == 'developer'){
-            total_cashier = await Users.find({isDeleted: false, role: 'cashier'}).countDocuments()
-            total_owner = await Users.find({isDeleted: false, role: 'owner'}).countDocuments()
-            total_stores = await Stores.find({isDeleted: false}).countDocuments()
-            const stores = await Stores.find({isDeleted: false, status: "unpaid"})
-            for (let i = 0; i < stores.length; i++) {
-                const sch = stores[i];
-                stores_unpaid.push({code: sch.code, name: sch.name, status: sch.status})
-            }
-            revenue_yearly = await yearlyRevenue()
-            revenue_monthly = await monthlyRevenue()
-            var last_year_reveneu = await lastYearReveneu()
-            var last_month_reveneu = await lastMonthReveneu()
-            // console.log({revenue_yearly, last_year_reveneu, revenue_monthly, last_month_reveneu})
-            percentage_yearly_revenue =  await percentageReveneue(revenue_yearly, last_year_reveneu)
-            percentage_monthly_revenue =  await percentageReveneue(revenue_monthly, last_month_reveneu)
-            // console.log({percentage_yearly_revenue, percentage_monthly_revenue})
-        } else if (req.session.role == 'teacher'){
-        }
-        // console.log({data, d, wd_null, total_users, total_devices, total_stores, schools_unpaid, total_kurus, total_normal, total_gemuk, total_obesitas, cat_bp, age_cat, con_normal_bp, con_normal_temp, cat_os, old, broca, total_male, total_female, recent_histories})
-        res.render('dashboard/index', {data, d, total_cashier, total_owner, total_stores, foods, drinks, toppings});
-    },
-
-    history: async (req, res) => {
-        const datas = await History.find({isDeleted: false, user_id: req.session.user_id}).sort({created_at: -1})
-
-        res.render('history/index', { datas });
-    },
-
-    users: async (req, res) => {
-        console.log({user: req.session})
-        const datas = []
-        const users = await Users.find({isDeleted: false, role: 'user', school_id: req.session.school_id}).sort({name: 1})
-        const majorities = await Majority.find({isDeleted: false, school_id: req.session.school_id}).sort({name: 1})
-        for (let i = 0; i < users.length; i++) {
-            const user = users[i];
-            var old = await countOld(user.date_of_birth)
-            const majority = (user.majority_id == null) ? '-' : `${user.majority_id.class} - ${user.majority_id.name}`
-            const user_detail = await WellnessDetail.findOne({user_id: user._id})
-            datas.push({ ...user._doc, majority: majority, bmi_score: user_detail.bmi_score, bmi_category: user_detail.bmi_category, height: user_detail.height, weight: user_detail.weight, blood_pressure: user_detail.blood_pressure, temperature: user_detail.temperature, oxygen_saturation: user_detail.oxygen_saturation, old: old})
-        }
-        res.render('users/index', {datas, majorities});
-    },
-
-    userHistory: async (req, res) => {
-        const user = await Users.findOne({ _id: req.query._id })
-        const datas = await History.find({isDeleted: false, user_id: req.query._id}).sort({created_at: -1})
-        const level = user.level
-
-        res.render('users/detail', { name: user.name, level: level.toLowerCase(), datas });
-    },
-
-
-    profile: async (req, res) => {
-        const data = await Users.findOne({isDeleted: false, _id: req.session.user_id}).sort({ created_at: -1 })
-
-        res.render('auth/profile', {data});
-    },
-
-    partners: async (req, res) => {
-        const datas = await Partners.find({isDeleted: false}).sort({ created_at: -1 })
-
-        res.render('partners/index', {datas});
-    },
     
-    devices: async (req, res) => {
-        const datas = await Devices.find({isDeleted: false}).sort({created_at: -1})
-        const partners = await Partners.find({isDeleted: false}).sort({created_at: -1})
-        // console.log({school: partners[0], datas: datas[0]})
-        res.render('devices/index', {datas, partners});
-    },
 }
 
 module.exports = IndexController;

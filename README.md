@@ -1,6 +1,6 @@
-# pyrocycles-v1
+# base-node-v1
 
-Dashboard Pyrocycles
+base-node
 
 # Requiments:
 
@@ -11,7 +11,7 @@ Dashboard Pyrocycles
 Dev Enviroments:
 
 ```cmd
-$ cd pyrocycle
+$ cd base
 $ npm install
 $ npm run dev
 ```
@@ -19,7 +19,7 @@ $ npm run dev
 Production Enviroments:
 
 ```cmd
-$ cd pyrocycle
+$ cd base
 $ npm install
 $ npm start
 ```
@@ -60,4 +60,3 @@ localhost:7500
 Coming soon
 ```
 
-# pos-platform-v1

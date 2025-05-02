@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const stores = require('./stores');
-const partners = require('./partners');
+const authors = require('./authors');
+const books = require('./books');
 const users = require('./users');
 
-module.exports = { stores, users, partners };
+module.exports = { authors, users, partners };

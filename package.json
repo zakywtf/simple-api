@@ -63,5 +63,8 @@
     "path": "^0.12.7",
     "pug": "2.0.0-beta11",
     "qrcode": "^1.5.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-syntax-optional-chaining": "^7.8.3"
   }
 }

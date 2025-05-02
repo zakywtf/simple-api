@@ -72,14 +72,6 @@ function authController(aModel=false) {
     router.post('/login', async(req,res)=>{        
         handleRequest(req, res, async(body)=>{
             const user = await model.login(body);
-            console.log({user})
-            req.session.user_id = user.data._id;
-            req.session.name = user.data.name;
-            req.session.role = user.data.role;
-            req.session.photo = user.data.photo;
-            req.session.gender = user.data.gender;
-            req.session.partner_id = user.data.partner_id;
-            req.session.online = true;
             return user
         });
     })
@@ -102,7 +94,7 @@ function authController(aModel=false) {
         handleRequest(req, res, async(body)=>{
             const token = req.headers['authorization']?.split(' ')[1];
             res.locals.udata = await decode(token)
-            console.log({body, udata: res.locals.udata})
+            // console.log({body, udata: res.locals.udata})
             return model.updatePin(body, res.locals.udata._id);
         });
     })

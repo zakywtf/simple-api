@@ -4,9 +4,9 @@ async function copyFile() {
   try {
     await fs.copySync('src/views', 'dist/views');
     await fs.copySync('src/public', 'dist/public');
-    console.log('views and public berhasil disalin!');
+    console.log('views and public copied!');
   } catch (err) {
-    console.error('Terjadi kesalahan:', err);
+    console.error('Error:', err);
   }
 }
 

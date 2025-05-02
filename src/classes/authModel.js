@@ -16,13 +16,13 @@ class authModel extends Models{
         console.log({body, useragent})
         const { browser, version, os, platform, source } = useragent
 
-        const user = await this.model.findOne({ nisn: body.nisn })
-        if(user) throw new NotFoundError('NISN sudah terdaftar!')
+        const user = await this.model.findOne({ email: body.email })
+        if(user) throw new NotFoundError('Email has been registered!')
 
         // const school = await Schools.findOne({ npsn: body.school_npsn })
         // if(!school) throw new NotFoundError('NPSN sekolah tidak ditemukan!')
 
-        let pinHash = await bcrypt.hash(body.pin + process.env.SALT, 10);
+        let passwordHash = await bcrypt.hash(body.password + process.env.SALT, 10);
         
         const ug = {
             browser : browser,
@@ -32,11 +32,10 @@ class authModel extends Models{
             source : source
         }
 
-        const resp = await this.model.create({ ...body, pin: pinHash, user_agent: ug, school_id: school._id })
-        if(body.role == 'user') await createDefaultWellnessDetail(resp)
-        if(!resp) throw new ServerError('Gagal register!')
+        const resp = await this.model.create({ ...body, password: passwordHash, user_agent: ug })
+        if(!resp) throw new ServerError('Failed to register!')
         
-        return { msg: 'Register Success.', data: { nisn: resp.nisn, pin: body.pin, name: resp.name }}
+        return { msg: 'Register Success.', data: { email: resp.email, name: resp.name }}
     }
 
     async login(body) {
@@ -44,9 +43,9 @@ class authModel extends Models{
         const identifier = body.email
         let user = await this.model.findOne({$or: [{ email: identifier }, { phone: identifier }]})
         // console.log({user})
-        if (!user) throw new NotFoundError('Email tidak ditemukan!')
-        if (user.status == 'inactive') throw new NotFoundError('Akun anda sudah tidak aktif!')
-        if (user.status == 'suspend') throw new NotFoundError('Akun anda dibekukan! Silahkan hubungi admin.')
+        if (!user) throw new NotFoundError('Email not found!')
+        if (user.status == 'inactive') throw new NotFoundError('Your account is inactive!')
+        if (user.status == 'suspend') throw new NotFoundError('Your account has been suspended!')
         user.isOnline = true
         await user.save()
         
@@ -55,23 +54,16 @@ class authModel extends Models{
             name: user.name,
             role: user.role,
             email: user.email,
-            status: user.status,
-            gender: user.gender,
-            partner_id: (user.partner_id != null) ? user.partner_id._id : null,
-            last_login: user.last_login,
-            total_login: user.total_login,
+            status: user.status
 
         }
         console.log({payload})
         const isMatch = await bcrypt.compare(body.password + process.env.SALT, user.password)
-        if (!isMatch) throw new ValidationError('Password salah!')
+        if (!isMatch) throw new ValidationError('Wrong password!')
 
         const token = await signer(payload)
         // console.log({token})
         payload.token = token
-
-        user.total_login += 1
-        user.last_login = moment()
         await user.save()
 
         return { msg: 'Login Success.', data:payload }
