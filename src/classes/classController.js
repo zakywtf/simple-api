@@ -39,7 +39,7 @@ function controller(model) {
     router.delete('/delete/:id',async (req, res, next)=>{
         handleRequest(req, res, async(body)=>{
             model.setUdata(req.user)
-            return await model.delete({ id: req.params.id });
+            return await model.delete({ id: req.params.id}, model.convertParamDeleted(body));
         });
     })
     
@@ -47,7 +47,7 @@ function controller(model) {
         handleRequest(req, res, async(body)=>{
             model.setUdata(req.user)
             const { page, perPage } = req.params;
-            const { search, commodity_id, farmer_land_id } = req.query
+            const { search } = req.query
             if ( search ) {
                 const rgxVal = new RegExp(req.query.search, 'i');
                 var qry = {
@@ -56,9 +56,9 @@ function controller(model) {
                     ]
                 };
             }
-            const filter = (commodity_id) ? { commodity_id: commodity_id } : (farmer_land_id) ? { farmer_land_id: farmer_land_id } : {}
+            const filter = {isDeleted: false}
             const select = ''
-            return await model.paging(perPage, (((page - 1) * perPage)), {...qry, ...filter, created_by: req.user._id}, { created_at: -1 }, select);
+            return await model.paging(perPage, (((page - 1) * perPage)), {...qry, ...filter}, { created_at: -1 }, select);
         });
         
     })

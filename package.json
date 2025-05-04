@@ -1,7 +1,7 @@
 {
-  "name": "pyrocycles-v1",
+  "name": "simple-api-v1",
   "version": "1.1",
-  "description": "Very Simple API for pyrocycles-v1",
+  "description": "Very Simple API and Base BE",
   "author": {
     "name": "Nova Zaky",
     "email": "novazaky1@gmail.com"

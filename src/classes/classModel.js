@@ -15,7 +15,7 @@ class Models {
 
     async getAll(query={}){
         // console.log({udata: this.udata, query})
-        const resp = await this.model.find(query).sort(this.sorting)
+        const resp = await this.model.find({...query, isDeleted: false}).sort(this.sorting)
 
         // console.log({resp})
         if(resp.length < 1) throw new NotFoundError('Data Not Found.')
@@ -47,7 +47,8 @@ class Models {
     }
 
     convertParamDeleted(body, deleted=false){
-        body.isDeleted=true, body.updated_at=Date.now()
+        console.log({body})
+        body.isDeleted=true, body.deleted_at=Date.now()
         return this.doConvertParam(body)
     }
     insert_result(resp){
@@ -87,7 +88,7 @@ class Models {
     }
 
     async delete(id, obj){
-        let resp = await this.model.findByIdAndDelete(id.id)
+        let resp = await this.model.findByIdAndUpdate(id.id, this.convertParamDeleted(obj, true))
         return this.delete_result(resp)
     }
 
