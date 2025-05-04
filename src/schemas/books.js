@@ -11,7 +11,7 @@ let sch = new Schema({
     },
     author : {
         type: Schema.Types.ObjectId, 
-        autopopulate: { select: 'name country year'}, 
+        autopopulate: { select: 'name bio website'}, 
         ref:'authors',
         default: null
     },
