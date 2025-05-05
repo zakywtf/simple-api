@@ -8,7 +8,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
-  	// await User.deleteMany();
+  	await User.deleteMany();
 	await mongoose.connection.close();
 });
 
@@ -36,7 +36,7 @@ describe('Auth', () => {
 
 describe('Books', () => {
 	let authorId
-	let bookId = '68185c5d7df72353da959f23'
+	let bookId
   
 	it('should create a author', async () => {
 		const obj = { name: "John Doe", bio: "Indonesian Writer", website: "https://jhondoe.id" }
