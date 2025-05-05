@@ -13,7 +13,7 @@ class authModel extends Models{
     }
 
     async register(body, useragent) {
-        console.log({body, useragent})
+        // console.log({body, useragent})
         const { browser, version, os, platform, source } = useragent
 
         const user = await this.model.findOne({ email: body.email })
@@ -57,7 +57,7 @@ class authModel extends Models{
             status: user.status
 
         }
-        console.log({payload})
+        // console.log({payload})
         const isMatch = await bcrypt.compare(body.password + process.env.SALT, user.password)
         if (!isMatch) throw new ValidationError('Wrong password!')
 

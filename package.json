@@ -9,11 +9,12 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src --exec babel-node --inspect",
     "build": "babel src --out-dir dist && node copy-views.js",
     "start": "node dist/index.js",
-    "serve": "node dist/index.js"
+    "serve": "node dist/index.js",
+    "test": "jest",
+    "test:api": "jest tests/api"
   },
   "type": "commonjs",
   "dependencies": {
@@ -65,6 +66,8 @@
     "qrcode": "^1.5.3"
   },
   "devDependencies": {
-    "@babel/plugin-syntax-optional-chaining": "^7.8.3"
+    "@babel/plugin-syntax-optional-chaining": "^7.8.3",
+    "jest": "^29.7.0",
+    "supertest": "^7.1.0"
   }
 }

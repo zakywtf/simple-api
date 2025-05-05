@@ -31,7 +31,7 @@ let MONGODB_URL = process.env.MONGODB_URL;
 globalThis.fetch = fetch;
 global.Headers = Headers;
 
-console.log({global: globalThis.fetch, header: global.Headers})
+// console.log({global: globalThis.fetch, header: global.Headers})
 
 mongoose.Promise = global.Promise;
 mongoose
@@ -53,7 +53,7 @@ mongoose
     });
 
 mongoose.set('debug', process.env.NODE_ENV == 'development' ? true : false);
-console.log({models: mongoose.models});
+// console.log({models: mongoose.models});
 
 // SESSION
 app.use(session({ secret: 'zakywtf', resave: true, saveUninitialized: true, cookie: { maxAge: process.env.SESSION_DURATION * 60 * 60 * 1000 } }));

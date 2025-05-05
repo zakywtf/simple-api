@@ -18,6 +18,11 @@ let sch = new Schema({
     published : {
         type: Date
     },
+    status: {
+        type: String,
+        enum: ['borrow', 'available'],
+        default: 'available'
+    },
     isDeleted: {
         type: Boolean,
         default: false

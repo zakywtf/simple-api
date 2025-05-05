@@ -47,7 +47,7 @@ class Models {
     }
 
     convertParamDeleted(body, deleted=false){
-        console.log({body})
+        // console.log({body})
         body.isDeleted=true, body.deleted_at=Date.now()
         return this.doConvertParam(body)
     }
@@ -75,7 +75,7 @@ class Models {
     }
 
     async insert(obj){
-        console.log({obj});
+        // console.log({obj});
         let resp = await this.model.create(this.convertParam(obj, false))
         return this.insert_result(resp)
     }
